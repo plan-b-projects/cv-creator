@@ -4,7 +4,7 @@ services:
     image: mongo:latest
     restart: always
     container_name: 'mongodb'
-    env_file: ./containerConfig/mongodb.env
+    env_file: ./.env.local
     ports:
       - 27017:27017
     volumes:
