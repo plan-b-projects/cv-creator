@@ -1,4 +1,4 @@
-/* Set min-height to avoid page reflow while session loading */
+/* Set min-height to avoid page reflow while session loading
 .signedInStatus {
   display: block;
   min-height: 4rem;
@@ -90,3 +90,27 @@
   display: inline-block;
   margin-right: 1rem;
 }
+
+.cvButton {
+  margin-right: -0.4rem;
+  font-weight: 500;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1.4rem;
+  padding: 0.7rem 0.8rem;
+  background-color: transparent;
+  color: #555;
+}
+
+.cvButton {
+  background-color: #346df1;
+  border-color: #346df1;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.7rem 1.4rem;
+}
+
+.cvButton:hover {
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.2);
+} */

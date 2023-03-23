@@ -3,6 +3,7 @@ import Link from "next/link"
 import { signIn, signOut, useSession } from "next-auth/react"
 import styles from "components/header.module.css"
 import { User } from '../db/db'
+import HomePage from "../components/homepage"
 
 const logInUser = async (credentials: User) => {
   const response = await fetch('http://localhost:3000/api/users', {
@@ -77,6 +78,7 @@ export default function IndexPage() {
                   </a>
                 </div>
               </div>
+              <HomePage />
             </>
           )}
         </div>
