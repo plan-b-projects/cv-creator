@@ -18,6 +18,8 @@
     "Lluis Agusti <hi@llu.lu>"
   ],
   "dependencies": {
+    "dotenv": "^16.0.3",
+    "mongodb": "^5.1.0",
     "next": "latest",
     "next-auth": "latest",
     "nodemailer": "^6",
