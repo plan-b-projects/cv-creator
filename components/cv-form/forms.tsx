@@ -10,7 +10,7 @@ import Skills from './tech-skills'
 
 export default function Form() {
     return (
-        <div>
+        <form action="/send-data-here" method="post">
             <p>Please fill in the form to create the CV</p>
             <ProfilePicture />
             <ProfileIntro />
@@ -20,6 +20,7 @@ export default function Form() {
             <Languages />
             <Education />
             <Experience />
-        </div>
-    )
+            <button type="submit">Submit</button>
+        </form>  
+        )
 }
