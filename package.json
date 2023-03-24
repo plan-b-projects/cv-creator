@@ -19,8 +19,9 @@
   ],
   "dependencies": {
     "dotenv": "^16.0.3",
+    "eslint-config-next": "^13.2.4",
     "mongodb": "^5.1.0",
-    "next": "latest",
+    "next": "^13.2.4",
     "next-auth": "latest",
     "nodemailer": "^6",
     "react": "^18.2.0",
