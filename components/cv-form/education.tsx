@@ -1,12 +1,11 @@
 import { useState } from 'react';
 type education = {
-    company: string,
-    role: string,
-    duration:string,
-    description: string
-}
+  company: string;
+  role: string;
+  duration: string;
+  description: string;
+};
 export default function Education() {
-
   const [companyMessage, setCompanyMessage] = useState('');
   const [roleMessage, setRoleMessage] = useState('');
   const [durationMessage, setDurationMessage] = useState('');
@@ -27,17 +26,30 @@ export default function Education() {
   };
 
   const handleBtnClick = () => {
-    setEducation([...education, {    company: companyMessage,
+    setEducation([
+      ...education,
+      {
+        company: companyMessage,
         role: roleMessage,
-        duration:durationMessage,
-        description: descriptionMessage}]);
-        setCompanyMessage('');
-        setRoleMessage('');
-        setDurationMessage('');
-        setDescriptionMessage('');
+        duration: durationMessage,
+        description: descriptionMessage,
+      },
+    ]);
+    setCompanyMessage('');
+    setRoleMessage('');
+    setDurationMessage('');
+    setDescriptionMessage('');
   };
 
+  const handleDeleteButtonClick = (index: any) => {
+    const removeEducation = education.filter((_, i) => i !== index);
+    setEducation(removeEducation);
+  };
 
+  const handleUpdateButtonClick = (index: any) => {
+    const removeEducation = education.filter((_, i) => i !== index);
+    setEducation(removeEducation);
+  };
 
   return (
     <div>
@@ -71,7 +83,7 @@ export default function Education() {
         />
         <label htmlFor="description">Description</label>
         <textarea
-        onChange={handleDescriptionChange}
+          onChange={handleDescriptionChange}
           name="description"
           id="description"
           placeholder="description...."
@@ -81,20 +93,23 @@ export default function Education() {
           Add education and training
         </button>
         <div className="d-flex flex-wrap">
-          {education.map((edu) => {
-            return(
-            <div key={edu.role}>
-              <p>
-                {edu.role} - {edu.company}
-              </p>
-              
-              <p>
-                {edu.duration}
-              </p>
-              <p>
-                {edu.description}
-              </p>
-            </div>)
+          {education.map((edu, index) => {
+            return (
+              <div key={index}>
+                <p>
+                  {edu.role} - {edu.company}
+                </p>
+
+                <p>{edu.duration}</p>
+                <p>{edu.description}</p>
+                <button onClick={() => handleDeleteButtonClick(index)}>
+                  Delete
+                </button>
+                <button onClick={() => handleUpdateButtonClick(index)}>
+                  Update
+                </button>
+              </div>
+            );
           })}
         </div>
       </div>
