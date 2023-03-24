@@ -1,17 +1,13 @@
 import { useState } from 'react';
-type education = {
-    company: string,
-    role: string,
-    duration:string,
-    description: string
-}
+import { Education } from './education';
+
 export default function Experience() {
 
   const [companyMessage, setCompanyMessage] = useState('');
   const [roleMessage, setRoleMessage] = useState('');
   const [durationMessage, setDurationMessage] = useState('');
   const [descriptionMessage, setDescriptionMessage] = useState('');
-  const [education, setEducation] = useState<education[]>([]);
+  const [education, setEducation] = useState<Education[]>([]);
 
   const handleCompanyChange = (event: any) => {
     setCompanyMessage(event.target.value);

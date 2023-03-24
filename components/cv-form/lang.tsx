@@ -1,5 +1,5 @@
 import { useState } from 'react';
-type lang = {
+export type Lang = {
     language: string,
     fluency:string
 }
@@ -7,7 +7,7 @@ export default function Languages() {
 
   const [langMessage, setLangMessage] = useState('');
   const [flueMessage, setFlueMessage] = useState('');
-  const [lang, setLang] = useState<lang[]>([]);
+  const [lang, setLang] = useState<Lang[]>([]);
 
   const handleLangChange = (event: any) => {
     setLangMessage(event.target.value);
