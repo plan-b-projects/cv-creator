@@ -47,7 +47,18 @@ export default function Education() {
   };
 
   const handleUpdateButtonClick = (index: any) => {
+    let updateEducation = education.filter((_, i) => i === index);
+    updateEducation = [
+      {
+        company: companyMessage,
+        role: roleMessage,
+        duration: durationMessage,
+        description: descriptionMessage,
+      },
+    ];
+
     const removeEducation = education.filter((_, i) => i !== index);
+    removeEducation.splice(index, 0, updateEducation[0]);
     setEducation(removeEducation);
   };
 
