@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         }
         else {
-            const newUser = await createUser({ email: req.body.emails })
+            const newUser = await createUser({ email: req.body.email })
             console.log(req.body.email);
             res.status(201).json(newUser)
         }
