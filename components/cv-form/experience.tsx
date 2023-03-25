@@ -2,12 +2,11 @@ import { useState } from 'react';
 import { Education } from './education';
 
 export default function Experience() {
-
   const [companyMessage, setCompanyMessage] = useState('');
   const [roleMessage, setRoleMessage] = useState('');
   const [durationMessage, setDurationMessage] = useState('');
   const [descriptionMessage, setDescriptionMessage] = useState('');
-  const [education, setEducation] = useState<Education[]>([]);
+  const [experience, setExperience] = useState<Education[]>([]);
 
   const handleCompanyChange = (event: any) => {
     setCompanyMessage(event.target.value);
@@ -23,17 +22,41 @@ export default function Experience() {
   };
 
   const handleBtnClick = () => {
-    setEducation([...education, {    company: companyMessage,
+    setExperience([
+      ...experience,
+      {
+        company: companyMessage,
         role: roleMessage,
-        duration:durationMessage,
-        description: descriptionMessage}]);
-        setCompanyMessage('');
-        setRoleMessage('');
-        setDurationMessage('');
-        setDescriptionMessage('');
+        duration: durationMessage,
+        description: descriptionMessage,
+      },
+    ]);
+    setCompanyMessage('');
+    setRoleMessage('');
+    setDurationMessage('');
+    setDescriptionMessage('');
   };
 
+  const handleDeleteButtonClick = (index: any) => {
+    const removeExperience = experience.filter((_, i) => i !== index);
+    setExperience(removeExperience);
+  };
 
+  const handleUpdateButtonClick = (index: any) => {
+    let updateExperience = experience.filter((_, i) => i === index);
+    updateExperience = [
+      {
+        company: companyMessage,
+        role: roleMessage,
+        duration: durationMessage,
+        description: descriptionMessage,
+      },
+    ];
+
+    const removeExperience = experience.filter((_, i) => i !== index);
+    removeExperience.splice(index, 0, updateExperience[0]);
+    setExperience(removeExperience);
+  };
 
   return (
     <div>
@@ -67,30 +90,36 @@ export default function Experience() {
         />
         <label htmlFor="description">Description</label>
         <textarea
-        onChange={handleDescriptionChange}
+          onChange={handleDescriptionChange}
           name="description"
           id="description"
           placeholder="description...."
           value={descriptionMessage}
         ></textarea>
-        <button className="add-skill-button" onClick={() => handleBtnClick()}>
-          Add education and training
+        <button
+          className="add-experience-button"
+          onClick={() => handleBtnClick()}
+        >
+          Add experience
         </button>
         <div className="d-flex flex-wrap">
-          {education.map((edu) => {
-            return(
-            <div key={edu.role}>
-              <p>
-                {edu.role} - {edu.company}
-              </p>
-              
-              <p>
-                {edu.duration}
-              </p>
-              <p>
-                {edu.description}
-              </p>
-            </div>)
+          {experience.map((exp, index) => {
+            return (
+              <div key={exp.role}>
+                <p>
+                  {exp.role} - {exp.company}
+                </p>
+
+                <p>{exp.duration}</p>
+                <p>{exp.description}</p>
+                <button onClick={() => handleDeleteButtonClick(index)}>
+                  Delete
+                </button>
+                <button onClick={() => handleUpdateButtonClick(index)}>
+                  Update
+                </button>
+              </div>
+            );
           })}
         </div>
       </div>
