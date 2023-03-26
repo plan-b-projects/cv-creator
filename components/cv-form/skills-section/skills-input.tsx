@@ -1,15 +1,15 @@
 import { useRef } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
-import { FormValues } from '../types';
+import { CvFormValues } from '../../../shared-types';
 
 type Props = {
-  skillType: keyof FormValues['skills'];
+  skillType: keyof CvFormValues['skills'];
   skillLabel: string;
 };
 
 export default function SkillsInput({ skillType, skillLabel }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { control, register } = useFormContext<FormValues>();
+  const { control, register } = useFormContext<CvFormValues>();
   const { fields, append, remove } = useFieldArray({
     control,
     name: `skills.${skillType}`,

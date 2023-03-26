@@ -1,24 +1,31 @@
-// import { createUser, findUser } from "../../../db/db";
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { findUser, updateCvForm } from '../../../../db/db';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '../../auth/[...nextauth]';
 
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const session = await getServerSession(req, res, authOptions);
+  const email = session?.user?.email;
+  if (!email) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    // if (req.method === 'POST') {
+  const user = await findUser(email);
+  if (!user) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
 
-    //     const findEmail = await findUser(req.body.email)
-    //     if (findEmail) {
-    //         res.status(200).json('')
+  if (req.method === 'PUT') {
+    await updateCvForm(user.email, req.body);
+    return res.status(201).json({ message: 'Updated' });
+  }
 
-    //     }
-    //     else {
-    //         const newUser = await createUser({ email: req.body.email })
-    //         console.log(req.body.email);
-    //         res.status(201).json(newUser)
-    //     }
-    // }
-    // else {
-    //     res.status(200).json({ message: 'method not allowed' })
-    // }
-    res.status(200).json('hi')
+  if (req.method === 'GET') {
+    return res.status(200).json(user.cv || {});
+  }
 
+  return res.status(400).json({ message: 'Method not implemented' });
 }

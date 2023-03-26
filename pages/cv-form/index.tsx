@@ -1,10 +1,10 @@
 import Layout from '../../components/layout';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import styles from '../../components/header/header.module.css';
 import Form from '../../components/cv-form/form';
 import useNoSession from '../../hooks/useNoSession';
 
-export default function formPage() {
+export default function FormPage() {
   const { data: session, status } = useSession();
 
   const loading = status === 'loading';
