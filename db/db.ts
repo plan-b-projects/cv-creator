@@ -1,29 +1,9 @@
-import { MongoClient, ObjectId } from 'mongodb';
-import { Education } from '../components/cv-form/education';
-import { Lang } from '../components/cv-form/lang';
-
-export type CV = {
-  picUrl: string;
-  name: string;
-  profileIntro: string;
-  location: string;
-  email: string;
-  tel: string;
-  linkedIn: string;
-  gitHub: string;
-  website: string;
-  frontend: string[];
-  backend: string[];
-  tools: string[];
-  general: string[];
-  lang: Lang[];
-  edu: Education[];
-  exp: Education[];
-};
+import { MongoClient } from 'mongodb';
+import { CvFormValues } from '../shared-types';
 
 export type User = {
   email: string;
-  CVs?: CV[];
+  cv?: CvFormValues;
 };
 
 export const mongoClient: MongoClient = new MongoClient(
@@ -38,6 +18,9 @@ export const findUser = (email: string) =>
         .db('cvDb')
         .collection('users')
         .findOne<User>({ email });
+    
+export const updateCvForm = (email: string, cv: CvFormValues) =>
+  mongoClient.db('cvDb').collection('users').updateOne({ email }, { $set: { cv }})
 
 // export const updateUser = (email: string, cv: CV) => {
 //     mongoClient

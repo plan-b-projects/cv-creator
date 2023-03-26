@@ -1,12 +1,12 @@
 import { useFieldArray, useFormContext } from 'react-hook-form';
-import { FormValues } from './types';
+import { CvFormValues } from '../../shared-types';
 
 export default function Experience() {
   const {
     register,
     formState: { errors },
     control,
-  } = useFormContext<FormValues>();
+  } = useFormContext<CvFormValues>();
 
   const { fields, append, remove } = useFieldArray({
     control,
