@@ -1,12 +1,12 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import { FormValues } from './types';
+import { CvFormValues } from '../../shared-types';
 
 export default function BasicInfo() {
   const {
     register,
     formState: { errors },
-  } = useFormContext<FormValues>();
+  } = useFormContext<CvFormValues>();
 
   return (
     <fieldset>

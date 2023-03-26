@@ -21,7 +21,7 @@ type LanguageItem = {
   fluency: 'Elementary' | 'Intermediate' | 'Fluent' | 'Native';
 };
 
-export type FormValues = {
+export type CvFormValues = {
   basicInfo: {
     profilePicture: string;
     name: string;

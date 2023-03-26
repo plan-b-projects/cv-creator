@@ -4,18 +4,45 @@ import Education from './education';
 import Experience from './experience';
 import Languages from './languages';
 import SkillsSection from './skills-section';
-import { FormValues } from './types';
+import { CvFormValues } from '../../shared-types';
+
+const getFormValues = async () => {
+  const response = await fetch('http://localhost:3000/api/users/cv-form', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (response.ok) {
+    return await response.json();
+  } else {
+    return {}
+  }
+}
+
+const saveForm = async (data: CvFormValues) => {
+  const response = await fetch('http://localhost:3000/api/users/cv-form', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  return response.ok
+}
 
 export default function Form() {
-  const methods = useForm<FormValues>();
+  const methods = useForm<CvFormValues>({ defaultValues: getFormValues });
 
-  const saveDraft = () => {
+  const saveDraft = async () => {
     const data = methods.getValues();
-    console.log('saving draft with values', data);
+    await saveForm(data);
   }
-
-  const submitForm = methods.handleSubmit((data) => {
-    console.log('all data is valid and submitting form', data)
+  
+  const submitForm = methods.handleSubmit(async (data) => {
+    await saveForm(data);
   })
 
   return (
