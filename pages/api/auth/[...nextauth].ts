@@ -10,6 +10,7 @@ import Auth0Provider from "next-auth/providers/auth0"
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
 export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   // https://next-auth.js.org/configuration/providers/oauth
   providers: [
     /* EmailProvider({
