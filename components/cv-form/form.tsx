@@ -5,6 +5,8 @@ import Experience from './experience';
 import Languages from './languages';
 import SkillsSection from './skills-section';
 import { CvFormValues } from '../../shared-types';
+import { useRouter } from 'next/router'
+
 
 const getFormValues = async () => {
   const response = await fetch('http://localhost:3000/api/users/cv-form', {
@@ -35,12 +37,14 @@ const saveForm = async (data: CvFormValues) => {
 
 export default function Form() {
   const methods = useForm<CvFormValues>({ defaultValues: getFormValues });
+  const router = useRouter()
+
 
   const saveDraft = async () => {
     const data = methods.getValues();
     await saveForm(data);
   }
-  
+
   const submitForm = methods.handleSubmit(async (data) => {
     await saveForm(data);
   })
@@ -55,7 +59,7 @@ export default function Form() {
         <Languages />
 
         <button type="button" onClick={saveDraft}>Save draft</button>
-        <button type="submit">Save and select template</button>
+        <button type="submit" onClick={() => router.push('/cv-form/templates')}>Save and select template</button>
       </form>
     </FormProvider>
   );
