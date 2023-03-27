@@ -18,6 +18,7 @@
     "Lluis Agusti <hi@llu.lu>"
   ],
   "dependencies": {
+    "@react-pdf/renderer": "^3.1.9",
     "dotenv": "^16.0.3",
     "eslint-config-next": "^13.2.4",
     "html-to-image": "^1.11.11",
