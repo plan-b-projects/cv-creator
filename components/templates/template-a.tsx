@@ -130,8 +130,6 @@ export default function TemplateA() {
                 }
             </div>
 
-
-
         </>
     )
 }
