@@ -34,13 +34,13 @@ export type CvFormValues = {
     gitHub: string;
     website: string;
   };
-  education?: EducationItem[];
-  experience?: ExperienceItem[];
-  skills?: {
+  education: EducationItem[];
+  experience: ExperienceItem[];
+  skills: {
     frontend: SkillItem[];
     backend: SkillItem[];
     tools: SkillItem[];
     general: SkillItem[];
   };
-  languages?: LanguageItem[];
+  languages: LanguageItem[];
 };
