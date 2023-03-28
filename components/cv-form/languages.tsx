@@ -1,60 +1,82 @@
+import { useState } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
+import styled from 'styled-components';
 import { CvFormValues } from '../../shared-types';
+import { Button } from '../button';
+import { FieldGroup } from './field-group';
+import { List, ListItem } from './lists-styles';
 
 export default function Languages() {
-  const {
-    register,
-    formState: { errors },
-    control,
-  } = useFormContext<CvFormValues>();
-
+  const [isExpanded, setIsExpanded] = useState(false);
+  const { control } = useFormContext<CvFormValues>();
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'languages',
   });
 
   return (
-    <fieldset>
-      <legend>Languages</legend>
-      <button
-        type="button"
-        onClick={() =>
-          append({
-            name: '',
-            fluency: 'Elementary',
-          })
-        }
+    <Fieldset>
+      <Legend
+        isExpanded={isExpanded}
+        onClick={() => setIsExpanded(!isExpanded)}
       >
-        Add Language
-      </button>
-      <ul>
-        {fields.map((languageItem, index) => (
-          <li key={languageItem.id}>
-            <label htmlFor={`languages.${index}.name`}>Language:</label>
-            <input
-              {...register(`languages.${index}.name`, {
-                required: 'This is required.',
-              })}
-              placeholder="English"
-            />
-            {errors?.languages?.[index]?.name && (
-              <p>{errors.languages[index]!.name!.message}</p>
-            )}
+        Languages
+      </Legend>
+      <FieldsetContent isExpanded={isExpanded}>
+        <Button
+          type="button"
+          onClick={() =>
+            append({
+              name: '',
+              fluency: 'Elementary',
+            })
+          }
+        >
+          Add Language
+        </Button>
+        <List>
+          {fields.map((languageItem, index) => (
+            <ListItem key={languageItem.id}>
+              <FieldGroup
+                name={`languages.${index}.name`}
+                label="Language"
+                placeholder="English"
+              />
 
-            <label htmlFor={`languages.${index}.fluency`}>Fluency:</label>
-            <select {...register(`languages.${index}.fluency`)}>
-              <option value="Elementary">Elementary</option>
-              <option value="Intermediate">Intermediate</option>
-              <option value="Fluent">Fluent</option>
-              <option value="Native">Native</option>
-            </select>
+              <FieldGroup
+                name={`languages.${index}.fluency`}
+                label="Fluency"
+                inputType="select"
+                options={['Elementary', 'Intermediate', 'Fluent', 'Native']}
+              />
 
-            <button type="button" onClick={() => remove(index)}>
-              Remove
-            </button>
-          </li>
-        ))}
-      </ul>
-    </fieldset>
+              <Button type="button" onClick={() => remove(index)}>
+                Remove
+              </Button>
+            </ListItem>
+          ))}
+        </List>
+      </FieldsetContent>
+    </Fieldset>
   );
 }
+
+const FieldsetContent = styled.div<{ isExpanded: boolean }>`
+  display: ${(props) => (props.isExpanded ? 'block' : 'none')};
+  padding-top: 10px;
+  margin-left: 10px;
+`;
+
+const Fieldset = styled.fieldset`
+  border: none;
+  padding: 0;
+  margin: 20px 0;
+`;
+const Legend = styled.legend<{ isExpanded: boolean }>`
+  border-radius: 2px;
+  background-color: #a0d6fc;
+  width: 95%;
+  padding: 15px 0;
+  padding-left: 20px;
+  font-weight: ${(props) => (props.isExpanded ? '700' : '400')};
+`;

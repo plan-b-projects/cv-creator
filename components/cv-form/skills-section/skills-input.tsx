@@ -1,6 +1,9 @@
 import { useRef } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
+import styled from 'styled-components';
 import { CvFormValues } from '../../../shared-types';
+import { Button } from '../../button';
+import { FieldGroupContainer, Input, Label } from '../field-group';
 
 type Props = {
   skillType: keyof CvFormValues['skills'];
@@ -8,6 +11,7 @@ type Props = {
 };
 
 export default function SkillsInput({ skillType, skillLabel }: Props) {
+
   const inputRef = useRef<HTMLInputElement>(null);
   const { control, register } = useFormContext<CvFormValues>();
   const { fields, append, remove } = useFieldArray({
@@ -16,9 +20,9 @@ export default function SkillsInput({ skillType, skillLabel }: Props) {
   });
 
   return (
-    <>
-      <label htmlFor={skillType}>{skillLabel}:</label>
-      <input
+    <FieldGroupContainer>
+      <Label htmlFor={skillType}>{skillLabel}:</Label>
+      <Input
         type="text"
         ref={inputRef}
         onKeyDown={(event) => {
@@ -42,13 +46,30 @@ export default function SkillsInput({ skillType, skillLabel }: Props) {
       ))}
 
       {fields.map((field, index) => (
-        <div key={field.id}>
+        <Chip key={field.id}>
           {field.name}{' '}
-          <button type="button" onClick={() => remove(index)}>
+          <ChipButton type="button" onClick={() => remove(index)}>
             x
-          </button>
-        </div>
+          </ChipButton>
+        </Chip>
       ))}
-    </>
+    </FieldGroupContainer>
   );
 }
+
+const ChipButton = styled.button`
+  padding: 5px;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+`;
+
+const Chip = styled.div`
+  margin: 10px;
+  margin-left: 0;
+  border-radius: 6px;
+  padding: 5px 0 5px 15px;
+  display: inline-block;
+  background: #eaeaea;
+`;

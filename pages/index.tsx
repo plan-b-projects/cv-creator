@@ -1,24 +1,11 @@
 import Layout from '../components/layout';
-import Link from 'next/link';
-import { signIn, signOut, useSession } from 'next-auth/react';
-// import styles from "../components/header/header.module.css"
+import { signIn, useSession } from 'next-auth/react';
 import { User } from '../db/db';
 import HomePage from '../components/homepage/homepage';
 import styled from 'styled-components';
-
-const ButtonLink = styled.a`
-  padding: 8px 20px;
-  text-decoration: none;
-  color: #000;
-  display: inline-block;
-  border: 2px solid #000;
-  border-radius: 4px;
-
-  &:hover {
-    background: #353535;
-    color: #fff;
-  }
-`
+import noSession from '../public/noSession.jpg';
+import LogInChip from '../components/log-in-chip';
+import { ButtonLink } from '../components/button';
 
 const logInUser = async (credentials: User) => {
   const response = await fetch('http://localhost:3000/api/users', {
@@ -34,9 +21,7 @@ const logInUser = async (credentials: User) => {
 };
 
 export default function IndexPage() {
-
   const { data: session, status } = useSession();
-  const loading = status === 'loading';
 
   if (session) {
     logInUser({ email: session.user!.email! });
@@ -44,13 +29,13 @@ export default function IndexPage() {
 
   return (
     <Layout>
-      <h1>CV Creator App</h1>
-
       <div>
         <div>
           {!session && (
-            <>
+            <NotSignedIn>
+              <Header>Welcome to CV Creator App</Header>
               <span>You are not signed in</span>
+              <br />
               <ButtonLink
                 href={`/api/auth/signin`}
                 onClick={(e) => {
@@ -60,35 +45,13 @@ export default function IndexPage() {
               >
                 Sign in
               </ButtonLink>
-            </>
+              <Image src={noSession.src} />
+            </NotSignedIn>
           )}
+          <LogInChip />
           {session?.user && (
             <>
-              <div>
-                <div>
-                  {session.user.image && (
-                    <span
-                      style={{
-                        backgroundImage: `url('${session.user.image}')`,
-                      }}
-                    />
-                  )}
-                  <span>
-                    <small>Signed in as</small>
-                    <br />
-                    <strong>{session.user.email ?? session.user.name}</strong>
-                  </span>
-                  <a
-                    href={`/api/auth/signout`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      signOut();
-                    }}
-                  >
-                    Sign out
-                  </a>
-                </div>
-              </div>
+              <Header>Welcome! Let's create CVs</Header>
               <HomePage />
             </>
           )}
@@ -97,3 +60,21 @@ export default function IndexPage() {
     </Layout>
   );
 }
+
+const Header = styled.h1`
+  text-align: center;
+  padding-bottom: 30px;
+  padding-inline: 30px;
+`;
+
+const NotSignedIn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Image = styled.img`
+  width: 350px;
+  height: 350px;
+  margin: 15px;
+`;
