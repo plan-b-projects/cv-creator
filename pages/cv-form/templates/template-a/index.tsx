@@ -1,14 +1,13 @@
-import Layout from '../../../components/layout';
+import Layout from '../../../../components/layout';
 import { signOut, useSession } from 'next-auth/react';
-import styles from '../../../components/header/header.module.css';
-import Form from '../../../components/cv-form/form';
-import useNoSession from '../../../hooks/useNoSession';
-import TemplateA from '../../../components/templates/template-a';
+import styles from '../../../../components/header/header.module.css';
+import Form from '../../../../components/header/header.module.css';
+import useNoSession from '../../../../hooks/useNoSession';
+import TemplateA from '../../../../components/templates/template-a';
 import { useForm } from 'react-hook-form';
-import { CvFormValues } from '../../../shared-types';
+import { CvFormValues } from '../../../../shared-types';
 import React from 'react';
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
-import router from "next/router"
 
 
 export default function FormPage() {
@@ -69,9 +68,14 @@ export default function FormPage() {
                                     </a>
                                 </div>
                             </div>
-                            <h2>CHOOSE YOU TEMPLATES</h2>
-                            <button className={styles.cvButton} type="button" onClick={() => router.push('/cv-form/templates/template-a')}>
-                                Template A
+                            <div>Templates</div>
+                            <PDFExport ref={pdfExportComponent} paperSize="auto" margin={40} fileName={`Report for ${new Date().getFullYear()}`} author="KendoReact Team">
+                                <div ref={container}>
+                                    <TemplateA />
+                                </div>
+                            </PDFExport>
+                            <button className="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" onClick={exportPDFWithComponent}>
+                                Download cv as pdf
                             </button>
                         </>
                     )}
