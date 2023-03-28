@@ -1,91 +1,90 @@
-import React from 'react';
-import { useFormContext } from 'react-hook-form';
-import { CvFormValues } from '../../shared-types';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { FieldGroup } from './field-group';
 
 export default function BasicInfo() {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext<CvFormValues>();
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <fieldset>
-      <legend>Basic Info</legend>
-      <label htmlFor="basicInfo.profilePicture">Profile Picture:</label>
-      <input
-        type="url"
-        {...register('basicInfo.profilePicture')}
-        placeholder="https://example.com/example.jpg"
-      />
-      {errors?.basicInfo?.profilePicture && <p>{errors.basicInfo.profilePicture.message}</p>}
+    <Fieldset>
+      <Legend isExpanded={isExpanded} onClick={() => setIsExpanded(!isExpanded)}>Basic Info</Legend>
 
-      <label htmlFor="basicInfo.name">Name:</label>
-      <input
-        {...register('basicInfo.name', { required: 'This is required.' })}
-        placeholder="John Doe"
-      />
-      {errors?.basicInfo?.name && <p>{errors.basicInfo.name.message}</p>}
+      <FieldsetContent isExpanded={isExpanded}>
+        <FieldGroup
+          name="basicInfo.profilePicture"
+          label="Profile Picture"
+          placeholder="https://example.com/example.jpg"
+          inputType="url"
+        />
 
-      <label htmlFor="basicInfo.profileIntro">Introduction:</label>
-      <textarea
-        {...register('basicInfo.profileIntro', {
-          required: 'This is required.',
-        })}
-        placeholder="Write a short description about yourself..."
-      />
-      {errors?.basicInfo?.profileIntro && (
-        <p>{errors.basicInfo.profileIntro.message}</p>
-      )}
+        <FieldGroup name="basicInfo.name" label="Name" placeholder="John Doe" />
 
-      <label htmlFor="basicInfo.location">Location:</label>
-      <input
-        {...register('basicInfo.location', { required: 'This is required.' })}
-        placeholder="Stockholm, Sweden"
-      />
-      {errors?.basicInfo?.location && (
-        <p>{errors.basicInfo.location.message}</p>
-      )}
+        <FieldGroup
+          name="basicInfo.profileIntro"
+          label="Introduction"
+          placeholder="Write a short description about yourself..."
+          inputType="textarea"
+        />
 
-      <label htmlFor="basicInfo.email">Email:</label>
-      <input
-        type="email"
-        {...register('basicInfo.email', { required: 'This is required.' })}
-        placeholder="johndoe@email.com"
-      />
-      {errors?.basicInfo?.email && <p>{errors.basicInfo.email.message}</p>}
+        <FieldGroup
+          name="basicInfo.location"
+          label="Location"
+          placeholder="Stockholm, Sweden"
+        />
 
-      <label htmlFor="basicInfo.tel">Tel:</label>
-      <input
-        {...register('basicInfo.tel')}
-        placeholder="0712345678"
-      />
-      {errors?.basicInfo?.tel && <p>{errors.basicInfo.tel.message}</p>}
+        <FieldGroup
+          name="basicInfo.email"
+          label="Email"
+          placeholder="johndoe@email.com"
+          inputType="email"
+        />
 
-      <label htmlFor="basicInfo.linkedIn">LinkedIn:</label>
-      <input
-        type="url"
-        {...register('basicInfo.linkedIn')}
-        placeholder="https://www.linkedin.com/in/johndoe/"
-      />
-      {errors?.basicInfo?.linkedIn && (
-        <p>{errors.basicInfo.linkedIn.message}</p>
-      )}
+        <FieldGroup
+          name="basicInfo.tel"
+          label="Tel"
+          placeholder="0712345678"
+          inputType="tel"
+        />
 
-      <label htmlFor="basicInfo.gitHub">GitHub:</label>
-      <input
-        type="url"
-        {...register('basicInfo.gitHub')}
-        placeholder="Your GitHub profile link"
-      />
-      {errors?.basicInfo?.gitHub && <p>{errors.basicInfo.gitHub.message}</p>}
+        <FieldGroup
+          name="basicInfo.linkedIn"
+          label="LinkedIn"
+          placeholder="https://www.linkedin.com/in/johndoe/"
+          inputType="url"
+        />
 
-      <label htmlFor="basicInfo.website">Other website:</label>
-      <input
-        type="url"
-        {...register('basicInfo.website')}
-        placeholder="Your profile link"
-      />
-      {errors?.basicInfo?.website && <p>{errors.basicInfo.website.message}</p>}
-    </fieldset>
+        <FieldGroup
+          name="basicInfo.gitHub"
+          label="GitHub"
+          placeholder="https://www.github.com/johndoe/"
+          inputType="url"
+        />
+
+        <FieldGroup
+          name="basicInfo.website"
+          label="Other website"
+          placeholder="https://www.johndoe.com"
+          inputType="url"
+        />
+      </FieldsetContent>
+    </Fieldset>
   );
 }
+
+const FieldsetContent = styled.div<{ isExpanded: boolean }>`
+  display: ${(props) => (props.isExpanded ? 'block' : 'none')};
+`;
+
+const Fieldset = styled.fieldset`
+  border: none;
+  padding: 0;
+  margin: 20px 0;
+`;
+const Legend = styled.legend<{ isExpanded: boolean }>`
+  border-radius: 2px;
+  background-color: #a0d6fc;
+  width: 95%;
+  padding: 15px 0;
+  padding-left: 20px;
+  font-weight: ${(props) => (props.isExpanded ? '700' : '400')};
+`;

@@ -111,4 +111,4 @@ Follow the [Deployment documentation](https://next-auth.js.org/deployment)
 
 ISC
 
-# cv-creator-1
+# cv-creator

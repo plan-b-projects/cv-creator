@@ -1,7 +1,5 @@
 import Layout from '../../../components/layout';
 import { signOut, useSession } from 'next-auth/react';
-import styles from '../../../components/header/header.module.css';
-import Form from '../../../components/cv-form/form';
 import useNoSession from '../../../hooks/useNoSession';
 import TemplateA from '../../../components/templates/template-a';
 import { useForm } from 'react-hook-form';
