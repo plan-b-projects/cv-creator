@@ -22,6 +22,7 @@ type LanguageItem = {
 };
 
 export type CvFormValues = {
+  cvTemplate?: '';
   basicInfo: {
     profilePicture: string;
     name: string;

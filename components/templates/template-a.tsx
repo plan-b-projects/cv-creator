@@ -1,7 +1,8 @@
 import { ReactNode, useEffect, useState } from 'react';
 import { CvFormValues } from '../../shared-types';
+import { saveTemplateToCv } from '../../db/db';
 
-export default function TemplateA() {
+export default function TemplateA({ userEmail }: any) {
   const [data, setData] = useState<CvFormValues>();
 
   const getFormValues = async () => {
@@ -18,6 +19,19 @@ export default function TemplateA() {
     } else {
       return {};
     }
+  };
+
+  const postTemplateToInfo = async () => {
+    await fetch('http://localhost:3000/api/users/cv-form', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: userEmail,
+        cvTemplate: 'template-a',
+      }),
+    });
   };
 
   useEffect(() => {
@@ -115,6 +129,13 @@ export default function TemplateA() {
           );
         })}
       </div>
+
+      <button
+        className="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base"
+        onClick={() => postTemplateToInfo()}
+      >
+        Save as complete CV
+      </button>
     </>
   );
 }
