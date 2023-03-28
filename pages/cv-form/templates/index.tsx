@@ -6,14 +6,31 @@ import useNoSession from '../../../hooks/useNoSession';
 import TemplateA from '../../../components/templates/template-a';
 import { useForm } from 'react-hook-form';
 import { CvFormValues } from '../../../shared-types';
+import React from 'react';
+import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
+
 
 export default function FormPage() {
     const { data: session, status } = useSession();
+    const pdfExportComponent = React.useRef(null);
+    const container = React.useRef(null);
 
+    const exportPDFWithMethod = () => {
+        let element = container.current || document.body;
+        savePDF(element, {
+            paperSize: "auto",
+            margin: 40,
+            fileName: `cv for ${new Date().getFullYear()}`
+        });
+    };
     const loading = status === 'loading';
 
     useNoSession();
-
+    const exportPDFWithComponent = () => {
+        if (pdfExportComponent.current) {
+            pdfExportComponent.current.save();
+        }
+    };
 
     return (
         <Layout>
@@ -52,7 +69,14 @@ export default function FormPage() {
                                 </div>
                             </div>
                             <div>Templates</div>
-                            <TemplateA />
+                            <PDFExport ref={pdfExportComponent} paperSize="auto" margin={40} fileName={`Report for ${new Date().getFullYear()}`} author="KendoReact Team">
+                                <div ref={container}>
+                                    <TemplateA />
+                                </div>
+                            </PDFExport>
+                            <button className="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" onClick={exportPDFWithComponent}>
+                                Download cv as pdf
+                            </button>
                         </>
                     )}
                 </div>
