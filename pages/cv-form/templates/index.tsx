@@ -33,12 +33,7 @@ export default function FormPage() {
 
   return (
     <Layout>
-      <div className={styles.signedInStatus}>
-        <div
-          className={`nojs-show ${
-            !session && loading ? styles.loading : styles.loaded
-          }`}
-        >
+      <div>
           {session?.user && (
             <>
               <div>
@@ -48,17 +43,17 @@ export default function FormPage() {
                       style={{
                         backgroundImage: `url('${session.user.image}')`,
                       }}
-                      className={styles.avatar}
+                      
                     />
                   )}
-                  <span className={styles.signedInText}>
+                  <span>
                     <small>Signed in as</small>
                     <br />
                     <strong>{session.user.email ?? session.user.name}</strong>
                   </span>
                   <a
                     href={`/api/auth/signout`}
-                    className={styles.button}
+                   
                     onClick={(e) => {
                       e.preventDefault();
                       signOut();
@@ -70,7 +65,7 @@ export default function FormPage() {
               </div>
               <h2>CHOOSE YOU TEMPLATES</h2>
               <button
-                className={styles.cvButton}
+                
                 type="button"
                 onClick={() => router.push('/cv-form/templates/template-a')}
               >
@@ -79,7 +74,6 @@ export default function FormPage() {
             </>
           )}
         </div>
-      </div>
     </Layout>
   );
 }
