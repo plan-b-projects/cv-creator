@@ -43,7 +43,7 @@ export default function Experience() {
             <ListItem key={experienceItem.id}>
               <FieldGroup
                 name={`experience.${index}.job`}
-                label="Name"
+                label="Title"
                 placeholder="Full-stack developer"
               />
 
@@ -91,7 +91,7 @@ const Fieldset = styled.fieldset`
 const Legend = styled.legend<{ isExpanded: boolean }>`
   border-radius: 2px;
   background-color: #a0d6fc;
-  width: 95%;
+  width: 97%;
   padding: 15px 0;
   padding-left: 20px;
   font-weight: ${(props) => (props.isExpanded ? '700' : '400')};

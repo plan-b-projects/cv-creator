@@ -51,8 +51,7 @@ const Container = styled.div`
 `;
 
 const Chip = styled.div`
-  max-width: 76%;
-
+  max-width: 300px;
   padding: 10px 20px 10px 10px;
   display: flex;
   border-radius: 40px;

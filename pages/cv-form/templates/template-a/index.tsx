@@ -1,9 +1,13 @@
 import Layout from '../../../../components/layout';
 import { signOut, useSession } from 'next-auth/react';
+import styles from '../../../../components/header/header.module.css';
 import useNoSession from '../../../../hooks/useNoSession';
 import TemplateA from '../../../../components/templates/template-a';
 import React from 'react';
 import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
+import LogInChip from '../../../../components/log-in-chip';
+import { Button } from '../../../../components/button';
+import styled from 'styled-components';
 
 export default function FormPage() {
   const { data: session, status } = useSession();
@@ -54,61 +58,56 @@ export default function FormPage() {
 
   return (
     <Layout>
-      <div>
-        {session?.user && (
-          <>
-            <div>
-              <div>
-                {session.user.image && (
-                  <span
-                    style={{
-                      backgroundImage: `url('${session.user.image}')`,
-                    }}
-                  />
-                )}
-                <span>
-                  <small>Signed in as</small>
-                  <br />
-                  <strong>{session.user.email ?? session.user.name}</strong>
-                </span>
-                <a
-                  href={`/api/auth/signout`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    signOut();
-                  }}
-                >
-                  Sign out
-                </a>
-              </div>
-            </div>
-            <div>Templates</div>
-            <PDFExport
-              ref={pdfExportComponent}
-              paperSize="auto"
-              margin={40}
-              fileName={`Report for ${new Date().getFullYear()}`}
-              author="KendoReact Team"
-            >
-              <div ref={container}>
-                <TemplateA userEmail={session?.user.email} />
-              </div>
-            </PDFExport>
-            <button
-              className="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base"
+
+      <Container>
+        <TopPart_Container>
+          <div>
+            <Button
               onClick={exportPDFWithComponent}
             >
               Download cv as pdf
-            </button>
+            </Button>
             <button
               className="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base"
               onClick={() => saveCvToUser()}
             >
               Save this CV to your profile
             </button>
-          </>
-        )}
-      </div>
+          </div>
+          <div>
+            <LogInChip />
+          </div>
+        </TopPart_Container>
+          {session?.user && (
+            <>
+              <PDFExport
+                ref={pdfExportComponent}
+                paperSize="auto"
+                margin={40}
+                fileName={`Report for ${new Date().getFullYear()}`}
+                author="KendoReact Team"
+              >
+                <div ref={container}>
+                  <TemplateA userEmail={session?.user.email} />
+                </div>
+              </PDFExport>
+            </>
+          )}
+        </Container>
+
     </Layout>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const TopPart_Container = styled.div`
+  width: 70%;
+  margin: 2rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`

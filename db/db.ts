@@ -7,7 +7,9 @@ export type User = {
 };
 
 export const mongoClient: MongoClient = new MongoClient(
+
   `${process.env.MONGO_INITDB_URL}`,
+
 );
 
 export const createUser = (user: User) =>
