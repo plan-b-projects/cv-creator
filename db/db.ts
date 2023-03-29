@@ -7,7 +7,7 @@ export type User = {
 };
 
 export const mongoClient: MongoClient = new MongoClient(
-  `${process.env.MONGO_INITDB_URL}`
+  `${process.env.MONGO_INITDB_URL}`,
 );
 
 export const createUser = (user: User) =>
@@ -22,11 +22,11 @@ export const updateCvForm = (email: string, cv: CvFormValues) =>
     .collection('users')
     .updateOne({ email }, { $set: { cv } });
 
-export const saveTemplateToCv = (email: string, cvTemplate: string) =>
+export const saveTemplateToCv = (email: string, cv: CvFormValues) =>
   mongoClient
     .db('cvDb')
     .collection('users')
-    .updateOne({ email }, { $set: { cvTemplate: { cvTemplate } } });
+    .updateOne({ email }, { $set: { cv } });
 
 // export const updateUser = (email: string, cv: CV) => {
 //     mongoClient
