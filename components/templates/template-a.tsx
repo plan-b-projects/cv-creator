@@ -157,9 +157,8 @@ export default function TemplateA({ userEmail }: any) {
 */}
 
 const Template = styled.div`
-  width: 150%;
-  position: relative;
-  right: 150px;
+  width: 70%;
+  margin: auto;
   border: 1px solid black;
   display: flex;
 `;
