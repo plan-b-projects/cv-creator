@@ -22,7 +22,6 @@ export default function FormPage() {
       fileName: `cv for ${new Date().getFullYear()}`,
     });
   };
-  const loading = status === 'loading';
 
   useNoSession();
   const exportPDFWithComponent = () => {
