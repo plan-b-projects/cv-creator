@@ -28,6 +28,8 @@ export default function HomePage() {
     getCvs();
   }, []);
 
+  console.log(cvs);
+
   return (
     <HomePageArea>
       <Button type="button" onClick={() => router.push('/cv-form')}>
@@ -36,8 +38,6 @@ export default function HomePage() {
       <h2>Your CV</h2>
 
       {cvs.map((cv: CvFormValues) => {
-        console.log(cv);
-
         return (
           <Button
             type="button"
@@ -50,8 +50,6 @@ export default function HomePage() {
     </HomePageArea>
   );
 }
-
-// router.push(`/cv-form/templates/template-a`)
 
 const HomePageArea = styled.div`
   display: flex;
