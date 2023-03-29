@@ -58,43 +58,34 @@ export default function FormPage() {
 
   return (
     <Layout>
-
       <Container>
         <TopPart_Container>
-          <div>
-            <Button
-              onClick={exportPDFWithComponent}
-            >
-              Download cv as pdf
-            </Button>
-            <button
-              className="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base"
-              onClick={() => saveCvToUser()}
-            >
+          <ButtonContainer>
+            <Button onClick={exportPDFWithComponent}>Download cv as pdf</Button>
+            <Button onClick={() => saveCvToUser()}>
               Save this CV to your profile
-            </button>
-          </div>
+            </Button>
+          </ButtonContainer>
           <div>
             <LogInChip />
           </div>
         </TopPart_Container>
-          {session?.user && (
-            <>
-              <PDFExport
-                ref={pdfExportComponent}
-                paperSize="auto"
-                margin={40}
-                fileName={`Report for ${new Date().getFullYear()}`}
-                author="KendoReact Team"
-              >
-                <div ref={container}>
-                  <TemplateA userEmail={session?.user.email} />
-                </div>
-              </PDFExport>
-            </>
-          )}
-        </Container>
-
+        {session?.user && (
+          <>
+            <PDFExport
+              ref={pdfExportComponent}
+              paperSize="auto"
+              margin={40}
+              fileName={`Report for ${new Date().getFullYear()}`}
+              author="KendoReact Team"
+            >
+              <div ref={container}>
+                <TemplateA />
+              </div>
+            </PDFExport>
+          </>
+        )}
+      </Container>
     </Layout>
   );
 }
@@ -110,4 +101,10 @@ const TopPart_Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  width: 30%;
+  justify-content: space-between;
+`;

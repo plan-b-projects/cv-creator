@@ -3,7 +3,7 @@ import { CvFormValues } from '../../shared-types';
 import { saveTemplateToCv } from '../../db/db';
 import styled from 'styled-components';
 
-export default function TemplateA({ userEmail }: any) {
+export default function TemplateA() {
   const [data, setData] = useState<CvFormValues>();
 
   const getFormValues = async () => {
