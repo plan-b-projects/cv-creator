@@ -14,16 +14,6 @@ export default function FormPage() {
   const pdfExportComponent = React.useRef<any>(null);
   const container = React.useRef(null);
 
-  const exportPDFWithMethod = () => {
-    let element = container.current || document.body;
-    savePDF(element, {
-      paperSize: 'auto',
-      margin: 40,
-      fileName: `cv for ${new Date().getFullYear()}`,
-    });
-  };
-  const loading = status === 'loading';
-
   useNoSession();
   const exportPDFWithComponent = () => {
     if (pdfExportComponent.current) {
@@ -33,8 +23,42 @@ export default function FormPage() {
     }
   };
 
+  const getFormValues = async () => {
+    const response = await fetch('http://localhost:3000/api/users/cv-form', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      const newData = await response.json();
+      return newData;
+    } else {
+      return {};
+    }
+  };
+
+  const saveCvToUser = async () => {
+    const cv = await getFormValues();
+    const response = await fetch('http://localhost:3000/api/users/cv-form', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...cv,
+        cvTemplate: 'template-a',
+      }),
+    });
+    const status = response.status;
+    const data = await response.json();
+    return { status, data };
+  };
+
   return (
     <Layout>
+
       <Container>
         <TopPart_Container>
           <div>
@@ -43,6 +67,12 @@ export default function FormPage() {
             >
               Download cv as pdf
             </Button>
+            <button
+              className="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base"
+              onClick={() => saveCvToUser()}
+            >
+              Save this CV to your profile
+            </button>
           </div>
           <div>
             <LogInChip />
@@ -64,6 +94,7 @@ export default function FormPage() {
             </>
           )}
         </Container>
+
     </Layout>
   );
 }

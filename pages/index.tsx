@@ -51,7 +51,8 @@ export default function IndexPage() {
           <LogInChip />
           {session?.user && (
             <>
-              <Header>Welcome! Let's create CVs</Header>
+              <Header>Welcome!</Header>
+
               <HomePage />
             </>
           )}
