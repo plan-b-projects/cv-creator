@@ -1,6 +1,5 @@
 import Layout from '../../../../components/layout';
 import { signOut, useSession } from 'next-auth/react';
-import styles from '../../../../components/header/header.module.css';
 import useNoSession from '../../../../hooks/useNoSession';
 import TemplateA from '../../../../components/templates/template-a';
 import React from 'react';
@@ -32,12 +31,7 @@ export default function FormPage() {
 
   return (
     <Layout>
-      <div className={styles.signedInStatus}>
-        <div
-          className={`nojs-show ${
-            !session && loading ? styles.loading : styles.loaded
-          }`}
-        >
+      <div>
           {session?.user && (
             <>
               <div>
@@ -47,17 +41,15 @@ export default function FormPage() {
                       style={{
                         backgroundImage: `url('${session.user.image}')`,
                       }}
-                      className={styles.avatar}
                     />
                   )}
-                  <span className={styles.signedInText}>
+                  <span>
                     <small>Signed in as</small>
                     <br />
                     <strong>{session.user.email ?? session.user.name}</strong>
                   </span>
                   <a
                     href={`/api/auth/signout`}
-                    className={styles.button}
                     onClick={(e) => {
                       e.preventDefault();
                       signOut();
@@ -88,7 +80,6 @@ export default function FormPage() {
             </>
           )}
         </div>
-      </div>
     </Layout>
   );
 }

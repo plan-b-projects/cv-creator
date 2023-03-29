@@ -7,7 +7,7 @@ export type User = {
 };
 
 export const mongoClient: MongoClient = new MongoClient(
-    `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@127.0.0.1:27017`
+  `${process.env.MONGO_INITDB_URL}`
 );
 
 export const createUser = (user: User) =>
