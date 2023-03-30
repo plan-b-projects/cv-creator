@@ -8,7 +8,7 @@ export default function HomePage() {
   const [cvs, setCvs] = useState<any>([]);
 
   const getCvs = async () => {
-    const response = await fetch('http://localhost:3000/api/users/cv-form', {
+    const response = await fetch('http://localhost:3000/api/users/cv-array', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -16,7 +16,8 @@ export default function HomePage() {
     });
 
     if (response.ok) {
-      const newData = [await response.json()];
+      const newData = await response.json();
+      console.log(newData);
 
       return setCvs(newData);
     } else {
@@ -24,11 +25,27 @@ export default function HomePage() {
     }
   };
 
+  const setCvForTemplate = async (data: CvFormValues) => {
+    const response = await fetch('http://localhost:3000/api/users/cv-form', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    return response.ok;
+  };
+
+  const handleClick = async (cv: CvFormValues) => {
+    console.log(cv);
+    setCvForTemplate(cv);
+    router.push(`/cv-form/templates/${cv.cvTemplate}`);
+  };
+
   useEffect(() => {
     getCvs();
   }, []);
-
-  console.log(cvs);
 
   return (
     <HomePageArea>
@@ -37,16 +54,14 @@ export default function HomePage() {
       </Button>
       <h2>Your CV</h2>
 
-      {cvs.map((cv: CvFormValues) => {
-        return (
-          <Button
-            type="button"
-            onClick={() => router.push(`/cv-form/templates/${cv.cvTemplate}`)}
-          >
-            CV 1
-          </Button>
-        );
-      })}
+      {cvs &&
+        cvs.map((cv: CvFormValues) => {
+          return (
+            <Button type="button" onClick={() => handleClick(cv)}>
+              CV {cvs.indexOf(cv) + 1}
+            </Button>
+          );
+        })}
     </HomePageArea>
   );
 }
