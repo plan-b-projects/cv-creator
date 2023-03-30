@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb';
+import { JobData } from '../components/job-search/job';
 import { CvFormValues } from '../shared-types';
 
 export type User = {
@@ -39,3 +40,19 @@ export const saveTemplateToCv = (email: string, cv: CvFormValues) =>
 //             }
 //         })
 // }
+export const addFavJob = (email: string, job: JobData) =>
+  mongoClient
+    .db('cvDb')
+    .collection('users')
+    .updateOne({ email }, { $push: { favJobs: job } });
+
+
+export const delFavJob = (email: string, job_id: string) =>
+  mongoClient
+    .db('cvDb')
+    .collection('users')
+    .updateOne({ email }, {
+      $pull: {
+        favJobs: { job_id: job_id }
+      }
+    });
