@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors } from '../../helpers/theme';
 
 export default function Footer() {
   const date = new Date();
@@ -16,7 +17,7 @@ export default function Footer() {
           </GitHub>
         </List>
         <List>
-          <em>&copy; {year} &lt;/salt&gt;</em>
+          <small>&copy; {year} &lt;/salt&gt;</small>
         </List>
       </NavList>
     </FooterBox>
@@ -25,12 +26,13 @@ export default function Footer() {
 
 const FooterBox = styled.footer`
   width: 100%;
-  height: 50px;
-  background-color: #a0d6fc;
+  height: 60px;
+  background-color: ${colors.dark};
 `;
 
 const NavList = styled.ul`
   margin-bottom: 8px;
+  margin-top: 0;
   padding: 0;
   font-size: 16px;
   display: flex;
@@ -43,11 +45,13 @@ const NavList = styled.ul`
 const List = styled.li`
   flex: 2 1;
   text-align: center;
-  line-height: 50px;
+  line-height: 60px;
+  color: ${colors.light};
 `;
 
 const GitHub = styled.a`
   text-decoration: none;
   width: 100%;
-  color: #262a74;
+  color:${colors.light};
+  font-weight: 700;
 `;

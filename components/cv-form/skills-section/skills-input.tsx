@@ -2,8 +2,9 @@ import { useRef } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import styled from 'styled-components';
 import { CvFormValues } from '../../../shared-types';
-import { Button } from '../../button';
+import { Button } from '../../../helpers/button';
 import { FieldGroupContainer, Input, Label } from '../field-group';
+import { colors } from '../../../helpers/theme';
 
 type Props = {
   skillType: keyof CvFormValues['skills'];
@@ -62,7 +63,8 @@ const ChipButton = styled.button`
   background: transparent;
   border: 0;
   outline: 0;
-  font-size: 16px;
+  font-size: 14px;
+  color: ${colors.dark};
 `;
 
 const Chip = styled.div`
@@ -71,5 +73,5 @@ const Chip = styled.div`
   border-radius: 6px;
   padding: 5px 0 5px 15px;
   display: inline-block;
-  background: #eaeaea;
+  background: ${colors.transparent};
 `;

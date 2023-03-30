@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import { colors, mediaScreen } from '../../helpers/theme';
+import LogInChip from '../log-in-chip';
 
 export default function Header() {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
-    <header>
+    <HeaderContainer>
       <NavItems>
         <NavList>
           <List isActive={router.pathname === '/'}>
@@ -16,17 +18,37 @@ export default function Header() {
             <NavListLink href="/documentation">Documentation</NavListLink>
           </List>
         </NavList>
+      <LogInChip />
       </NavItems>
-    </header>
+    </HeaderContainer>
   );
 }
 
-const NavItems = styled.nav`
-  height: 80px;
+const HeaderContainer = styled.header`
   display: flex;
-  justify-content: center;
   align-items: flex-end;
-  background-color: #a0d6fc
+  justify-content: flex-end;
+  padding: 40px;
+  
+  @media (max-width: ${mediaScreen.small}){
+    padding: 20px 10px;
+  }
+`;
+
+const NavItems = styled.nav`
+  border-radius: 30px;
+  margin-bottom: 0;
+  height: 50px;
+  display: flex;
+  padding-left: 30px;
+  justify-content: space-around;
+  background-color: ${colors.transparent};
+  text-align: center;
+
+  @media (max-width: ${mediaScreen.small}){
+    width: 100%;
+  }
+
 `;
 
 const NavList = styled.ul`
@@ -34,25 +56,33 @@ const NavList = styled.ul`
   padding: 0;
   font-size: 16px;
   display: flex;
-  width: 100%;
+  flex: 1 0 auto;
   align-content: center;
   list-style: none;
   justify-content: center;
 `;
 
 const List = styled.li<{ isActive: boolean }>`
-  flex: 2 1;
+  flex: 1 0 auto;
   text-align: center;
   padding-bottom: 10px;
-  border-bottom: ${props => props.isActive ? '2px' : '0'} solid #262A74;
+  padding-inline: 30px;
+  border-bottom: ${(props) => (props.isActive ? '2px' : '0')} solid
+    ${colors.dark};
 
   &:hover {
-    border-bottom: 2px solid #262A74;
+    border-bottom: 2px solid ${colors.dark};
+  }
+
+  @media (max-width: ${mediaScreen.small}){
+    padding-bottom: 8px;
+    padding-inline: 0;
+    font-size: 14px;
   }
 `;
 
 const NavListLink = styled(Link)`
   text-decoration: none;
   width: 100%;
-  color: #262A74;
+  color: ${colors.dark};
 `;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FieldGroup } from './field-group';
+import { Fieldset, Legend, FieldsetContent } from './form-styles';
 
 export default function BasicInfo() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -71,20 +72,3 @@ export default function BasicInfo() {
   );
 }
 
-const FieldsetContent = styled.div<{ isExpanded: boolean }>`
-  display: ${(props) => (props.isExpanded ? 'block' : 'none')};
-`;
-
-const Fieldset = styled.fieldset`
-  border: none;
-  padding: 0;
-  margin: 20px 0;
-`;
-const Legend = styled.legend<{ isExpanded: boolean }>`
-  border-radius: 2px;
-  background-color: #a0d6fc;
-  width: 97%;
-  padding: 15px 0;
-  padding-left: 20px;
-  font-weight: ${(props) => (props.isExpanded ? '700' : '400')};
-`;

@@ -3,7 +3,7 @@ import { CvFormValues } from '../../shared-types';
 import styled from 'styled-components';
 import { mediaScreen } from '../../helpers/theme';
 
-export default function TemplateA(props:{isInSelector?:boolean}) {
+export default function TemplateA(props: { isInSelector?: boolean }) {
   const [data, setData] = useState<CvFormValues>();
 
   const getFormValues = async () => {
@@ -27,7 +27,7 @@ export default function TemplateA(props:{isInSelector?:boolean}) {
   }, []);
 
   return (
-    <Template  isInSelector={props.isInSelector}>
+    <Template isInSelector={props.isInSelector}>
       <TemplateLeft>
         <ProfileImage src={data?.basicInfo.profilePicture} />
         <Name>{data?.basicInfo.name}</Name>
@@ -142,7 +142,7 @@ const Template = styled.div<{ isInSelector?: boolean }>`
     width: ${(props) => (props.isInSelector ? '198.33px' : '297.5px')};
     height: ${(props) => (props.isInSelector ? '280.67px' : '421px')};
     font-size: ${(props) => (props.isInSelector ? '6px' : '9px')};
-   }
+  }
 `;
 
 const TemplateLeft = styled.div`
