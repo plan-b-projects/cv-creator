@@ -12,26 +12,52 @@ export type JobData = {
     job_is_remote: boolean;
     job_city: string;
     job_country: string;
+    job_id: string;
 }
+
 type JobType = {
     prop: JobData;
 }
+
 export default function Job(prop: JobType) {
     const [fav, setFave] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
 
+    const addFav = () => {
+        fetch(`http://localhost:3000/api/users/job-search`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                job: prop.prop
+            }),
+        })
+            .then(() => setFave(true))
+    };
+
+    const deleteFav = () => {
+        fetch(`http://localhost:3000/api/users/job-search/${prop.prop.job_id}`, {
+            method: 'DELETE',
+        })
+            .then(() => setFave(false))
+    };
+
     const handleClick = () => {
-        setFave(!fav);
-        
+        if (!fav) {
+            addFav();
+        } else {
+            deleteFav()
+        }
+
     };
 
     return (
-        <JobContainer>
+        <JobContainer key={prop.prop.job_id}>
             <h1>{prop.prop.job_title}</h1>
             <h4>employer name: {prop.prop.employer_name}</h4>
             <p>location: {prop.prop.job_city}, {prop.prop.job_country}</p>
             <p>{prop.prop.job_employment_type}- {prop.prop.job_is_remote ? 'remote' : 'on-site'}</p>
-            {/* <p>{prop.prop.job_description}</p> */}
             <FavLinkContainer>
                 <a href={prop.prop.job_apply_link}>Apply link</a>
                 <FavButton onClick={() => handleClick()}>
