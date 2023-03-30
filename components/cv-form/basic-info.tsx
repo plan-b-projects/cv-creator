@@ -7,7 +7,12 @@ export default function BasicInfo() {
 
   return (
     <Fieldset>
-      <Legend isExpanded={isExpanded} onClick={() => setIsExpanded(!isExpanded)}>Basic Info</Legend>
+      <Legend
+        isExpanded={isExpanded}
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        Basic Info
+      </Legend>
 
       <FieldsetContent isExpanded={isExpanded}>
         <FieldGroup

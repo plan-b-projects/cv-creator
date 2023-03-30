@@ -1,6 +1,5 @@
 import { ReactNode, useEffect, useState } from 'react';
 import { CvFormValues } from '../../shared-types';
-import { saveTemplateToCv } from '../../db/db';
 import styled from 'styled-components';
 
 export default function TemplateA() {
@@ -16,6 +15,8 @@ export default function TemplateA() {
 
     if (response.ok) {
       const newData = await response.json();
+      console.log(newData);
+
       return setData(newData);
     } else {
       return {};

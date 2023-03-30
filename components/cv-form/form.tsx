@@ -47,32 +47,29 @@ export default function Form() {
 
   const submitForm = methods.handleSubmit(async (data) => {
     await saveForm(data);
-    router.push('/cv-form/templates')
+    router.push('/cv-form/templates');
   });
 
   return (
     <FormProvider {...methods}>
       <Header>Fill in Your CV</Header>
       <FormContainer>
-      <StyledForm  onSubmit={submitForm}>
-        <BasicInfo />
-        <Education />
-        <Experience />
-        <SkillsSection />
-        <Languages />
+        <StyledForm onSubmit={submitForm}>
+          <BasicInfo />
+          <Education />
+          <Experience />
+          <SkillsSection />
+          <Languages />
 
-        <ButtonGroup>
-          <Button type="button" onClick={saveDraft}>
-            Save draft
-          </Button>
-          <Button
-            type="submit"
-            onClick={submitForm}
-          >
-            Save and select template
-          </Button>
-        </ButtonGroup>
-      </StyledForm>
+          <ButtonGroup>
+            <Button type="button" onClick={saveDraft}>
+              Save draft
+            </Button>
+            <Button type="submit" onClick={submitForm}>
+              Save and select template
+            </Button>
+          </ButtonGroup>
+        </StyledForm>
       </FormContainer>
     </FormProvider>
   );

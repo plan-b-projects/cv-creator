@@ -4,12 +4,11 @@ import { CvFormValues } from '../shared-types';
 export type User = {
   email: string;
   cv?: CvFormValues;
+  CVs: [];
 };
 
 export const mongoClient: MongoClient = new MongoClient(
-
   `${process.env.MONGO_INITDB_URL}`,
-
 );
 
 export const createUser = (user: User) =>
@@ -22,7 +21,7 @@ export const updateCvForm = (email: string, cv: CvFormValues) =>
   mongoClient
     .db('cvDb')
     .collection('users')
-    .updateOne({ email }, { $set: { cv } });
+    .updateOne({ email: email }, { $set: { cv } });
 
 export const saveTemplateToCv = (email: string, cv: CvFormValues) =>
   mongoClient
@@ -30,12 +29,16 @@ export const saveTemplateToCv = (email: string, cv: CvFormValues) =>
     .collection('users')
     .updateOne({ email }, { $set: { cv } });
 
-// export const updateUser = (email: string, cv: CV) => {
-//     mongoClient
-//     .db('cvDb').collection('users').updateOne({email: email},
-//         {$push:
-//             {
-//                 CVs: cv
-//             }
-//         })
-// }
+export const updateUser = (email: string, cv: CvFormValues) => {
+  mongoClient
+    .db('cvDb')
+    .collection('users')
+    .updateOne(
+      { email: email },
+      {
+        $push: {
+          CVs: cv,
+        },
+      },
+    );
+};
