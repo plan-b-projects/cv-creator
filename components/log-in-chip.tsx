@@ -1,7 +1,7 @@
 import { signOut, useSession } from 'next-auth/react';
 import React from 'react';
 import styled from 'styled-components';
-import { ButtonLink } from './button';
+import { colors, mediaScreen } from '../helpers/theme';
 
 const LogInChip: React.FC = () => {
   const { data: session } = useSession();
@@ -43,27 +43,30 @@ const LogInChip: React.FC = () => {
 export default LogInChip;
 
 const Container = styled.div`
-  margin: 10px;
-  margin-top: 15px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+
 `;
 
 const Chip = styled.div`
-  max-width: 300px;
-  padding: 10px 20px 10px 10px;
+  max-width: 260px;
+  padding: 8px;
   display: flex;
   border-radius: 40px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   align-items: center;
+  background-color: ${colors.transparent};
+
+  @media only screen and (max-width: ${mediaScreen.small}) {
+    width: 115px;
+  }
 `;
 
 const ImageAcc = styled.div`
-  flex: 0 0 40px;
+  flex: 0 0 35px;
   background-size: 100% 100%;
-  width: 40px;
-  height: 40px;
+  height: 35px;
   border-radius: 50%;
 `;
 
@@ -72,14 +75,31 @@ const NameAcc = styled.div`
   margin: 0 10px;
   text-overflow: ellipsis;
   font-size: 12px;
-
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 50%;
+
+  @media (max-width: ${mediaScreen.small}) {
+    visibility: hidden;
+    max-width: 1px;
+    margin: 0 5px;
+  }
 `;
 
-const SignOut = styled(ButtonLink)`
-  flex: 1 0 auto;
-  border-radius: 20px;
+const SignOut = styled.a`
+  font-weight: 700;
+  font-size: 14px;
+  color: ${colors.dark};
+  margin-right: 8px;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover{
+    color: ${colors.light};
+  }
+
+  @media (max-width:${mediaScreen.small}) {
+    margin-right: 4px;
+  }
 `;

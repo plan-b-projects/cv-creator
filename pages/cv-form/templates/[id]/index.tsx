@@ -1,24 +1,26 @@
 import Layout from '../../../../components/layout';
-import { signOut, useSession } from 'next-auth/react';
-import styles from '../../../../components/header/header.module.css';
-import useNoSession from '../../../../hooks/useNoSession';
+import { useSession } from 'next-auth/react';
+import useNoSession from '../../../../helpers/useNoSession';
 import TemplateA from '../../../../components/templates/template-a';
 import React from 'react';
-import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
+import { PDFExport } from '@progress/kendo-react-pdf';
 import LogInChip from '../../../../components/log-in-chip';
-import { Button } from '../../../../components/button';
+import { Button, ButtonContainer } from '../../../../helpers/button';
+import useWindowWidth from '../../../../helpers/useWindowWidth';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import { mediaScreen } from '../../../../helpers/theme';
 
-export default function FormPage() {
+export default function TemplatePage() {
+  const router = useRouter();
+  const { id } = router.query;
   const { data: session, status } = useSession();
-  const pdfExportComponent = React.useRef<any>(null);
+  const pdfExportComponent = React.useRef<PDFExport>(null);
   const container = React.useRef(null);
 
   useNoSession();
   const exportPDFWithComponent = () => {
     if (pdfExportComponent.current) {
-      console.log(pdfExportComponent);
-
       pdfExportComponent.current.save();
     }
   };
@@ -56,55 +58,45 @@ export default function FormPage() {
     return { status, data };
   };
 
+  const width = useWindowWidth();
+
   return (
     <Layout>
-      <Container>
-        <TopPart_Container>
-          <ButtonContainer>
-            <Button onClick={exportPDFWithComponent}>Download cv as pdf</Button>
-            <Button onClick={() => saveCvToUser()}>
-              Save this CV to your profile
-            </Button>
-          </ButtonContainer>
-          <div>
-            <LogInChip />
-          </div>
-        </TopPart_Container>
-        {session?.user && (
-          <>
+      {session?.user && (
+        <>
+          <TopContainer>
+            <ButtonContainer>
+              <Button onClick={exportPDFWithComponent}>Download as PFD</Button>
+              <Button onClick={() => saveCvToUser()}>
+                Save this CV to your profile
+              </Button>
+            </ButtonContainer>
+          </TopContainer>
+          <ContentContainer>
             <PDFExport
               ref={pdfExportComponent}
-              paperSize="auto"
-              margin={40}
-              fileName={`Report for ${new Date().getFullYear()}`}
-              author="KendoReact Team"
+              paperSize="A4"
+              margin={0}
+              scale={width > 600 ? 0.999 : 1.99}
+              // fileName={`Report for ${new Date().getFullYear()}`}
             >
               <div ref={container}>
-                <TemplateA />
+                {id === 'template-a' && <TemplateA />}
+                {id === 'template-b' && <TemplateA />}
+                {id === 'template-c' && <TemplateA />}
               </div>
             </PDFExport>
-          </>
-        )}
-      </Container>
+          </ContentContainer>
+        </>
+      )}
     </Layout>
   );
 }
-
-const Container = styled.div`
+const TopContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
 `;
 
-const TopPart_Container = styled.div`
-  width: 70%;
-  margin: 2rem auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  width: 30%;
-  justify-content: space-between;
+const ContentContainer = styled.div`
+  margin-bottom: 20px;
 `;

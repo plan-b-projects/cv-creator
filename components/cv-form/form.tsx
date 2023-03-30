@@ -6,8 +6,9 @@ import Languages from './languages';
 import SkillsSection from './skills-section';
 import { CvFormValues } from '../../shared-types';
 import { useRouter } from 'next/router';
-import { Button } from '../button';
+import { Button } from '../../helpers/button';
 import styled from 'styled-components';
+import { H1, mediaScreen } from '../../helpers/theme';
 
 const getFormValues = async () => {
   const response = await fetch('http://localhost:3000/api/users/cv-form', {
@@ -52,7 +53,7 @@ export default function Form() {
 
   return (
     <FormProvider {...methods}>
-      <Header>Fill in Your CV</Header>
+      <H1>Fill in Your CV</H1>
       <FormContainer>
       <StyledForm  onSubmit={submitForm}>
         <BasicInfo />
@@ -82,13 +83,14 @@ const FormContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
-`;
-
-const StyledForm = styled.form`
-  padding: 10px;
-  width: 780px;
   flex-direction: column;
-  align-items
+  align-items: center;
+  `;
+  
+  const StyledForm = styled.form`
+  padding: 10px;
+  width: 90%;
+  max-width: 600px;
 `;
 
 const ButtonGroup = styled.div`
@@ -96,10 +98,8 @@ const ButtonGroup = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-`;
 
-const Header = styled.h1`
-  text-align: center;
-  padding-inline: 30px;
-  margin-bottom: 10px;
+  @media (max-width: 400px) {
+    flex-direction: column;
+  }
 `;
