@@ -3,16 +3,33 @@ import { signOut, useSession } from 'next-auth/react';
 import styles from '../../../../components/header/header.module.css';
 import useNoSession from '../../../../hooks/useNoSession';
 import TemplateA from '../../../../components/templates/template-a';
-import React from 'react';
+import React, { useState } from 'react';
 import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
 import LogInChip from '../../../../components/log-in-chip';
 import { Button } from '../../../../components/button';
 import styled from 'styled-components';
-
+import { ThemeContainer, ThemeButton } from '../../../../components/themes/ThemeSwitching.styled';
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles } from '../../../../components/themes/Global';
+import { Theme } from '../../../../shared-types';
+import {
+  light,
+  dark,
+  blue,
+  green,
+  brown,
+  pink,
+} from '../../../../components/themes/Theme.styled';
+ 
 export default function FormPage() {
   const { data: session, status } = useSession();
   const pdfExportComponent = React.useRef<any>(null);
   const container = React.useRef(null);
+
+  const [selectedTheme, setSelectedTheme] = useState(light);
+  const HandleThemeChange = (theme: Theme) => {
+    setSelectedTheme(theme);
+  };
 
   useNoSession();
   const exportPDFWithComponent = () => {
@@ -58,6 +75,17 @@ export default function FormPage() {
 
   return (
     <Layout>
+      <GlobalStyles name={''} colors={{
+        primaryBackground: '',
+        secondaryBackground: '',
+        primaryTitle: '',
+        secondayTitle: '',
+        primaryBgTitle: '',
+        secondayBgTitle: '',
+        primaryText: '',
+        secondaryText: '',
+        border: ''
+      }}/>
       <Container>
         <TopPart_Container>
           <ButtonContainer>
@@ -70,21 +98,47 @@ export default function FormPage() {
             <LogInChip />
           </div>
         </TopPart_Container>
-        {session?.user && (
-          <>
-            <PDFExport
-              ref={pdfExportComponent}
-              paperSize="auto"
-              margin={40}
-              fileName={`Report for ${new Date().getFullYear()}`}
-              author="KendoReact Team"
-            >
-              <div ref={container}>
-                <TemplateA />
-              </div>
-            </PDFExport>
-          </>
-        )}
+        <ThemeProvider theme={selectedTheme}>
+          <ThemeContainer>
+            <span>Themes: </span>
+            <ThemeButton
+              className={`light ${selectedTheme === light ? "active" : ""}`}
+              onClick={() => HandleThemeChange(light)}></ThemeButton>
+            <ThemeButton
+              className={`dark ${selectedTheme === dark ? "active" : ""}`}
+              onClick={() => HandleThemeChange(dark)}></ThemeButton>
+            <ThemeButton
+              className={`blue ${selectedTheme === blue ? "active" : ""}`}
+              onClick={() => HandleThemeChange(blue)}></ThemeButton>
+            <ThemeButton
+              className={`green ${selectedTheme === green ? "active" : ""}`}
+              onClick={() => HandleThemeChange(green)}></ThemeButton>
+            <ThemeButton
+              className={`brown ${selectedTheme === brown ? "active" : ""}`}
+              onClick={() => HandleThemeChange(brown)}></ThemeButton>
+            <ThemeButton
+              className={`pink ${selectedTheme === pink ? "active" : ""}`}
+                onClick={() => HandleThemeChange(pink)}> 
+            </ThemeButton>
+          </ThemeContainer>
+          {session?.user && (
+            <>
+              <PDFExport
+                ref={pdfExportComponent}
+                paperSize="auto"
+                margin={40}
+                fileName={`Report for ${new Date().getFullYear()}`}
+                author="KendoReact Team"
+              >
+                <div ref={container}>
+                  
+                    <TemplateA />
+                  
+                </div>
+              </PDFExport>
+            </>
+          )}
+        </ThemeProvider>
       </Container>
     </Layout>
   );
