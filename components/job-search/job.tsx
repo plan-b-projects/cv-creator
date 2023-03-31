@@ -79,7 +79,8 @@ const JobContainer = styled.div`
   border: 1px solid #262A74;
   padding: 10px;
   width: 25%;
-`;
+  background-color: white;
+  `;
 const FavLinkContainer = styled.div`
   display: flex;
   flex-direction: row;
