@@ -104,6 +104,7 @@ export default function TemplatePage() {
               </Button>
             </ButtonContainer>
           </TopContainer>
+          <ContentContainer>
           <ThemeProvider theme={selectedTheme}>
             <ThemeContainer>
               <span>Themes: </span>
@@ -133,7 +134,7 @@ export default function TemplatePage() {
               ></ThemeButton>
             </ThemeContainer>
 
-            <ContentContainer>
+           
               <PDFExport
                 ref={pdfExportComponent}
                 paperSize="A4"
@@ -147,8 +148,8 @@ export default function TemplatePage() {
                   {id === 'template-c' && <TemplateA />}
                 </div>
               </PDFExport>
-            </ContentContainer>
           </ThemeProvider>
+            </ContentContainer>
         </>
       )}
     </Layout>

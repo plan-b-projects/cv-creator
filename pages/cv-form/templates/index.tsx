@@ -3,13 +3,12 @@ import { useSession } from 'next-auth/react';
 import useNoSession from '../../../helpers/useNoSession';
 import TemplateA from '../../../components/templates/template-a';
 import React from 'react';
-
 import router from 'next/router';
-import LogInChip from '../../../components/log-in-chip';
 import { Button } from '../../../helpers/button';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import TemplateB from '../../../components/templates/template-b';
 import { colors, H1, mediaScreen } from '../../../helpers/theme';
+import { light } from '../../../components/themes/Theme.styled';
 
 export default function FormPage() {
   const { data: session, status } = useSession();
@@ -23,6 +22,7 @@ export default function FormPage() {
           <PageContainer>
             <H1>Select CV TEMPLATES</H1>
             <ContentContainer>
+              <ThemeProvider theme={light}>
               <TemplateSelector>
                 <TemplateBtn
                   type="button"
@@ -51,6 +51,7 @@ export default function FormPage() {
                   </Button>
                 </TemplateBtn>
               </TemplateSelector>
+              </ThemeProvider>
             </ContentContainer>
           </PageContainer>
         )}
