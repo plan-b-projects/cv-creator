@@ -25,7 +25,7 @@ export default function TemplateA(props: { isInSelector?: boolean }) {
   useEffect(() => {
     getFormValues();
   }, []);
-
+  
   return (
     <Template isInSelector={props.isInSelector}>
       <TemplateLeft>
@@ -149,8 +149,8 @@ const TemplateLeft = styled.div`
   flex: 0 0 38%;
   max-height: 100%;
   padding: 1em;
-  color: ${(theme) => theme.theme.primaryTitle};
-  background: ${(theme) => theme.theme.primaryBackground};
+  color: ${({ theme }) => theme.colors.primaryTitle};
+  background: ${({ theme }) => theme.colors.primaryBackground};
   display: flex;
   flex-direction: column;
 `;
@@ -159,14 +159,14 @@ const ProfileImage = styled.img`
   flex: 0 0 9em;
   width: 9em;
   margin: auto;
-  border: 3px solid ${(theme) => theme.theme.primaryTitle};
+  border: 3px solid ${({ theme }) => theme.colors.primaryTitle};
   border-radius: 50%;
 `;
 
 const Name = styled.h1`
   font-size: 1.5em;
   padding-bottom: 0.7em;
-  border-bottom: 3px solid ${(theme) => theme.theme.primaryTitle};
+  border-bottom: 3px solid ${({ theme }) => theme.colors.primaryTitle};
 `;
 
 const LeftSection = styled.div`
@@ -186,20 +186,20 @@ const LeftSubtitle = styled.h4`
 
 const LeftText = styled.div`
   font-size: 0.6em;
-  color: ${(theme) => theme.theme.primaryText};
+  color: ${({ theme }) => theme.colors.primaryText};
 `;
 
 const Link = styled.a`
   font-size: 0.6em;
-  color: ${(theme) => theme.theme.primaryText};
+  color: ${({ theme }) => theme.colors.primaryText};
   text-decoration: none;
 `;
 
 const TemplateRight = styled.div`
   flex: 0 0 53%;
   padding: 0.5em;
-  color: ${(theme) => theme.theme.secondayTitle};
-  background: ${(theme) => theme.theme.secondaryBackground};
+  color: ${({ theme }) => theme.colors.secondayTitle};
+  background: ${({ theme }) => theme.colors.secondaryBackground};
   display: flex;
   flex-direction: column;
 `;
@@ -209,7 +209,7 @@ const RightSection = styled.div``;
 const RightSectionTitle = styled.h2`
   padding: 0.5em 1em;
   text-align: center;
-  background: ${(theme) => theme.theme.secondayBgTitle};
+  background:  ${({ theme }) => theme.colors.secondayBgTitle};
   font-size: 1.2em;
 `;
 
