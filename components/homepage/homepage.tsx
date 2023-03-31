@@ -5,16 +5,6 @@ import { Button } from '../../helpers/button';
 import { H1, H2 } from '../../helpers/theme';
 import { CvFormValues } from '../../shared-types';
 
-export const placeHolderCV = {
-  cvTemplate: 'template-a',
-  basicInfo: {
-    profilePicture: 'https://labs.openai.com/s/iguIOPMVVskVdSY2wuSMHfAJ',
-    name: 'Alex',
-    location: 'Stockholm',
-    email: 'test@test.test',
-  },
-};
-
 export default function HomePage() {
   const [cvs, setCvs] = useState<any>([]);
 
@@ -28,7 +18,7 @@ export default function HomePage() {
 
     if (response.ok) {
       const newData = await response.json();
-      if (newData.length > 1) {
+      if (newData.length > 0) {
         return setCvs(newData);
       } else {
         return;
@@ -58,6 +48,7 @@ export default function HomePage() {
   useEffect(() => {
     getCvs();
   }, []);
+  
 
   return (
     <HomePageArea>
