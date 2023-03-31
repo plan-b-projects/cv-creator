@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { ResponseData } from "../../pages/api/generate-answer";
 import { Button } from "../../helpers/button";
 import styled from "styled-components";
@@ -8,7 +8,7 @@ export default function Modal() {
   const [modal, setModal] = useState(false);
   const [prompt, setPrompt] = useState('');
   const [aiConversation, setAiConversation] = useState<string[]>([]);
-
+ 
   const askToAi = async (prompt: string) => {
     setAiConversation(aiConversation => [...aiConversation, prompt]);
     await fetch('http://localhost:3000/api/generate-answer', {
@@ -28,12 +28,6 @@ export default function Modal() {
   const toggleModal = () => {
     setModal(!modal);
   };
-
-  if(modal) {
-    document.body.classList.add('active-modal')
-  } else {
-    document.body.classList.remove('active-modal')
-  }
 
     return (
     <>
