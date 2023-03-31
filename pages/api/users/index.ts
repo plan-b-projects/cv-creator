@@ -10,7 +10,7 @@ export default async function handler(
     if (findEmail) {
       res.status(200).json('');
     } else {
-      const newUser = await createUser({ email: req.body.email, CVs: [] });
+      const newUser = await createUser({ email: req.body.email, CVs: [], favJobs: [] });
       console.log(req.body.email);
       res.status(201).json(newUser);
     }
