@@ -7,19 +7,29 @@ import ReacrScrollableFeed from 'react-scrollable-feed';
 export default function Modal() {
   const [modal, setModal] = useState(false);
   const [prompt, setPrompt] = useState('');
+  const [errorVisibility, setErrorVisibility] = useState(false);
   const [aiConversation, setAiConversation] = useState<string[]>([]);
  
   const askToAi = async (prompt: string) => {
-    setAiConversation(aiConversation => [...aiConversation, prompt]);
-    await fetch('http://localhost:3000/api/generate-answer', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        prompt: prompt
-      })
-    }).then((response) => response.json()).then((data) => setAiConversation(aiConversation => [...aiConversation, data.text]));
+    const patternDigit = /^\d+$/;
+    const patternSpace = /^\s*$/;
+    if (prompt === '' || patternDigit.test(prompt) || patternSpace.test(prompt)) {
+      setErrorVisibility(!errorVisibility);
+    } else {
+      if (errorVisibility === true) {
+        setErrorVisibility(!errorVisibility);
+      }
+      setAiConversation(aiConversation => [...aiConversation, prompt]);
+      await fetch('http://localhost:3000/api/generate-answer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          prompt: prompt
+        })
+      }).then((response) => response.json()).then((data) => setAiConversation(aiConversation => [...aiConversation, data.text]));
+    }
     setPrompt('');
   };
 
@@ -47,6 +57,12 @@ export default function Modal() {
                   askToAi(prompt);
                 }}>Go</ModalBtn>
               </Form>
+              {
+                errorVisibility === true ?
+                  <ErrorBox>Sorry, try to write something else.</ErrorBox>
+                  :
+                  null
+              }
               <ConversationBox>
               <ReacrScrollableFeed>
                 {
@@ -165,6 +181,14 @@ const Input = styled.input`
   padding: 1rem;
   margin-right: 1rem;
   border-radius: 7px;
+`;
+
+const ErrorBox = styled.div`
+  width: 65%;
+  position: absolute;
+  color: red;
+  top:210px;
+  left:35px;
 `;
 
 const ConversationBox = styled.div`
