@@ -44,3 +44,18 @@ export type CvFormValues = {
   };
   languages: LanguageItem[];
 };
+
+export type Theme = {
+  name: string;
+  colors: {
+    primaryBackground: string;
+    secondaryBackground: string;
+    primaryTitle: string;
+    secondayTitle: string;
+    primaryBgTitle: string;
+    secondayBgTitle: string;
+    primaryText: string;
+    secondaryText: string;
+    border: string;
+  };
+};

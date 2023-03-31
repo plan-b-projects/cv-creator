@@ -2,21 +2,37 @@ import Layout from '../../../../components/layout';
 import { useSession } from 'next-auth/react';
 import useNoSession from '../../../../helpers/useNoSession';
 import TemplateA from '../../../../components/templates/template-a';
-import React from 'react';
-import { PDFExport } from '@progress/kendo-react-pdf';
-import LogInChip from '../../../../components/log-in-chip';
+import React, { useState } from 'react';
+import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
+
 import { Button, ButtonContainer } from '../../../../helpers/button';
 import useWindowWidth from '../../../../helpers/useWindowWidth';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import { mediaScreen } from '../../../../helpers/theme';
 
+import { ThemeContainer, ThemeButton } from '../../../../components/themes/ThemeSwitching.styled';
+import { ThemeProvider } from "styled-components";
+
+import { Theme } from '../../../../shared-types';
+import {
+  light,
+  dark,
+  blue,
+  green,
+  brown,
+  pink,
+} from '../../../../components/themes/Theme.styled';
 export default function TemplatePage() {
   const router = useRouter();
   const { id } = router.query;
   const { data: session, status } = useSession();
   const pdfExportComponent = React.useRef<PDFExport>(null);
   const container = React.useRef(null);
+
+  const [selectedTheme, setSelectedTheme] = useState(light);
+  const HandleThemeChange = (theme: Theme) => {
+    setSelectedTheme(theme);
+  };
 
   useNoSession();
   const exportPDFWithComponent = () => {
@@ -72,6 +88,30 @@ export default function TemplatePage() {
               </Button>
             </ButtonContainer>
           </TopContainer>
+          <ThemeProvider theme={selectedTheme}>
+          <ThemeContainer>
+            <span>Themes: </span>
+            <ThemeButton
+              className={`light ${selectedTheme === light ? "active" : ""}`}
+              onClick={() => HandleThemeChange(light)}></ThemeButton>
+            <ThemeButton
+              className={`dark ${selectedTheme === dark ? "active" : ""}`}
+              onClick={() => HandleThemeChange(dark)}></ThemeButton>
+            <ThemeButton
+              className={`blue ${selectedTheme === blue ? "active" : ""}`}
+              onClick={() => HandleThemeChange(blue)}></ThemeButton>
+            <ThemeButton
+              className={`green ${selectedTheme === green ? "active" : ""}`}
+              onClick={() => HandleThemeChange(green)}></ThemeButton>
+            <ThemeButton
+              className={`brown ${selectedTheme === brown ? "active" : ""}`}
+              onClick={() => HandleThemeChange(brown)}></ThemeButton>
+            <ThemeButton
+              className={`pink ${selectedTheme === pink ? "active" : ""}`}
+                onClick={() => HandleThemeChange(pink)}> 
+            </ThemeButton>
+          </ThemeContainer>
+          </ThemeProvider>
           <ContentContainer>
             <PDFExport
               ref={pdfExportComponent}
