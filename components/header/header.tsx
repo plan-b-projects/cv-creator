@@ -15,7 +15,7 @@ export default function Header() {
             <NavListLink href="/">Home</NavListLink>
           </List>
           <List isActive={router.pathname === '/documentation'}>
-            <NavListLink href="/documentation">Documentation</NavListLink>
+            <NavListLink href="/job-search">Job Search</NavListLink>
           </List>
         </NavList>
       <LogInChip />
