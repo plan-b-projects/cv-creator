@@ -179,8 +179,8 @@ const Template = styled.div`
 const TemplateLeft = styled.div`
   width: 40%;
   padding: 2rem;
-  color: #ffe7d3;
-  background: #494e5f;
+  color: ${({ theme }) => theme.colors.primaryTitle};
+  background: ${({ theme }) => theme.colors.primaryBackground};
   display: flex;
   flex-direction: column;
 `;
@@ -189,14 +189,14 @@ const TemplateLeft__image = styled.img`
   width: 150px;
   height: 150px;
   margin: auto;
-  border: 1px solid #ffe7d3;
+  border: 3px solid ${({ theme }) => theme.colors.primaryTitle};
   border-radius: 50%;
 `;
 
 const TemplateLeft__name = styled.h1`
   padding: 1rem 0;
   margin-bottom: 2rem;
-  border-bottom: 3px solid #ffe7d3;
+  border-bottom: 3px solid ${({ theme }) => theme.colors.primaryTitle};
 `;
 
 const TemplateLeft__section = styled.div`
@@ -213,19 +213,19 @@ const TemplateLeft__subtitle = styled.h4`
 `;
 
 const TemplateLeft__text = styled.div`
-  color: #f1f1ed;
+  color: ${({ theme }) => theme.colors.primaryText};
 `;
 
 const TemplateLeft__link = styled.a`
-  color: #f1f1ed;
+  color: ${({ theme }) => theme.colors.primaryText};
   text-decoration: none;
 `;
 
 const TemplateRight = styled.div`
   width: 60%;
   padding: 2rem;
-  color: #494e5f;
-  background: #fefef9;
+  color: ${({ theme }) => theme.colors.secondayTitle};
+  background: ${({ theme }) => theme.colors.secondaryBackground};
   display: flex;
   flex-direction: column;
 `;
@@ -233,7 +233,7 @@ const TemplateRight = styled.div`
 const TemplateRight__sectionTitle = styled.h2`
   padding: 0.5rem 1rem;
   text-align: center;
-  background: #ffe7d3;
+  background: ${({ theme }) => theme.colors.secondayBgTitle};
 `;
 
 const TemplateRight__section = styled.div``;

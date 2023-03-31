@@ -4,6 +4,7 @@ import Form from '../../components/cv-form/form';
 import useNoSession from '../../hooks/useNoSession';
 import styled from 'styled-components';
 import LogInChip from '../../components/log-in-chip';
+import Ai from '../../components/Ai/Ai';
 
 export default function FormPage() {
   const { data: session, status } = useSession();
@@ -20,6 +21,7 @@ export default function FormPage() {
             <Form />
         )}
       </div>
+    <Ai  />
     </Layout>
   );
 }
