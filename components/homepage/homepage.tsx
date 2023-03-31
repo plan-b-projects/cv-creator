@@ -18,7 +18,6 @@ export default function HomePage() {
 
     if (response.ok) {
       const newData = await response.json();
-      console.log(newData);
 
       return setCvs(newData);
     } else {
@@ -39,7 +38,6 @@ export default function HomePage() {
   };
 
   const handleClick = async (cv: CvFormValues) => {
-    console.log(cv);
     setCvForTemplate(cv);
     router.push(`/cv-form/templates/${cv.cvTemplate}`);
   };
@@ -55,7 +53,7 @@ export default function HomePage() {
       </Button>
       <H2>Your CVs Collection</H2>
 
-      {cvs &&
+      {cvs.length > 1 &&
         cvs.map((cv: CvFormValues) => {
           return (
             <Button type="button" onClick={() => handleClick(cv)}>
