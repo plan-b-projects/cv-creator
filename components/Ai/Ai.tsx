@@ -38,13 +38,13 @@ export default function Modal() {
     return (
     <>
       <ButtonAi onClick={toggleModal}>
-        Ask to George
+        Ask Ceve
       </ButtonAi>
       {modal && (
         <ModalDiv>
           <Overlay onClick={toggleModal} />
             <ModalContent>
-              <h2>Hello! My name is George.</h2>
+              <h2>Hello! My name is Ceve.</h2>
               <h3>How can I help you?</h3>
               <Form>
                 <Input type="text" value={prompt} onChange={(e) => { setPrompt(e.target.value) }} placeholder='Write something to George ...' /> 
