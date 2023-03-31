@@ -3,7 +3,7 @@ import { JobData } from '../components/job-search/job';
 import { CvFormValues } from '../shared-types';
 
 export type User = {
-  favJobs: {};
+  favJobs?: {};
   email: string;
   cv?: CvFormValues;
   CVs?: [];
