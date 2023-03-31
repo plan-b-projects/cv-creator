@@ -47,7 +47,6 @@ export default function IndexPage() {
                 Sign in
               </ButtonLink>
             </NotSignedIn>
-          <Sphere/>
           </>
           )}
           {session?.user && (
