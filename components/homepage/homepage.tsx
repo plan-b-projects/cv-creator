@@ -1,7 +1,8 @@
 import router from 'next/router';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Button } from '../button';
+import { Button } from '../../helpers/button';
+import { H1, H2 } from '../../helpers/theme';
 import { CvFormValues } from '../../shared-types';
 
 export default function HomePage() {
@@ -52,7 +53,7 @@ export default function HomePage() {
       <Button type="button" onClick={() => router.push('/cv-form')}>
         Create a new CV
       </Button>
-      <h2>Your CV</h2>
+      <H2>Your CVs Collection</H2>
 
       {cvs &&
         cvs.map((cv: CvFormValues) => {

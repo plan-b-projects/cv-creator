@@ -5,7 +5,8 @@ import HomePage from '../components/homepage/homepage';
 import styled from 'styled-components';
 import noSession from '../public/noSession.jpg';
 import LogInChip from '../components/log-in-chip';
-import { ButtonLink } from '../components/button';
+import { ButtonLink } from '../helpers/button';
+import { H1, mediaScreen, Sphere, Text } from '../helpers/theme';
 
 const logInUser = async (credentials: User) => {
   const response = await fetch('http://localhost:3000/api/users', {
@@ -29,12 +30,12 @@ export default function IndexPage() {
 
   return (
     <Layout>
-      <div>
-        <div>
+      <>
           {!session && (
+        <>
             <NotSignedIn>
-              <Header>Welcome to CV Creator App</Header>
-              <span>You are not signed in</span>
+              <H1>Welcome to CV Creator App</H1>
+              <Text>Signed in to create CVs</Text>
               <br />
               <ButtonLink
                 href={`/api/auth/signin`}
@@ -45,37 +46,26 @@ export default function IndexPage() {
               >
                 Sign in
               </ButtonLink>
-              <Image src={noSession.src} />
             </NotSignedIn>
+          <Sphere/>
+          </>
           )}
-          <LogInChip />
           {session?.user && (
             <>
-              <Header>Welcome!</Header>
-
+              <H1>Welcome!</H1>
               <HomePage />
             </>
           )}
-        </div>
-      </div>
+      </>
     </Layout>
   );
 }
-
-const Header = styled.h1`
-  text-align: center;
-  padding-bottom: 30px;
-  padding-inline: 30px;
-`;
 
 const NotSignedIn = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 `;
 
-const Image = styled.img`
-  width: 350px;
-  height: 350px;
-  margin: 15px;
-`;
+
