@@ -5,6 +5,16 @@ import { Button } from '../../helpers/button';
 import { H1, H2 } from '../../helpers/theme';
 import { CvFormValues } from '../../shared-types';
 
+export const placeHolderCV = {
+  cvTemplate: 'template-a',
+  basicInfo: {
+    profilePicture: 'https://labs.openai.com/s/iguIOPMVVskVdSY2wuSMHfAJ',
+    name: 'Alex',
+    location: 'Stockholm',
+    email: 'test@test.test',
+  },
+};
+
 export default function HomePage() {
   const [cvs, setCvs] = useState<any>([]);
 
@@ -18,8 +28,11 @@ export default function HomePage() {
 
     if (response.ok) {
       const newData = await response.json();
-
-      return setCvs(newData);
+      if (newData.length > 1) {
+        return setCvs(newData);
+      } else {
+        return;
+      }
     } else {
       return {};
     }
@@ -51,10 +64,11 @@ export default function HomePage() {
       <Button type="button" onClick={() => router.push('/cv-form')}>
         Create a new CV
       </Button>
-      <H2>Your CVs Collection</H2>
-
-      {cvs.length > 1 &&
+      {cvs.length > 0 && <H2>Your CVs Collection</H2>}
+      {cvs.length > 0 &&
         cvs.map((cv: CvFormValues) => {
+          console.log(cvs);
+
           return (
             <Button type="button" onClick={() => handleClick(cv)}>
               CV {cvs.indexOf(cv) + 1}

@@ -3,7 +3,7 @@ import { CvFormValues } from '../../shared-types';
 import styled from 'styled-components';
 import { mediaScreen } from '../../helpers/theme';
 
-export default function TemplateA(props:{isInSelector?:boolean}) {
+export default function TemplateA(props: { isInSelector?: boolean }) {
   const [data, setData] = useState<CvFormValues>();
 
   const getFormValues = async () => {
@@ -27,7 +27,7 @@ export default function TemplateA(props:{isInSelector?:boolean}) {
   }, []);
 
   return (
-    <Template  isInSelector={props.isInSelector}>
+    <Template isInSelector={props.isInSelector}>
       <TemplateLeft>
         <ProfileImage src={data?.basicInfo.profilePicture} />
         <Name>{data?.basicInfo.name}</Name>
@@ -142,15 +142,15 @@ const Template = styled.div<{ isInSelector?: boolean }>`
     width: ${(props) => (props.isInSelector ? '198.33px' : '297.5px')};
     height: ${(props) => (props.isInSelector ? '280.67px' : '421px')};
     font-size: ${(props) => (props.isInSelector ? '6px' : '9px')};
-   }
+  }
 `;
 
 const TemplateLeft = styled.div`
   flex: 0 0 38%;
   max-height: 100%;
   padding: 1em;
-  color: ${({ theme }) => theme.colors.primaryTitle};
-  background: ${({ theme }) => theme.colors.primaryBackground};
+  color: ${(theme) => theme.theme.primaryTitle};
+  background: ${(theme) => theme.theme.primaryBackground};
   display: flex;
   flex-direction: column;
 `;
@@ -159,14 +159,14 @@ const ProfileImage = styled.img`
   flex: 0 0 9em;
   width: 9em;
   margin: auto;
-  border: 3px solid ${({ theme }) => theme.colors.primaryTitle};
+  border: 3px solid ${(theme) => theme.theme.primaryTitle};
   border-radius: 50%;
 `;
 
 const Name = styled.h1`
   font-size: 1.5em;
   padding-bottom: 0.7em;
-  border-bottom: 3px solid ${({ theme }) => theme.colors.primaryTitle};
+  border-bottom: 3px solid ${(theme) => theme.theme.primaryTitle};
 `;
 
 const LeftSection = styled.div`
@@ -186,20 +186,20 @@ const LeftSubtitle = styled.h4`
 
 const LeftText = styled.div`
   font-size: 0.6em;
-  color: ${({ theme }) => theme.colors.primaryText};
+  color: ${(theme) => theme.theme.primaryText};
 `;
 
 const Link = styled.a`
   font-size: 0.6em;
-  color: ${({ theme }) => theme.colors.primaryText};
+  color: ${(theme) => theme.theme.primaryText};
   text-decoration: none;
 `;
 
 const TemplateRight = styled.div`
   flex: 0 0 53%;
   padding: 0.5em;
-  color: ${({ theme }) => theme.colors.secondayTitle};
-  background: ${({ theme }) => theme.colors.secondaryBackground};
+  color: ${(theme) => theme.theme.secondayTitle};
+  background: ${(theme) => theme.theme.secondaryBackground};
   display: flex;
   flex-direction: column;
 `;
@@ -209,7 +209,7 @@ const RightSection = styled.div``;
 const RightSectionTitle = styled.h2`
   padding: 0.5em 1em;
   text-align: center;
-  background: ${({ theme }) => theme.colors.secondayBgTitle};
+  background: ${(theme) => theme.theme.secondayBgTitle};
   font-size: 1.2em;
 `;
 
