@@ -1,78 +1,99 @@
 import Layout from '../../../components/layout';
-import { signOut, useSession } from 'next-auth/react';
-import useNoSession from '../../../hooks/useNoSession';
+import { useSession } from 'next-auth/react';
+import useNoSession from '../../../helpers/useNoSession';
 import TemplateA from '../../../components/templates/template-a';
-import { useForm } from 'react-hook-form';
-import { CvFormValues } from '../../../shared-types';
 import React from 'react';
 
-import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
 import router from 'next/router';
+import LogInChip from '../../../components/log-in-chip';
+import { Button } from '../../../helpers/button';
+import styled from 'styled-components';
+import TemplateB from '../../../components/templates/template-b';
+import { colors, H1, mediaScreen } from '../../../helpers/theme';
 
 export default function FormPage() {
   const { data: session, status } = useSession();
-  const pdfExportComponent = React.useRef<any>(null);
-  const container = React.useRef(null);
-
-  const exportPDFWithMethod = () => {
-    let element = container.current || document.body;
-    savePDF(element, {
-      paperSize: 'auto',
-      margin: 40,
-      fileName: `cv for ${new Date().getFullYear()}`,
-    });
-  };
 
   useNoSession();
-  const exportPDFWithComponent = () => {
-    if (pdfExportComponent.current) {
-      pdfExportComponent.current.save();
-    }
-  };
 
   return (
     <Layout>
       <div>
-          {session?.user && (
-            <>
-              <div>
-                <div>
-                  {session.user.image && (
-                    <span
-                      style={{
-                        backgroundImage: `url('${session.user.image}')`,
-                      }}
-                      
-                    />
-                  )}
-                  <span>
-                    <small>Signed in as</small>
-                    <br />
-                    <strong>{session.user.email ?? session.user.name}</strong>
-                  </span>
-                  <a
-                    href={`/api/auth/signout`}
-                   
-                    onClick={(e) => {
-                      e.preventDefault();
-                      signOut();
-                    }}
+        {session?.user && (
+          <PageContainer>
+            <H1>Select CV TEMPLATES</H1>
+            <ContentContainer>
+              <TemplateSelector>
+                <TemplateBtn
+                  type="button"
+                  onClick={() => router.push('/cv-form/templates/template-a')}
+                >
+                  <TemplateA isInSelector />
+                  <Button
+                    type="button"
+                    onClick={() => router.push('/cv-form/templates/template-a')}
                   >
-                    Sign out
-                  </a>
-                </div>
-              </div>
-              <h2>CHOOSE YOU TEMPLATES</h2>
-              <button
-                
-                type="button"
-                onClick={() => router.push('/cv-form/templates/template-a')}
-              >
-                Template A
-              </button>
-            </>
-          )}
-        </div>
+                    Select This Template
+                  </Button>
+                </TemplateBtn>
+              </TemplateSelector>
+              <TemplateSelector>
+                <TemplateBtn
+                  type="button"
+                  onClick={() => router.push('/cv-form/templates/template-b')}
+                >
+                  <TemplateB isInSelector />
+                  <Button
+                    type="button"
+                    onClick={() => router.push('/cv-form/templates/template-b')}
+                  >
+                    Select This Template
+                  </Button>
+                </TemplateBtn>
+              </TemplateSelector>
+            </ContentContainer>
+          </PageContainer>
+        )}
+      </div>
     </Layout>
   );
 }
+
+const PageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  justify-content: space-evenly;
+  align-items: center;
+
+  @media (max-width: ${mediaScreen.small}) {
+    flex-direction: column;
+    justify-content: center;
+    width: 300px;
+  }
+`;
+
+const TemplateSelector = styled.div`
+  margin: 30px;
+
+  @media (max-width: ${mediaScreen.small}) {
+    margin: 15px;
+  }
+`;
+
+const TemplateBtn = styled.button`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 10px;
+  padding-bottom: 0;
+  border: none;
+  border-radius: 10px;
+  background-color: ${colors.transparent};
+`;

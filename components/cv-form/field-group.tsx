@@ -59,30 +59,38 @@ export const FieldGroup: React.FC<Props> = (props) => {
 
 export const FieldGroupContainer = styled.div`
   margin: 10px;
-  padding-inline: 10px;
-  margin-left: 10px
+  padding-right: 10px;
 `;
 
 export const Input = styled.input`
   padding: 3px;
   border: 0;
-  border-bottom: 1px solid #000;
   width: 100%;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
 `;
 
 const Textarea = styled.textarea`
   padding: 3px;
   border: 0;
-  border-bottom: 1px solid #000;
   width: 100%;
   font-family: inherit;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
 `;
 
 export const Label = styled.label`
   display: block;
+  font-size: 14px;
+  padding-bottom: 10px;
 `;
 
 const Select = styled.select`
-  padding: 3px;
-  width: 100%;
+  padding: 8px;
+  width: calc(100% + 16px);
+  border: 0;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
 `;
