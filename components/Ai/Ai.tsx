@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ResponseData } from "../../pages/api/generate-answer";
-import { Button } from "../button";
+import { Button } from "../../helpers/button";
 import styled from "styled-components";
 import ReacrScrollableFeed from 'react-scrollable-feed';
 
