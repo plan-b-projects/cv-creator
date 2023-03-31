@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import noSession from '../public/noSession.jpg';
 import LogInChip from '../components/log-in-chip';
 import { ButtonLink } from '../helpers/button';
-import { H1, mediaScreen, Text } from '../helpers/theme';
+import { H1, mediaScreen, Sphere, Text } from '../helpers/theme';
 
 const logInUser = async (credentials: User) => {
   const response = await fetch('http://localhost:3000/api/users', {
@@ -69,24 +69,3 @@ const NotSignedIn = styled.div`
 `;
 
 
-const Sphere = styled.div`
-  display: block;
-  width: 1500px;
-  height: 800px;
-  position: absolute;
-  bottom: -300px;
-  right: -150px;
-  border-radius: 50%;
-  background-color: rgb(148,178,240);
-  box-shadow: inset -25px -15px 40px rgba(0, 0, 0, 0.03);
-  background-image: linear-gradient(
-    -120deg,
-    rgba(255, 255, 220, 0.3) 0%,
-    transparent 100%
-  );
-
-  @media (max-height: ${mediaScreen.small}) {
-    width: 1000px;
-    height: 800px;
-  }
-`;

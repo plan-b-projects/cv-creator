@@ -66,9 +66,9 @@ export const Input = styled.input`
   padding: 3px;
   border: 0;
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 5px;
+  border-radius: 10px;
 `;
 
 const Textarea = styled.textarea`
@@ -77,20 +77,20 @@ const Textarea = styled.textarea`
   width: 100%;
   font-family: inherit;
   padding: 8px;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
 `;
 
 export const Label = styled.label`
   display: block;
   font-size: 14px;
-  padding-bottom: 5px;
+  padding-bottom: 10px;
 `;
 
 const Select = styled.select`
   padding: 8px;
   width: calc(100% + 16px);
   border: 0;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
 `;

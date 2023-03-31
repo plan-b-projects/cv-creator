@@ -3,8 +3,8 @@ body {
     "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   margin: 0 auto;
-  background: rgb(170,226,200);
-  background: linear-gradient(162deg, rgba(148,178,240,1) 0%, rgba(255,255,255,1) 100%);
-  color: #063B8A;
+  background: rgb(0,0,0);
+  background: linear-gradient(162deg, rgb(41, 40, 40) 0%, rgba(0,0,0,1) 100%);
+  color: #000;
 }
 
