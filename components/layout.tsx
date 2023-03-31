@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       <Header />
-      <Main>{children}<Sphere/></Main>
+      <Main>{children}</Main>
       <Footer />
     </>
   )

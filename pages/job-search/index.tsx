@@ -16,7 +16,6 @@ export default function FormPage() {
   return (
     <Layout>
       <div>
-        <LogInChip />
         {session?.user && <JobSearch />}
       </div>
     </Layout>
