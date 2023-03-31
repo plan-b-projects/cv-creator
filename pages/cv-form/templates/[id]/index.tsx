@@ -9,10 +9,12 @@ import { Button, ButtonContainer } from '../../../../helpers/button';
 import useWindowWidth from '../../../../helpers/useWindowWidth';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-
-import { ThemeContainer, ThemeButton } from '../../../../components/themes/ThemeSwitching.styled';
-import { ThemeProvider } from "styled-components";
-
+import {
+  ThemeContainer,
+  ThemeButton,
+} from '../../../../components/themes/ThemeSwitching.styled';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyles } from '../../../../components/themes/Global';
 import { Theme } from '../../../../shared-types';
 import {
   light,
@@ -59,7 +61,7 @@ export default function TemplatePage() {
 
   const saveCvToUser = async () => {
     const cv = await getFormValues();
-    const response = await fetch('http://localhost:3000/api/users/cv-form', {
+    const response = await fetch('http://localhost:3000/api/users/cv-array', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -80,6 +82,20 @@ export default function TemplatePage() {
     <Layout>
       {session?.user && (
         <>
+          <GlobalStyles
+            name={''}
+            colors={{
+              primaryBackground: '',
+              secondaryBackground: '',
+              primaryTitle: '',
+              secondayTitle: '',
+              primaryBgTitle: '',
+              secondayBgTitle: '',
+              primaryText: '',
+              secondaryText: '',
+              border: '',
+            }}
+          />
           <TopContainer>
             <ButtonContainer>
               <Button onClick={exportPDFWithComponent}>Download as PFD</Button>
@@ -89,44 +105,50 @@ export default function TemplatePage() {
             </ButtonContainer>
           </TopContainer>
           <ThemeProvider theme={selectedTheme}>
-          <ThemeContainer>
-            <span>Themes: </span>
-            <ThemeButton
-              className={`light ${selectedTheme === light ? "active" : ""}`}
-              onClick={() => HandleThemeChange(light)}></ThemeButton>
-            <ThemeButton
-              className={`dark ${selectedTheme === dark ? "active" : ""}`}
-              onClick={() => HandleThemeChange(dark)}></ThemeButton>
-            <ThemeButton
-              className={`blue ${selectedTheme === blue ? "active" : ""}`}
-              onClick={() => HandleThemeChange(blue)}></ThemeButton>
-            <ThemeButton
-              className={`green ${selectedTheme === green ? "active" : ""}`}
-              onClick={() => HandleThemeChange(green)}></ThemeButton>
-            <ThemeButton
-              className={`brown ${selectedTheme === brown ? "active" : ""}`}
-              onClick={() => HandleThemeChange(brown)}></ThemeButton>
-            <ThemeButton
-              className={`pink ${selectedTheme === pink ? "active" : ""}`}
-                onClick={() => HandleThemeChange(pink)}> 
-            </ThemeButton>
-          </ThemeContainer>
+            <ThemeContainer>
+              <span>Themes: </span>
+              <ThemeButton
+                className={`light ${selectedTheme === light ? 'active' : ''}`}
+                onClick={() => HandleThemeChange(light)}
+              ></ThemeButton>
+              <ThemeButton
+                className={`dark ${selectedTheme === dark ? 'active' : ''}`}
+                onClick={() => HandleThemeChange(dark)}
+              ></ThemeButton>
+              <ThemeButton
+                className={`blue ${selectedTheme === blue ? 'active' : ''}`}
+                onClick={() => HandleThemeChange(blue)}
+              ></ThemeButton>
+              <ThemeButton
+                className={`green ${selectedTheme === green ? 'active' : ''}`}
+                onClick={() => HandleThemeChange(green)}
+              ></ThemeButton>
+              <ThemeButton
+                className={`brown ${selectedTheme === brown ? 'active' : ''}`}
+                onClick={() => HandleThemeChange(brown)}
+              ></ThemeButton>
+              <ThemeButton
+                className={`pink ${selectedTheme === pink ? 'active' : ''}`}
+                onClick={() => HandleThemeChange(pink)}
+              ></ThemeButton>
+            </ThemeContainer>
+
+            <ContentContainer>
+              <PDFExport
+                ref={pdfExportComponent}
+                paperSize="A4"
+                margin={0}
+                scale={width > 600 ? 0.999 : 1.99}
+                // fileName={`Report for ${new Date().getFullYear()}`}
+              >
+                <div ref={container}>
+                  {id === 'template-a' && <TemplateA />}
+                  {id === 'template-b' && <TemplateA />}
+                  {id === 'template-c' && <TemplateA />}
+                </div>
+              </PDFExport>
+            </ContentContainer>
           </ThemeProvider>
-          <ContentContainer>
-            <PDFExport
-              ref={pdfExportComponent}
-              paperSize="A4"
-              margin={0}
-              scale={width > 600 ? 0.999 : 1.99}
-              // fileName={`Report for ${new Date().getFullYear()}`}
-            >
-              <div ref={container}>
-                {id === 'template-a' && <TemplateA />}
-                {id === 'template-b' && <TemplateA />}
-                {id === 'template-c' && <TemplateA />}
-              </div>
-            </PDFExport>
-          </ContentContainer>
         </>
       )}
     </Layout>

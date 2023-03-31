@@ -5,7 +5,7 @@ import { CvFormValues } from '../shared-types';
 export type User = {
   email: string;
   cv?: CvFormValues;
-  CVs: [];
+  CVs?: [];
 };
 
 export const mongoClient: MongoClient = new MongoClient(
