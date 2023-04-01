@@ -18,9 +18,10 @@ export type JobData = {
 type JobType = {
     prop: JobData;
     isLiked?: boolean;
+    onDeleteFav?: () => void;
 }
 
-export default function Job({ prop, isLiked = false }: JobType) {
+export default function Job({ prop, isLiked = false, onDeleteFav = () => { } }: JobType) {
     console.log(prop);
 
     const [fav, setFave] = useState(isLiked);
@@ -44,6 +45,7 @@ export default function Job({ prop, isLiked = false }: JobType) {
             method: 'DELETE',
         })
             .then(() => setFave(false))
+            .then(onDeleteFav)
     };
 
     const handleClick = () => {
@@ -81,7 +83,7 @@ const JobContainer = styled.div`
   margin: 30px;
   border: 1px solid #262A74;
   padding: 10px;
-  width: 25%;
+  min-width: 25%;
   background-color: white;
   `;
 const FavLinkContainer = styled.div`

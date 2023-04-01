@@ -27,6 +27,7 @@ import {
   brown,
   pink,
 } from '../../../../components/themes/Theme.styled';
+import CvNameModal from '../../../../components/cv-name/modal';
 export default function TemplatePage() {
   const router = useRouter();
   const { id } = router.query;
@@ -62,22 +63,6 @@ export default function TemplatePage() {
     }
   };
 
-  const saveCvToUser = async () => {
-    const cv = await getFormValues();
-    const response = await fetch('http://localhost:3000/api/users/cv-array', {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...cv,
-        cvTemplate: 'template-a',
-      }),
-    });
-    const status = response.status;
-    const data = await response.json();
-    return { status, data };
-  };
 
   const width = useWindowWidth();
 
@@ -101,49 +86,47 @@ export default function TemplatePage() {
           />
           <TopContainer>
             <ButtonContainer>
-              <Button onClick={exportPDFWithComponent}>Download as PFD</Button>
-              <Button onClick={() => saveCvToUser()}>
-                Save this CV to your profile
-              </Button>
+              <Button onClick={exportPDFWithComponent}>Download as PDF</Button>
+              <CvNameModal />
             </ButtonContainer>
           </TopContainer>
           <ContentContainer>
-          <ThemeProvider theme={selectedTheme}>
-            <ThemeContainer>
-              <span>Themes: </span>
-              <ThemeButton
-                className={`light ${selectedTheme === light ? 'active' : ''}`}
-                onClick={() => HandleThemeChange(light)}
-              ></ThemeButton>
-              <ThemeButton
-                className={`dark ${selectedTheme === dark ? 'active' : ''}`}
-                onClick={() => HandleThemeChange(dark)}
-              ></ThemeButton>
-              <ThemeButton
-                className={`blue ${selectedTheme === blue ? 'active' : ''}`}
-                onClick={() => HandleThemeChange(blue)}
-              ></ThemeButton>
-              <ThemeButton
-                className={`green ${selectedTheme === green ? 'active' : ''}`}
-                onClick={() => HandleThemeChange(green)}
-              ></ThemeButton>
-              <ThemeButton
-                className={`brown ${selectedTheme === brown ? 'active' : ''}`}
-                onClick={() => HandleThemeChange(brown)}
-              ></ThemeButton>
-              <ThemeButton
-                className={`pink ${selectedTheme === pink ? 'active' : ''}`}
-                onClick={() => HandleThemeChange(pink)}
-              ></ThemeButton>
-            </ThemeContainer>
+            <ThemeProvider theme={selectedTheme}>
+              <ThemeContainer>
+                <span>Themes: </span>
+                <ThemeButton
+                  className={`light ${selectedTheme === light ? 'active' : ''}`}
+                  onClick={() => HandleThemeChange(light)}
+                ></ThemeButton>
+                <ThemeButton
+                  className={`dark ${selectedTheme === dark ? 'active' : ''}`}
+                  onClick={() => HandleThemeChange(dark)}
+                ></ThemeButton>
+                <ThemeButton
+                  className={`blue ${selectedTheme === blue ? 'active' : ''}`}
+                  onClick={() => HandleThemeChange(blue)}
+                ></ThemeButton>
+                <ThemeButton
+                  className={`green ${selectedTheme === green ? 'active' : ''}`}
+                  onClick={() => HandleThemeChange(green)}
+                ></ThemeButton>
+                <ThemeButton
+                  className={`brown ${selectedTheme === brown ? 'active' : ''}`}
+                  onClick={() => HandleThemeChange(brown)}
+                ></ThemeButton>
+                <ThemeButton
+                  className={`pink ${selectedTheme === pink ? 'active' : ''}`}
+                  onClick={() => HandleThemeChange(pink)}
+                ></ThemeButton>
+              </ThemeContainer>
 
-           
+
               <PDFExport
                 ref={pdfExportComponent}
                 paperSize="A4"
                 margin={0}
                 scale={width > 600 ? 0.999 : 1.99}
-                // fileName={`Report for ${new Date().getFullYear()}`}
+              // fileName={`Report for ${new Date().getFullYear()}`}
               >
                 <div ref={container}>
                   {id === 'template-a' && <TemplateA />}
@@ -152,7 +135,7 @@ export default function TemplatePage() {
                   {id === 'template-d' && <TemplateD />}
                 </div>
               </PDFExport>
-          </ThemeProvider>
+            </ThemeProvider>
           </ContentContainer>
         </>
       )}
