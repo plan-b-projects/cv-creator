@@ -5,14 +5,14 @@ const buttonStyle = css`
   padding: 10px 20px;
   display: inline-block;
   border-radius: 20px;
-  background: ${colors.light};
+  background: ${colors.purple};
   color: ${colors.dark};
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 400;
 
   &:hover {
     background: ${colors.dark};
-    color: ${colors.light};
+    color: ${colors.purple};
   }
 
   @media (max-width: ${mediaScreen.small}) {

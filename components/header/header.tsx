@@ -14,7 +14,7 @@ export default function Header() {
           <List isActive={router.pathname === '/'}>
             <NavListLink href="/">Home</NavListLink>
           </List>
-          <List isActive={router.pathname === '/documentation'}>
+          <List isActive={router.pathname === '/job-search'}>
             <NavListLink href="/job-search">Job Search</NavListLink>
           </List>
         </NavList>
@@ -43,7 +43,6 @@ const NavItems = styled.nav`
   padding-left: 30px;
   justify-content: space-around;
   background-color: ${colors.transparent};
-  text-align: center;
 
   @media (max-width: ${mediaScreen.small}){
     width: 100%;
@@ -68,10 +67,10 @@ const List = styled.li<{ isActive: boolean }>`
   padding-bottom: 10px;
   padding-inline: 30px;
   border-bottom: ${(props) => (props.isActive ? '2px' : '0')} solid
-    ${colors.dark};
+    ${colors.purple};
 
   &:hover {
-    border-bottom: 2px solid ${colors.dark};
+    border-bottom: 2px solid ${colors.purple};
   }
 
   @media (max-width: ${mediaScreen.small}){
@@ -84,5 +83,9 @@ const List = styled.li<{ isActive: boolean }>`
 const NavListLink = styled(Link)`
   text-decoration: none;
   width: 100%;
-  color: ${colors.dark};
+  color: ${colors.light};
+
+  &:hover{
+    color: ${colors.purple}
+  }
 `;

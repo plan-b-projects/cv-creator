@@ -56,7 +56,7 @@ const Chip = styled.div`
   border-radius: 40px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   align-items: center;
-  background-color: ${colors.transparent};
+  background-color: ${colors.purple};
 
   @media only screen and (max-width: ${mediaScreen.small}) {
     width: 115px;
@@ -79,6 +79,7 @@ const NameAcc = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 50%;
+  color: ${colors.dark};
 
   @media (max-width: ${mediaScreen.small}) {
     visibility: hidden;

@@ -67,8 +67,9 @@ export const Input = styled.input`
   border: 0;
   width: 100%;
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 15px;
+  font-size: 15px;
 `;
 
 const Textarea = styled.textarea`
@@ -79,11 +80,12 @@ const Textarea = styled.textarea`
   padding: 8px;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 10px;
+  font-size: 15px;
 `;
 
 export const Label = styled.label`
   display: block;
-  font-size: 14px;
+  font-size: 16px;
   padding-bottom: 10px;
 `;
 
