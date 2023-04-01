@@ -3,7 +3,7 @@ import { CvFormValues } from '../../shared-types';
 import styled from 'styled-components';
 import { mediaScreen } from '../../helpers/theme';
 
-export default function TemplateB(props: { isInSelector?: boolean }) {
+export default function TemplateC(props: { isInSelector?: boolean }) {
   const [data, setData] = useState<CvFormValues>();
 
   const getFormValues = async () => {
@@ -28,22 +28,21 @@ export default function TemplateB(props: { isInSelector?: boolean }) {
   
   return (
     <Template isInSelector={props.isInSelector}>
-      <TemplateTop>
-        <LeftSection>
-          <Name>{data?.basicInfo.name}</Name>
-          <UpperText>{data?.basicInfo.location}</UpperText>
-          <UpperText>{data?.basicInfo.email}</UpperText>
-          <UpperText>{data?.basicInfo.tel}</UpperText>
-          <Link href={data?.basicInfo.linkedIn}>LinkedIn</Link>
-          <Link href={data?.basicInfo.gitHub}>GitHub</Link>
-          <Link href={data?.basicInfo.website}>Website</Link>
-        </LeftSection>
-        <RightSection>
-          <ProfileImage src={data?.basicInfo.profilePicture} />
-        </RightSection>
+      <TemplateTop> 
+        <Name>{data?.basicInfo.name}</Name>
+        <ProfileImage src={data?.basicInfo.profilePicture} /> 
       </TemplateTop>
       <TemplateBottom>
         <TemplateLeft>
+          <LeftSection>
+            <LeftTitle>CONTACT</LeftTitle>
+            <LeftText>{data?.basicInfo.location}</LeftText>
+            <LeftText>{data?.basicInfo.email}</LeftText>
+            <LeftText>{data?.basicInfo.tel}</LeftText>
+            <Link href={data?.basicInfo.linkedIn}>LinkedIn</Link>
+            <Link href={data?.basicInfo.gitHub}>GitHub</Link>
+            <Link href={data?.basicInfo.website}>Website</Link>
+          </LeftSection>
           <LeftSection>
             <LeftTitle>TECH SKILLS</LeftTitle>
             <LeftSubtitle>General</LeftSubtitle>
@@ -141,6 +140,16 @@ const Template = styled.div<{ isInSelector?: boolean }>`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  color: ${({ theme }) => theme.name !== 'dark' ?
+  theme.colors.secondaryText
+  :
+  theme.colors.secondaryBackground
+  };
+  background: ${({ theme }) => theme.name !== 'dark' ?
+  theme.colors.secondaryBackground
+  :
+  theme.colors.primaryBackground
+  };
 
   @media (max-width: ${mediaScreen.small}) {
     width: ${(props) => (props.isInSelector ? '198.33px' : '297.5px')};
@@ -152,18 +161,14 @@ const Template = styled.div<{ isInSelector?: boolean }>`
 const TemplateTop = styled.div`
   max-height: 20%;
   padding: 1em;
-  color: ${({ theme }) => theme.colors.primaryTitle};
-  background: ${({ theme }) => theme.colors.primaryBackground};
   display: flex;
   justify-content: space-around;
-  border-bottom: 1px solid black;
+  align-items: center;
 `;
 
 const TemplateBottom = styled.div`
   flex: 0 0 75%;
   max-height: 100%;
-  color: ${({ theme }) => theme.colors.primaryTitle};
-  background: ${({ theme }) => theme.colors.primaryBackground};
   display: flex;
   flex-direction: row-reverse;
 `;
@@ -171,9 +176,7 @@ const TemplateBottom = styled.div`
 const TemplateLeft = styled.div`
   flex: 0 0 38%;
   max-height: 100%;
-  padding: 1em;
-  color: ${({ theme }) => theme.colors.secondayTitle};
-  background: ${({ theme }) => theme.colors.secondayBgTitle};
+  padding: 1em;s
   display: flex;
   flex-direction: column;
 `;
@@ -181,15 +184,22 @@ const TemplateLeft = styled.div`
 const ProfileImage = styled.img`
   flex: 0 0 9em;
   width: 9em;
-  margin: auto;
-  border: 3px solid ${({ theme }) => theme.colors.primaryTitle};
   border-radius: 50%;
 `;
 
-const Name = styled.h1`
-  font-size: 1.5em;
-  padding-bottom: 0.7em;
-  border-bottom: 3px solid ${({ theme }) => theme.colors.primaryTitle};
+const Name = styled.span`
+  color: ${({ theme }) => theme.name !== 'dark' ?
+  theme.colors.primaryBackground
+  :
+  theme.colors.secondaryBackground
+  };
+  color: ${({ theme }) => theme.name === 'light' ?
+  theme.colors.secondaryText
+  :
+  null
+  };
+  width: 50%;
+  font-size: 3.5em;
 `;
 
 const LeftSection = styled.div`
@@ -197,6 +207,16 @@ const LeftSection = styled.div`
 `;
 
 const LeftTitle = styled.h3`
+  color: ${({ theme }) => theme.name !== 'dark' ?
+  theme.colors.primaryBackground
+  :
+  theme.colors.secondaryBackground
+  };
+  color: ${({ theme }) => theme.name === 'light' ?
+  theme.colors.secondaryText
+  :
+  null
+  };
   font-size: 1em;
   margin: 0.5em 0;
 `;
@@ -208,36 +228,43 @@ const LeftSubtitle = styled.h4`
 `;
 
 const LeftText = styled.div`
-  font-size: 0.6em;
-  color: ${({ theme }) => theme.colors.secondaryText};
-`;
-
-const UpperText = styled.div`
-  font-size: 0.6em;
-  color: ${({ theme }) => theme.colors.primaryText};
+  font-size: 0.6em;s
 `;
 
 const Link = styled.a`
   font-size: 0.6em;
-  color: ${({ theme }) => theme.colors.primaryText};
+  color: ${({ theme }) => theme.name !== 'dark' ?
+  theme.colors.secondaryText
+  :
+  theme.colors.secondaryBackground
+  };
   text-decoration: none;
 `;
 
 const TemplateRight = styled.div`
-  width: 100%;
-  padding: 0.5em 1.5rem;
-  color: ${({ theme }) => theme.colors.secondayTitle};
-  background: ${({ theme }) => theme.colors.secondaryBackground};
+  flex: 0 0 53%;
+  padding: 0.5em;
   display: flex;
   flex-direction: column;
 `;
 
-const RightSection = styled.div``;
+const RightSection = styled.div`
+  padding-left: 1.5rem;
+`;
 
 const RightSectionTitle = styled.h2`
+  color: ${({ theme }) => theme.name !== 'dark' ?
+  theme.colors.primaryBackground
+  :
+  theme.colors.secondaryBackground
+  };
+  color: ${({ theme }) => theme.name === 'light' ?
+  theme.colors.secondaryText
+  :
+  null
+  };
   margin: 0.5rem 0 0 0;
-  padding: 0.5em 1em;
-  text-align: center;
+  padding: 0.5em 0;
   font-size: 1.2em;
 `;
 
@@ -256,3 +283,6 @@ const RightText = styled.p`
   font-size: 0.5em;
   margin: 0;
 `;
+
+
+
