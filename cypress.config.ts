@@ -7,7 +7,7 @@ export default defineConfig({
     },
   },
   env: {
-    NAME: 'alexander.tarler@gmail.com',
-    PASSWORD: 'ArthurMorgan420',
+    NAME: '',
+    PASSWORD: '',
   },
 });
