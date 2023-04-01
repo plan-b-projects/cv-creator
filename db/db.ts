@@ -48,7 +48,10 @@ export const addFavJob = (email: string, job: JobData) =>
   mongoClient
     .db('cvDb')
     .collection('users')
-    .updateOne({ email }, { $push: { favJobs: job } });
+    .updateOne(
+      { email, "favJobs.job_id": { $ne: job.job_id } },
+      { $push: { favJobs: job } }
+    );
 
 export const delFavJob = (email: string, job_id: string) =>
   mongoClient

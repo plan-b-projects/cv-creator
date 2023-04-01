@@ -17,10 +17,13 @@ export type JobData = {
 
 type JobType = {
     prop: JobData;
+    isLiked?: boolean;
 }
 
-export default function Job(prop: JobType) {
-    const [fav, setFave] = useState(false);
+export default function Job({ prop, isLiked = false }: JobType) {
+    console.log(prop);
+
+    const [fav, setFave] = useState(isLiked);
     const ref = useRef<HTMLDivElement>(null);
 
     const addFav = () => {
@@ -30,14 +33,14 @@ export default function Job(prop: JobType) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                job: prop.prop
+                job: prop
             }),
         })
             .then(() => setFave(true))
     };
 
     const deleteFav = () => {
-        fetch(`http://localhost:3000/api/users/job-search/${prop.prop.job_id}`, {
+        fetch(`http://localhost:3000/api/users/job-search/${prop.job_id}`, {
             method: 'DELETE',
         })
             .then(() => setFave(false))
@@ -53,13 +56,13 @@ export default function Job(prop: JobType) {
     };
 
     return (
-        <JobContainer key={prop.prop.job_id}>
-            <h1>{prop.prop.job_title}</h1>
-            <h4>employer name: {prop.prop.employer_name}</h4>
-            <p>location: {prop.prop.job_city}, {prop.prop.job_country}</p>
-            <p>{prop.prop.job_employment_type}- {prop.prop.job_is_remote ? 'remote' : 'on-site'}</p>
+        <JobContainer key={prop.job_id}>
+            <h1>{prop.job_title}</h1>
+            <h4>employer name: {prop.employer_name}</h4>
+            <p>location: {prop.job_city}, {prop.job_country}</p>
+            <p>{prop.job_employment_type} - {prop.job_is_remote ? 'remote' : 'on-site'}</p>
             <FavLinkContainer>
-                <a href={prop.prop.job_apply_link} target='_blank'>Apply link</a>
+                <a href={prop.job_apply_link} target='_blank'>Apply link</a>
                 <FavButton onClick={() => handleClick()}>
                     {fav ?
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z" /></svg>
