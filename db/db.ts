@@ -65,3 +65,16 @@ export const delFavJob = (email: string, job_id: string) =>
         },
       },
     );
+
+export const delCv = (email: string, cv_id: string) =>
+  mongoClient
+    .db('cvDb')
+    .collection('users')
+    .updateOne(
+      { email },
+      {
+        $pull: {
+          CVs: { id: cv_id },
+        },
+      },
+    );
