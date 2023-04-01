@@ -1,10 +1,17 @@
-import { useState } from 'react';
-import styled from 'styled-components';
-import { Fieldset, FieldsetContent, Legend } from '../form-styles';
+import React, { useState } from 'react';
+import { useMeasuredHeight } from '../../../helpers/useMeasuredHeight';
+import {
+  Fieldset,
+  FieldsetContent,
+  Legend,
+  MeasuringWrapper,
+} from '../form-styles';
 import SkillsInput from './skills-input';
 
 export default function SkillsForm() {
   const [isExpanded, setIsExpanded] = useState(false);
+  const { measuringWrapperRef, measuredHeight } = useMeasuredHeight();
+  const height = isExpanded ? measuredHeight : 0;
 
   return (
     <Fieldset>
@@ -14,13 +21,14 @@ export default function SkillsForm() {
       >
         Skills
       </Legend>
-      <FieldsetContent isExpanded={isExpanded}>
-        <SkillsInput skillLabel="Frontend" skillType="frontend" />
-        <SkillsInput skillLabel="Backend" skillType="backend" />
-        <SkillsInput skillLabel="Tools and technologies" skillType="tools" />
-        <SkillsInput skillLabel="General" skillType="general" />
+      <FieldsetContent height={height}>
+        <MeasuringWrapper ref={measuringWrapperRef}>
+          <SkillsInput skillLabel="Frontend" skillType="frontend" />
+          <SkillsInput skillLabel="Backend" skillType="backend" />
+          <SkillsInput skillLabel="Tools and technologies" skillType="tools" />
+          <SkillsInput skillLabel="General" skillType="general" />
+        </MeasuringWrapper>
       </FieldsetContent>
     </Fieldset>
   );
 }
-
