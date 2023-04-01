@@ -99,42 +99,45 @@ export default function TemplatePage() {
           <TopContainer>
             <ButtonContainer>
               <Button onClick={exportPDFWithComponent}>Download as PFD</Button>
-              <Button onClick={() => saveCvToUser()}>
+
+              <Button
+                data-testid="save_template"
+                onClick={() => saveCvToUser()}
+              >
                 Save this CV to your profile
               </Button>
             </ButtonContainer>
           </TopContainer>
           <ContentContainer>
-          <ThemeProvider theme={selectedTheme}>
-            <ThemeContainer>
-              <span>Themes: </span>
-              <ThemeButton
-                className={`light ${selectedTheme === light ? 'active' : ''}`}
-                onClick={() => HandleThemeChange(light)}
-              ></ThemeButton>
-              <ThemeButton
-                className={`dark ${selectedTheme === dark ? 'active' : ''}`}
-                onClick={() => HandleThemeChange(dark)}
-              ></ThemeButton>
-              <ThemeButton
-                className={`blue ${selectedTheme === blue ? 'active' : ''}`}
-                onClick={() => HandleThemeChange(blue)}
-              ></ThemeButton>
-              <ThemeButton
-                className={`green ${selectedTheme === green ? 'active' : ''}`}
-                onClick={() => HandleThemeChange(green)}
-              ></ThemeButton>
-              <ThemeButton
-                className={`brown ${selectedTheme === brown ? 'active' : ''}`}
-                onClick={() => HandleThemeChange(brown)}
-              ></ThemeButton>
-              <ThemeButton
-                className={`pink ${selectedTheme === pink ? 'active' : ''}`}
-                onClick={() => HandleThemeChange(pink)}
-              ></ThemeButton>
-            </ThemeContainer>
+            <ThemeProvider theme={selectedTheme}>
+              <ThemeContainer>
+                <span>Themes: </span>
+                <ThemeButton
+                  className={`light ${selectedTheme === light ? 'active' : ''}`}
+                  onClick={() => HandleThemeChange(light)}
+                ></ThemeButton>
+                <ThemeButton
+                  className={`dark ${selectedTheme === dark ? 'active' : ''}`}
+                  onClick={() => HandleThemeChange(dark)}
+                ></ThemeButton>
+                <ThemeButton
+                  className={`blue ${selectedTheme === blue ? 'active' : ''}`}
+                  onClick={() => HandleThemeChange(blue)}
+                ></ThemeButton>
+                <ThemeButton
+                  className={`green ${selectedTheme === green ? 'active' : ''}`}
+                  onClick={() => HandleThemeChange(green)}
+                ></ThemeButton>
+                <ThemeButton
+                  className={`brown ${selectedTheme === brown ? 'active' : ''}`}
+                  onClick={() => HandleThemeChange(brown)}
+                ></ThemeButton>
+                <ThemeButton
+                  className={`pink ${selectedTheme === pink ? 'active' : ''}`}
+                  onClick={() => HandleThemeChange(pink)}
+                ></ThemeButton>
+              </ThemeContainer>
 
-           
               <PDFExport
                 ref={pdfExportComponent}
                 paperSize="A4"
@@ -148,8 +151,8 @@ export default function TemplatePage() {
                   {id === 'template-c' && <TemplateA />}
                 </div>
               </PDFExport>
-          </ThemeProvider>
-            </ContentContainer>
+            </ThemeProvider>
+          </ContentContainer>
         </>
       )}
     </Layout>

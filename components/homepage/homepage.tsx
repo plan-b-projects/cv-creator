@@ -5,7 +5,7 @@ import { Button } from '../../helpers/button';
 import { H1, H2 } from '../../helpers/theme';
 import { CvFormValues } from '../../shared-types';
 import Job, { JobData } from '../job-search/job';
-import { JobsContainer } from '../../components/job-search/job-search'
+import { JobsContainer } from '../../components/job-search/job-search';
 
 export default function HomePage() {
   const [cvs, setCvs] = useState<any>([]);
@@ -73,10 +73,13 @@ export default function HomePage() {
     getFavJobs();
   }, []);
 
-
   return (
     <HomePageArea>
-      <Button type="button" onClick={() => router.push('/cv-form')}>
+      <Button
+        type="button"
+        data-testid="create_cv"
+        onClick={() => router.push('/cv-form')}
+      >
         Create a new CV
       </Button>
       {cvs.length > 0 && <H2>Your CVs Collection</H2>}
@@ -92,12 +95,9 @@ export default function HomePage() {
       <JobsContainer>
         {favJobs.length > 0 &&
           favJobs.map((job: JobData) => {
-            return (
-              <Job prop={job} isLiked={true} />
-            );
+            return <Job prop={job} isLiked={true} />;
           })}
       </JobsContainer>
-
     </HomePageArea>
   );
 }

@@ -8,7 +8,13 @@ export default function BasicInfo() {
 
   return (
     <Fieldset>
-      <Legend isExpanded={isExpanded} onClick={() => setIsExpanded(!isExpanded)}>Basic Info</Legend>
+      <Legend
+        isExpanded={isExpanded}
+        data-testid="basic_info"
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        Basic Info
+      </Legend>
 
       <FieldsetContent isExpanded={isExpanded}>
         <FieldGroup
@@ -18,7 +24,12 @@ export default function BasicInfo() {
           inputType="url"
         />
 
-        <FieldGroup name="basicInfo.name" label="Name" placeholder="John Doe" />
+        <FieldGroup
+          name="basicInfo.name"
+          data-testid="name"
+          label="Name"
+          placeholder="John Doe"
+        />
 
         <FieldGroup
           name="basicInfo.profileIntro"
@@ -71,4 +82,3 @@ export default function BasicInfo() {
     </Fieldset>
   );
 }
-

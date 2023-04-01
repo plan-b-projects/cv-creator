@@ -48,32 +48,33 @@ export default function Form() {
 
   const submitForm = methods.handleSubmit(async (data) => {
     await saveForm(data);
-    router.push('/cv-form/templates')
+    router.push('/cv-form/templates');
   });
 
   return (
     <FormProvider {...methods}>
       <H1>Fill in Your CV</H1>
       <FormContainer>
-      <StyledForm  onSubmit={submitForm}>
-        <BasicInfo />
-        <Education />
-        <Experience />
-        <SkillsSection />
-        <Languages />
+        <StyledForm onSubmit={submitForm}>
+          <BasicInfo />
+          <Education />
+          <Experience />
+          <SkillsSection />
+          <Languages />
 
-        <ButtonGroup>
-          <Button type="button" onClick={saveDraft}>
-            Save draft
-          </Button>
-          <Button
-            type="submit"
-            onClick={submitForm}
-          >
-            Save and select template
-          </Button>
-        </ButtonGroup>
-      </StyledForm>
+          <ButtonGroup>
+            <Button type="button" onClick={saveDraft}>
+              Save draft
+            </Button>
+            <Button
+              type="submit"
+              data-testid="save_and_create_cv"
+              onClick={submitForm}
+            >
+              Save and select template
+            </Button>
+          </ButtonGroup>
+        </StyledForm>
       </FormContainer>
     </FormProvider>
   );
@@ -85,9 +86,9 @@ const FormContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  `;
-  
-  const StyledForm = styled.form`
+`;
+
+const StyledForm = styled.form`
   padding: 10px;
   width: 90%;
   max-width: 600px;
