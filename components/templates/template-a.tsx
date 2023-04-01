@@ -156,8 +156,8 @@ const TemplateLeft = styled.div`
 `;
 
 const ProfileImage = styled.img`
-  flex: 0 0 9em;
-  width: 9em;
+  flex: 0 0 6em;
+  width: 6em;
   margin: auto;
   border: 3px solid ${({ theme }) => theme.colors.primaryTitle};
   border-radius: 50%;
@@ -196,8 +196,8 @@ const Link = styled.a`
 `;
 
 const TemplateRight = styled.div`
-  flex: 0 0 53%;
-  padding: 0.5em;
+  width: 100%;
+  padding: 0.5em 1rem;
   color: ${({ theme }) => theme.colors.secondayTitle};
   background: ${({ theme }) => theme.colors.secondaryBackground};
   display: flex;
