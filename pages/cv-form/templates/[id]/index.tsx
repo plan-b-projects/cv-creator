@@ -2,6 +2,9 @@ import Layout from '../../../../components/layout';
 import { useSession } from 'next-auth/react';
 import useNoSession from '../../../../helpers/useNoSession';
 import TemplateA from '../../../../components/templates/template-a';
+import TemplateB from '../../../../components/templates/template-b';
+import TemplateC from '../../../../components/templates/template-c';
+import TemplateD from '../../../../components/templates/template-d';
 import React, { useState } from 'react';
 import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
 
@@ -144,12 +147,13 @@ export default function TemplatePage() {
               >
                 <div ref={container}>
                   {id === 'template-a' && <TemplateA />}
-                  {id === 'template-b' && <TemplateA />}
-                  {id === 'template-c' && <TemplateA />}
+                  {id === 'template-b' && <TemplateB />}
+                  {id === 'template-c' && <TemplateC />}
+                  {id === 'template-d' && <TemplateD />}
                 </div>
               </PDFExport>
           </ThemeProvider>
-            </ContentContainer>
+          </ContentContainer>
         </>
       )}
     </Layout>
