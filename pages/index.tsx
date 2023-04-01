@@ -3,10 +3,8 @@ import { signIn, useSession } from 'next-auth/react';
 import { User } from '../db/db';
 import HomePage from '../components/homepage/homepage';
 import styled from 'styled-components';
-import noSession from '../public/noSession.jpg';
-import LogInChip from '../components/log-in-chip';
 import { ButtonLink } from '../helpers/button';
-import { H1, mediaScreen, Sphere, Text } from '../helpers/theme';
+import { H1, Text } from '../helpers/theme';
 
 const logInUser = async (credentials: User) => {
   const response = await fetch('http://localhost:3000/api/users', {
