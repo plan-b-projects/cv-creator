@@ -24,8 +24,6 @@ const jobSearchApi = async (query: string) => {
   }
 };
 
-
-
 export default function JobSearch() {
   const { register, getValues } = useForm();
   const [jobData, setJobData] = useState([]);
@@ -80,7 +78,7 @@ export default function JobSearch() {
             </Button>
           </ButtonGroup>
         </InputSearchContainer>
-        {isFormLoading ?
+        {isFormLoading ? (
           <Load>
             <div className="wrapper">
               <div className="circle"></div>
@@ -92,14 +90,19 @@ export default function JobSearch() {
               <span>Loading</span>
             </div>
           </Load>
-          :
-          null}
+        ) : null}
       </JobSearchContainer>
       <JobsContainer>
         {jobData.map((job: JobData) => (
-          <Job prop={job} isLiked={
-            favJobs.find((_job: JobData) => _job.job_id === job.job_id) ? true : false
-          } />
+          <Job
+            data-testid="job_box"
+            prop={job}
+            isLiked={
+              favJobs.find((_job: JobData) => _job.job_id === job.job_id)
+                ? true
+                : false
+            }
+          />
         ))}
       </JobsContainer>
     </>

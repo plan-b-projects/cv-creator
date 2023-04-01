@@ -17,7 +17,9 @@ export default function Header() {
             </NavListLink>
           </List>
           <List isActive={router.pathname === '/documentation'}>
-            <NavListLink href="/job-search">Job Search</NavListLink>
+            <NavListLink data-testid="job_search" href="/job-search">
+              Job Search
+            </NavListLink>
           </List>
         </NavList>
         <LogInChip />

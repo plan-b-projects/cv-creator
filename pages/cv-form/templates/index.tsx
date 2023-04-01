@@ -25,62 +25,71 @@ export default function FormPage() {
             <H1>Select CV TEMPLATES</H1>
             <ContentContainer>
               <ThemeProvider theme={dark}>
-              <TemplateSelector>
-                <TemplateBtn
-                  type="button"
-                  onClick={() => router.push('/cv-form/templates/template-a')}
-                >
-                  <TemplateA isInSelector />
-                  <Button
+                <TemplateSelector>
+                  <TemplateBtn
                     type="button"
                     onClick={() => router.push('/cv-form/templates/template-a')}
                   >
-                    Select This Template
-                  </Button>
-                </TemplateBtn>
-              </TemplateSelector>
-              <TemplateSelector>
-                <TemplateBtn
-                  type="button"
-                  onClick={() => router.push('/cv-form/templates/template-b')}
-                >
-                  <TemplateB isInSelector />
-                  <Button
+                    <TemplateA isInSelector />
+                    <Button
+                      type="button"
+                      onClick={() =>
+                        router.push('/cv-form/templates/template-a')
+                      }
+                    >
+                      Select This Template
+                    </Button>
+                  </TemplateBtn>
+                </TemplateSelector>
+                <TemplateSelector>
+                  <TemplateBtn
                     type="button"
                     onClick={() => router.push('/cv-form/templates/template-b')}
                   >
-                    Select This Template
-                  </Button>
-                </TemplateBtn>
-              </TemplateSelector>
-              <TemplateSelector>
-                <TemplateBtn
-                  type="button"
-                  onClick={() => router.push('/cv-form/templates/template-c')}
-                >
-                  <TemplateC isInSelector />
-                  <Button
+                    <TemplateB isInSelector />
+                    <Button
+                      data-testid="template_b"
+                      type="button"
+                      onClick={() =>
+                        router.push('/cv-form/templates/template-b')
+                      }
+                    >
+                      Select This Template
+                    </Button>
+                  </TemplateBtn>
+                </TemplateSelector>
+                <TemplateSelector>
+                  <TemplateBtn
                     type="button"
                     onClick={() => router.push('/cv-form/templates/template-c')}
                   >
-                    Select This Template
-                  </Button>
-                </TemplateBtn>
-              </TemplateSelector>
-              <TemplateSelector>
-                <TemplateBtn
-                  type="button"
-                  onClick={() => router.push('/cv-form/templates/template-d')}
-                >
-                  <TemplateD isInSelector />
-                  <Button
+                    <TemplateC isInSelector />
+                    <Button
+                      type="button"
+                      onClick={() =>
+                        router.push('/cv-form/templates/template-c')
+                      }
+                    >
+                      Select This Template
+                    </Button>
+                  </TemplateBtn>
+                </TemplateSelector>
+                <TemplateSelector>
+                  <TemplateBtn
                     type="button"
                     onClick={() => router.push('/cv-form/templates/template-d')}
                   >
-                    Select This Template
-                  </Button>
-                </TemplateBtn>
-              </TemplateSelector>
+                    <TemplateD isInSelector />
+                    <Button
+                      type="button"
+                      onClick={() =>
+                        router.push('/cv-form/templates/template-d')
+                      }
+                    >
+                      Select This Template
+                    </Button>
+                  </TemplateBtn>
+                </TemplateSelector>
               </ThemeProvider>
             </ContentContainer>
           </PageContainer>

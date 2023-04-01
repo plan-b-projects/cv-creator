@@ -86,7 +86,11 @@ export default function HomePage() {
       {cvs.length > 0 &&
         cvs.map((cv: CvFormValues) => {
           return (
-            <Button type="button" onClick={() => handleClick(cv)}>
+            <Button
+              data-testid={`cv_button_${cvs.indexOf(cv) + 1}`}
+              type="button"
+              onClick={() => handleClick(cv)}
+            >
               CV {cvs.indexOf(cv) + 1}
             </Button>
           );
@@ -95,7 +99,13 @@ export default function HomePage() {
       <JobsContainer>
         {favJobs.length > 0 &&
           favJobs.map((job: JobData) => {
-            return <Job prop={job} isLiked={true} />;
+            return (
+              <Job
+                data-testid={`fav_job_${cvs.indexOf(favJobs) + 1}`}
+                prop={job}
+                isLiked={true}
+              />
+            );
           })}
       </JobsContainer>
     </HomePageArea>
