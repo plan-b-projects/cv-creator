@@ -93,7 +93,7 @@ export default function HomePage() {
         {favJobs.length > 0 &&
           favJobs.map((job: JobData) => {
             return (
-              <Job prop={job} />
+              <Job prop={job} isLiked={true} />
             );
           })}
       </JobsContainer>
