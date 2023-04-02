@@ -58,13 +58,14 @@ describe('Navigation', () => {
       'http://localhost:3000/cv-form/templates/template-b',
     );
     cy.get('[data-testid="save_template"]').click();
+    cy.get('[data-testid="name_cv"]').type('Cypress test cv');
 
     cy.go('back');
     cy.go('back');
     cy.go('back');
     cy.reload();
     cy.url().should('include', 'http://localhost:3000/');
-    cy.get('[data-testid="cv_button_1"]');
+    cy.get('[data-testid="Cypress test cv"]');
   });
 
   it.only('should go to job search', () => {

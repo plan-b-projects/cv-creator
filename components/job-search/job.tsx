@@ -16,22 +16,20 @@ export type JobData = {
 };
 
 type JobType = {
+  prop: JobData;
+  isLiked?: boolean;
+  onDeleteFav?: () => void;
+};
 
-    prop: JobData;
-    isLiked?: boolean;
-    onDeleteFav?: () => void;
-}
-
-export default function Job({ prop, isLiked = false, onDeleteFav = () => { } }: JobType) {
-    console.log(prop);
-
-    const [fav, setFave] = useState(isLiked);
-    const ref = useRef<HTMLDivElement>(null);
-
+export default function Job({
+  prop,
+  isLiked = false,
+  onDeleteFav = () => {},
+}: JobType) {
+  console.log(prop);
 
   const [fav, setFave] = useState(isLiked);
   const ref = useRef<HTMLDivElement>(null);
-
 
   const addFav = () => {
     fetch(`http://localhost:3000/api/users/job-search`, {
@@ -45,16 +43,13 @@ export default function Job({ prop, isLiked = false, onDeleteFav = () => { } }: 
     }).then(() => setFave(true));
   };
 
-    const deleteFav = () => {
-        fetch(`http://localhost:3000/api/users/job-search/${prop.job_id}`, {
-            method: 'DELETE',
-        })
-            .then(() => setFave(false))
-            .then(onDeleteFav)
-    };
-
-
-  
+  const deleteFav = () => {
+    fetch(`http://localhost:3000/api/users/job-search/${prop.job_id}`, {
+      method: 'DELETE',
+    })
+      .then(() => setFave(false))
+      .then(onDeleteFav);
+  };
 
   const handleClick = () => {
     if (!fav) {

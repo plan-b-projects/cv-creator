@@ -63,7 +63,6 @@ export default function TemplatePage() {
     }
   };
 
-
   const width = useWindowWidth();
 
   return (
@@ -86,19 +85,9 @@ export default function TemplatePage() {
           />
           <TopContainer>
             <ButtonContainer>
-
               <Button onClick={exportPDFWithComponent}>Download as PFD</Button>
 
-              <Button
-                data-testid="save_template"
-                onClick={() => saveCvToUser()}
-              >
-                Save this CV to your profile
-              </Button>
-
-
               <CvNameModal />
-
             </ButtonContainer>
           </TopContainer>
           <ContentContainer>
@@ -131,13 +120,12 @@ export default function TemplatePage() {
                 ></ThemeButton>
               </ThemeContainer>
 
-
               <PDFExport
                 ref={pdfExportComponent}
                 paperSize="A4"
                 margin={0}
                 scale={width > 600 ? 0.999 : 1.99}
-              // fileName={`Report for ${new Date().getFullYear()}`}
+                // fileName={`Report for ${new Date().getFullYear()}`}
               >
                 <div ref={container}>
                   {id === 'template-a' && <TemplateA />}
@@ -146,13 +134,7 @@ export default function TemplatePage() {
                   {id === 'template-d' && <TemplateD />}
                 </div>
               </PDFExport>
-
-
-          </ThemeProvider>
-
-
-
-
+            </ThemeProvider>
           </ContentContainer>
         </>
       )}

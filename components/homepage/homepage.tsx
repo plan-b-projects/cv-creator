@@ -12,7 +12,6 @@ export default function HomePage() {
   const [favJobs, setFavJobs] = useState<any>([]);
   const [reloadData, setReloadData] = useState<any>(false);
 
-
   const getCvs = async () => {
     const response = await fetch('http://localhost:3000/api/users/cv-array', {
       method: 'GET',
@@ -58,9 +57,12 @@ export default function HomePage() {
   };
 
   const deleteCv = async (cv: CvFormValues) => {
-    const response = await fetch(`http://localhost:3000/api/users/cv-array/${cv.id}`, {
-      method: 'DELETE',
-    });
+    const response = await fetch(
+      `http://localhost:3000/api/users/cv-array/${cv.id}`,
+      {
+        method: 'DELETE',
+      },
+    );
 
     if (response.ok) {
       setReloadData(!reloadData);
@@ -90,15 +92,24 @@ export default function HomePage() {
       {cvs.length > 0 &&
         cvs.map((cv: CvFormValues) => {
           return (
-
             <CvNameAndDelete key={cv.id}>
               <Button
-      data-testid={`cv_button_${cvs.indexOf(cv) + 1}`}
- type="button" onClick={() => handleClick(cv)}>
+                data-testid={cv.cvName}
+                type="button"
+                onClick={() => handleClick(cv)}
+              >
                 {cv.cvName}
               </Button>
               <Button type="button" onClick={() => deleteCv(cv)}>
-                <svg height="25" viewBox="0 0 48 48" width="25" xmlns="http://www.w3.org/2000/svg"><path d="M12 38c0 2.21 1.79 4 4 4h16c2.21 0 4-1.79 4-4v-24h-24v24zm26-30h-7l-2-2h-10l-2 2h-7v4h28v-4z" /><path d="M0 0h48v48h-48z" fill="none" /></svg>
+                <svg
+                  height="25"
+                  viewBox="0 0 48 48"
+                  width="25"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12 38c0 2.21 1.79 4 4 4h16c2.21 0 4-1.79 4-4v-24h-24v24zm26-30h-7l-2-2h-10l-2 2h-7v4h28v-4z" />
+                  <path d="M0 0h48v48h-48z" fill="none" />
+                </svg>
               </Button>
             </CvNameAndDelete>
           );
@@ -107,11 +118,15 @@ export default function HomePage() {
       <JobsContainer>
         {favJobs.length > 0 &&
           favJobs.map((job: JobData) => {
-
             return (
-              <Job data-testid="fav_job" key={job.job_id} prop={job} isLiked={true} onDeleteFav={() => setReloadData(!reloadData)} />
+              <Job
+                data-testid="fav_job"
+                key={job.job_id}
+                prop={job}
+                isLiked={true}
+                onDeleteFav={() => setReloadData(!reloadData)}
+              />
             );
-
           })}
       </JobsContainer>
     </HomePageArea>
