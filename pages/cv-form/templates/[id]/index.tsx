@@ -86,8 +86,19 @@ export default function TemplatePage() {
           />
           <TopContainer>
             <ButtonContainer>
-              <Button onClick={exportPDFWithComponent}>Download as PDF</Button>
+
+              <Button onClick={exportPDFWithComponent}>Download as PFD</Button>
+
+              <Button
+                data-testid="save_template"
+                onClick={() => saveCvToUser()}
+              >
+                Save this CV to your profile
+              </Button>
+
+
               <CvNameModal />
+
             </ButtonContainer>
           </TopContainer>
           <ContentContainer>
@@ -135,7 +146,13 @@ export default function TemplatePage() {
                   {id === 'template-d' && <TemplateD />}
                 </div>
               </PDFExport>
-            </ThemeProvider>
+
+
+          </ThemeProvider>
+
+
+
+
           </ContentContainer>
         </>
       )}

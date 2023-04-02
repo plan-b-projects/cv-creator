@@ -12,13 +12,17 @@ export default function Header() {
       <NavItems>
         <NavList>
           <List isActive={router.pathname === '/'}>
-            <NavListLink href="/">Home</NavListLink>
+            <NavListLink data-testid="home" href="/">
+              Home
+            </NavListLink>
           </List>
           <List isActive={router.pathname === '/documentation'}>
-            <NavListLink href="/job-search">Job Search</NavListLink>
+            <NavListLink data-testid="job_search" href="/job-search">
+              Job Search
+            </NavListLink>
           </List>
         </NavList>
-      <LogInChip />
+        <LogInChip />
       </NavItems>
     </HeaderContainer>
   );
@@ -29,8 +33,8 @@ const HeaderContainer = styled.header`
   align-items: flex-end;
   justify-content: flex-end;
   padding: 40px;
-  
-  @media (max-width: ${mediaScreen.small}){
+
+  @media (max-width: ${mediaScreen.small}) {
     padding: 20px 10px;
   }
 `;
@@ -45,10 +49,9 @@ const NavItems = styled.nav`
   background-color: ${colors.transparent};
   text-align: center;
 
-  @media (max-width: ${mediaScreen.small}){
+  @media (max-width: ${mediaScreen.small}) {
     width: 100%;
   }
-
 `;
 
 const NavList = styled.ul`
@@ -74,7 +77,7 @@ const List = styled.li<{ isActive: boolean }>`
     border-bottom: 2px solid ${colors.dark};
   }
 
-  @media (max-width: ${mediaScreen.small}){
+  @media (max-width: ${mediaScreen.small}) {
     padding-bottom: 8px;
     padding-inline: 0;
     font-size: 14px;

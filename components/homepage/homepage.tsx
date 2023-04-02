@@ -5,7 +5,7 @@ import { Button } from '../../helpers/button';
 import { H1, H2 } from '../../helpers/theme';
 import { CvFormValues } from '../../shared-types';
 import Job, { JobData } from '../job-search/job';
-import { JobsContainer } from '../../components/job-search/job-search'
+import { JobsContainer } from '../../components/job-search/job-search';
 
 export default function HomePage() {
   const [cvs, setCvs] = useState<any>([]);
@@ -77,18 +77,24 @@ export default function HomePage() {
     getFavJobs();
   }, [reloadData]);
 
-
   return (
     <HomePageArea>
-      <Button type="button" onClick={() => router.push('/cv-form')}>
+      <Button
+        type="button"
+        data-testid="create_cv"
+        onClick={() => router.push('/cv-form')}
+      >
         Create a new CV
       </Button>
       {cvs.length > 0 && <H2>Your CVs Collection</H2>}
       {cvs.length > 0 &&
         cvs.map((cv: CvFormValues) => {
           return (
+
             <CvNameAndDelete key={cv.id}>
-              <Button type="button" onClick={() => handleClick(cv)}>
+              <Button
+      data-testid={`cv_button_${cvs.indexOf(cv) + 1}`}
+ type="button" onClick={() => handleClick(cv)}>
                 {cv.cvName}
               </Button>
               <Button type="button" onClick={() => deleteCv(cv)}>
@@ -101,12 +107,13 @@ export default function HomePage() {
       <JobsContainer>
         {favJobs.length > 0 &&
           favJobs.map((job: JobData) => {
+
             return (
-              <Job key={job.job_id} prop={job} isLiked={true} onDeleteFav={() => setReloadData(!reloadData)} />
+              <Job data-testid="fav_job" key={job.job_id} prop={job} isLiked={true} onDeleteFav={() => setReloadData(!reloadData)} />
             );
+
           })}
       </JobsContainer>
-
     </HomePageArea>
   );
 }

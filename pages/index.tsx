@@ -31,13 +31,14 @@ export default function IndexPage() {
   return (
     <Layout>
       <>
-          {!session && (
-        <>
+        {!session && (
+          <>
             <NotSignedIn>
-              <H1>Welcome to CV Creator App</H1>
-              <Text>Signed in to create CVs</Text>
+              <H1>Welcome to our CV Creator App</H1>
+              <Text>Sign in to create CVs</Text>
               <br />
               <ButtonLink
+                data-testid="sign_in"
                 href={`/api/auth/signin`}
                 onClick={(e) => {
                   e.preventDefault();
@@ -48,13 +49,13 @@ export default function IndexPage() {
               </ButtonLink>
             </NotSignedIn>
           </>
-          )}
-          {session?.user && (
-            <>
-              <H1>Welcome!</H1>
-              <HomePage />
-            </>
-          )}
+        )}
+        {session?.user && (
+          <>
+            <H1>Welcome!</H1>
+            <HomePage />
+          </>
+        )}
       </>
     </Layout>
   );
@@ -64,7 +65,4 @@ const NotSignedIn = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  
 `;
-
-
