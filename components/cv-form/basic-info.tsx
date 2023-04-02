@@ -1,27 +1,43 @@
 import React, { useState } from 'react';
+import { useFormContext, useWatch } from 'react-hook-form';
 import { useMeasuredHeight } from '../../helpers/useMeasuredHeight';
+import { CvFormValues } from '../../shared-types';
 import { FieldGroup } from './field-group';
 import {
   Fieldset,
   Legend,
   FieldsetContent,
   MeasuringWrapper,
+  ProgressBar,
+  ProgressBarCompleted,
 } from './form-styles';
+
+const NUMBER_OF_QUESTIONS = 8;
 
 export default function BasicInfo() {
   const [isExpanded, setIsExpanded] = useState(false);
   const { measuringWrapperRef, measuredHeight } = useMeasuredHeight();
   const height = isExpanded ? measuredHeight : 0;
+  const values = useWatch<CvFormValues, 'basicInfo'>({ name: 'basicInfo' });
+  const answeredQuestions = values
+    ? Object.values(values).filter((v) => !!v).length
+    : 0;
+  const percentageCompleted =
+    100 *
+    (Math.min(answeredQuestions, NUMBER_OF_QUESTIONS) / NUMBER_OF_QUESTIONS);
 
   return (
-    <Fieldset>
-      <Legend
-        isExpanded={isExpanded}
-        data-testid="basic_info"
-        onClick={() => setIsExpanded(!isExpanded)}
-      >
-        Basic Info
-      </Legend>
+    <Fieldset aria-label="Basic Info">
+      <ProgressBar isExpanded={isExpanded}>
+        <ProgressBarCompleted percentageCompleted={percentageCompleted} />
+        <Legend
+          isExpanded={isExpanded}
+          data-testid="basic_info"
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          Basic Info
+        </Legend>
+      </ProgressBar>
 
       <FieldsetContent height={height}>
         <MeasuringWrapper ref={measuringWrapperRef}>
