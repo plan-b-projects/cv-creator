@@ -89,19 +89,19 @@ export default function JobSearch() {
         ) : null}
       </JobSearchContainer>
       <PageWrap>
-      <JobsContainer>
-        {jobData.map((job: JobData) => (
-          <Job
-            data-testid="job_box"
-            prop={job}
-            isLiked={
-              favJobs.find((_job: JobData) => _job.job_id === job.job_id)
-                ? true
-                : false
-            }
-          />
-        ))}
-      </JobsContainer>
+        <JobsContainer>
+          {jobData.map((job: JobData) => (
+            <Job
+              data-testid="job_box"
+              prop={job}
+              isLiked={
+                favJobs.find((_job: JobData) => _job.job_id === job.job_id)
+                  ? true
+                  : false
+              }
+            />
+          ))}
+        </JobsContainer>
       </PageWrap>
     </>
   );
@@ -113,7 +113,7 @@ export const InputSearchContainer = styled.div`
   justify-content: center;
   flex-direction: row;
 
-  @media (max-width: ${mediaScreen.small}){
+  @media (max-width: ${mediaScreen.small}) {
     flex-direction: column;
     flex: 0 0 260px;
     align-items: stretch;
@@ -128,28 +128,32 @@ const Input = styled.input`
   margin-inline: 20px;
   width: 40%;
 
-  @media (max-width: ${mediaScreen.small}){
+  @media (max-width: ${mediaScreen.small}) {
     width: 260px;
     margin-inline: 0;
   }
 `;
+
 export const JobSearchContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
-  
 `;
 
 const PageWrap = styled.div`
   display: flex;
   justify-content: center;
-`
+`;
 
 export const JobsContainer = styled.div`
-display: grid;
-grid-template-columns: 1fr 1fr;
-margin: 20px;
-max-width: 900px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 20px;
+  max-width: 900px;
+
+  @media (max-width: ${mediaScreen.small}) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const Load = styled.div`

@@ -63,7 +63,6 @@ export const FieldGroupContainer = styled.div`
 `;
 
 export const Input = styled.input`
-  padding: 3px;
   border: 0;
   width: 100%;
   padding: 10px;

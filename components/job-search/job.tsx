@@ -62,9 +62,8 @@ export default function Job({
     <JobContainer
       isFavorite={fav}
       key={prop.job_id}
-      onClick={() => window.open(prop.job_apply_link, '_blank')}
     >
-      <JobTitle isFavorite={fav}>{prop.job_title}</JobTitle>
+      <JobTitle isFavorite={fav} onClick={() => window.open(prop.job_apply_link, '_blank')}>{prop.job_title}</JobTitle>
       <DetailsContainer>
         <Company isFavorite={fav}>{prop.employer_name}</Company>
         <Details isFavorite={fav}>
@@ -129,6 +128,7 @@ const JobContainer = styled.div<{ isFavorite: boolean }>`
 
 const JobTitle = styled(H3)<{ isFavorite: boolean }>`
   color: ${(props) => (props.isFavorite ? colors.dark : colors.light)};
+  cursor: pointer;
 `;
 
 const Details = styled(Text)<{ isFavorite: boolean }>`
@@ -158,4 +158,5 @@ const FavButton = styled.button`
   outline: 0;
   background-color: transparent;
   padding: 5px;
+  cursor: pointer;
 `;

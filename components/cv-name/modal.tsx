@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import ReacrScrollableFeed from 'react-scrollable-feed';
 import { useRouter } from 'next/router';
 import { v4 as uuidv4 } from 'uuid';
+import { colors, mediaScreen } from '../../helpers/theme';
 
 export default function CvNameModal() {
   const [modal, setModal] = useState(false);
@@ -44,6 +45,7 @@ export default function CvNameModal() {
     const status = response.status;
     const data = await response.json();
     toggleModal();
+    router.push('/');
     return { status, data };
   };
 
@@ -72,6 +74,7 @@ export default function CvNameModal() {
                 placeholder="My first CV"
               />
               <ModalBtn
+                disabled={prompt === ''}
                 onClick={(e) => {
                   e.preventDefault();
                   saveCvToUser();
@@ -111,43 +114,36 @@ const ModalContent = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   line-height: 1.4;
-  background: #f1f1f1;
+  background: ${colors.dark};
+  color: ${colors.light};
   padding: 18px 28px;
   border-radius: 14px;
-  max-width: 600px;
-  min-width: 300px;
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  @media (min-width: 400px) {
-    min-width: 30vw;
+  
+  @media (min-width: ${mediaScreen.small}) {
+    max-width: 500px;
   }
-`;
-
-const Form = styled.form`
+  `;
+  
+  const Form = styled.form`
   width: 100%;
   margin-bottom: 2rem;
   display: flex;
   justify-content: center;
+  gap: 15px;
+  flex-direction: column;
+  
+  @media (min-width: ${mediaScreen.small}) {
+    flex-direction: row;
+  }
+  
 `;
 
-const ModalBtn = styled.button`
-  padding: 0 1rem;
-  font-weight: 800;
-  font-size: large;
-  background: #a0d6fc;
-  color: #262a74;
-  border-radius: 7px;
-  outline: 0;
-  border: 0;
-  cursor: pointer;
-
-  &:hover {
-    background: #262a74;
-    color: #a0d6fc;
-  }
+const ModalBtn = styled(Button)`
 `;
 
 const ModalBtnClose = styled(ModalBtn)`
@@ -157,9 +153,13 @@ const ModalBtnClose = styled(ModalBtn)`
   right: 10px;
 `;
 
-const Input = styled.input`
-  width: 100%;
-  padding: 1rem;
-  margin-right: 1rem;
-  border-radius: 7px;
+export const Input = styled.input`
+  border: 0;
+  padding: 10px;
+  padding-right: 0;
+  background-color: ${colors.transparent};
+  color: ${colors.light};
+  border-radius: 15px;
+  font-size: 15px;
+  flex: 1;
 `;
