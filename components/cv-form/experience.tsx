@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useFieldArray, useFormContext } from 'react-hook-form';
+import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
 import { CvFormValues } from '../../shared-types';
 import { Button } from '../../helpers/button';
 import { FieldGroup } from './field-group';
@@ -10,13 +10,24 @@ import {
   List,
   ListItem,
   MeasuringWrapper,
+  ProgressBar,
+  ProgressBarCompleted,
 } from './form-styles';
 import { useMeasuredHeight } from '../../helpers/useMeasuredHeight';
+
+const NUMBER_OF_QUESTIONS = 4;
 
 export default function Experience() {
   const [isExpanded, setIsExpanded] = useState(false);
   const { measuringWrapperRef, measuredHeight } = useMeasuredHeight();
   const height = isExpanded ? measuredHeight : 0;
+  const values = useWatch<CvFormValues, 'experience'>({ name: 'experience' });
+  const answeredQuestions = values?.length
+    ? Object.values(values[0]).filter((v) => !!v).length
+    : 0;
+  const percentageCompleted =
+    100 *
+    (Math.min(answeredQuestions, NUMBER_OF_QUESTIONS) / NUMBER_OF_QUESTIONS);
 
   const { control } = useFormContext<CvFormValues>();
   const { fields, append, remove } = useFieldArray({
@@ -25,13 +36,17 @@ export default function Experience() {
   });
 
   return (
-    <Fieldset>
-      <Legend
-        isExpanded={isExpanded}
-        onClick={() => setIsExpanded(!isExpanded)}
-      >
-        Experience
-      </Legend>
+    <Fieldset aria-label="Experience">
+      <ProgressBar isExpanded={isExpanded}>
+        <ProgressBarCompleted percentageCompleted={percentageCompleted} />
+        <Legend
+          isExpanded={isExpanded}
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          Experience
+        </Legend>
+      </ProgressBar>
+
       <FieldsetContent height={height}>
         <MeasuringWrapper ref={measuringWrapperRef}>
           <Button
