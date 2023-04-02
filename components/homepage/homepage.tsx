@@ -99,13 +99,7 @@ export default function HomePage() {
       <JobsContainer>
         {favJobs.length > 0 &&
           favJobs.map((job: JobData) => {
-            return (
-              <Job
-                data-testid={`fav_job_${cvs.indexOf(favJobs) + 1}`}
-                prop={job}
-                isLiked={true}
-              />
-            );
+            return <Job data-testid="fav_job" prop={job} isLiked={true} />;
           })}
       </JobsContainer>
     </HomePageArea>

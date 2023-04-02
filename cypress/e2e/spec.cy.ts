@@ -62,6 +62,7 @@ describe('Navigation', () => {
     cy.go('back');
     cy.go('back');
     cy.go('back');
+    cy.reload();
     cy.url().should('include', 'http://localhost:3000/');
     cy.get('[data-testid="cv_button_1"]');
   });
@@ -96,8 +97,8 @@ describe('Navigation', () => {
     cy.scrollTo(0, 500);
     cy.get('[data-testid="fav_job"]').first().click();
     cy.go('back');
-    cy.get('[job-search__JobsContainer-sc-e3874dc5-5 bfLEkS]').scrollIntoView();
     cy.url().should('include', 'http://localhost:3000/');
-    cy.get('[data-testid="fav_job_1"]');
+    cy.scrollTo('bottom');
+    cy.get('[data-testid="fav_job"]').first().scrollIntoView();
   });
 });
