@@ -14,7 +14,12 @@ export default function Modal() {
     const patternDigit = /^\d+$/;
     const patternSpace = /^\s*$/;
     if (prompt === '' || patternDigit.test(prompt) || patternSpace.test(prompt)) {
-      setErrorVisibility(!errorVisibility);
+      if (errorVisibility === false) {
+        setErrorVisibility(!errorVisibility);
+      }
+      setTimeout(() => {
+          setErrorVisibility(false);
+        }, 2000);
     } else {
       if (errorVisibility === true) {
         setErrorVisibility(!errorVisibility);
@@ -28,7 +33,12 @@ export default function Modal() {
         body: JSON.stringify({
           prompt: prompt
         })
-      }).then((response) => response.json()).then((data) => setAiConversation(aiConversation => [...aiConversation, data.text]));
+      }).then((response) => response.json())
+        .then((data) => setAiConversation(aiConversation => [...aiConversation, data.text]))
+        .catch(error => {
+          console.log('ERROR FROM CHATGPT: ' + error);
+          setAiConversation(aiConversation => [...aiConversation, 'Sorry. I am not feeling well. I will be back soon.'])
+        });
     }
     setPrompt('');
   };
