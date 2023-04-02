@@ -28,6 +28,7 @@ import {
   pink,
 } from '../../../../components/themes/Theme.styled';
 import CvNameModal from '../../../../components/cv-name/modal';
+import { H3 } from '../../../../helpers/theme';
 export default function TemplatePage() {
   const router = useRouter();
   const { id } = router.query;
@@ -92,8 +93,8 @@ export default function TemplatePage() {
           </TopContainer>
           <ContentContainer>
             <ThemeProvider theme={selectedTheme}>
+                <ThemeHeader>Choose a theme</ThemeHeader>
               <ThemeContainer>
-                <span>Themes: </span>
                 <ThemeButton
                   className={`light ${selectedTheme === light ? 'active' : ''}`}
                   onClick={() => HandleThemeChange(light)}
@@ -149,3 +150,8 @@ const TopContainer = styled.div`
 const ContentContainer = styled.div`
   margin-bottom: 20px;
 `;
+
+const ThemeHeader = styled(H3)`
+  text-align: center;
+  margin-bottom: 10px;
+`

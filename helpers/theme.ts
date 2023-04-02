@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const colors = {
     light: '#fff',
     dark: '#000',
-    transparent: 'rgb(42,47,56, 0.5)',
+    transparent: 'rgb(42,47,56)',
     purple: '#c795f6', 
     blue: '#84ccfa',
     green: '#71d67b',
@@ -39,6 +39,17 @@ export const H2 = styled.h2`
     @media (max-width: 450px) {
         font-size: 20px;
         margin: 10px;
+    }
+`
+export const H3 = styled.h3`
+    color: ${colors.light};
+    font-weight: 700;
+    font-size: 20px;
+    margin: 10px;
+
+    @media (max-width: 450px) {
+        font-size: 16px;
+        margin: 5px;
     }
 `
 

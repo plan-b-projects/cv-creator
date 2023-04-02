@@ -92,12 +92,8 @@ export default function HomePage() {
       {cvs.length > 0 &&
         cvs.map((cv: CvFormValues) => {
           return (
-            <CvNameAndDelete key={cv.id}>
-              <Button
-                data-testid={cv.cvName}
-                type="button"
-                onClick={() => handleClick(cv)}
-              >
+            <CVCard key={cv.id}>
+              <Button type="button" data-textid={cv.cvName} onClick={() => handleClick(cv)}>
                 {cv.cvName}
               </Button>
               <Button type="button" onClick={() => deleteCv(cv)}>
@@ -111,7 +107,7 @@ export default function HomePage() {
                   <path d="M0 0h48v48h-48z" fill="none" />
                 </svg>
               </Button>
-            </CvNameAndDelete>
+            </CVCard>
           );
         })}
       {favJobs.length > 0 && <H2>Your Saved Job Ads</H2>}
@@ -139,9 +135,11 @@ const HomePageArea = styled.div`
   align-items: center;
 `;
 
-const CvNameAndDelete = styled.div`
+const CVCard = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 5px;
+  width: 200px;
+  height: 50px;
 `;

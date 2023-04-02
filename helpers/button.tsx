@@ -39,6 +39,11 @@ export const Button = styled.button`
 export const ButtonSecondary = styled(Button)`
   background: #1f1f1f;
   color: #ffffff;
+  `
+  
+export const ButtonLinkSecondary = styled(ButtonLink)`
+  background: #1f1f1f;
+  color: #ffffff;
 `
 
 export const ButtonContainer = styled.div`
