@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
 import { CvFormValues } from '../../shared-types';
-import { Button } from '../../helpers/button';
+import { ButtonSecondary } from '../../helpers/button';
 import { FieldGroup } from './field-group';
 import {
   Fieldset,
@@ -14,6 +14,7 @@ import {
   ProgressBarCompleted,
 } from './form-styles';
 import { useMeasuredHeight } from '../../helpers/useMeasuredHeight';
+import { colors } from '../../helpers/theme';
 
 const NUMBER_OF_QUESTIONS = 4;
 
@@ -38,7 +39,7 @@ export default function Experience() {
   return (
     <Fieldset aria-label="Experience">
       <ProgressBar isExpanded={isExpanded}>
-        <ProgressBarCompleted percentageCompleted={percentageCompleted} />
+        <ProgressBarCompleted percentageCompleted={percentageCompleted} color={colors.green} />
         <Legend
           isExpanded={isExpanded}
           onClick={() => setIsExpanded(!isExpanded)}
@@ -47,9 +48,9 @@ export default function Experience() {
         </Legend>
       </ProgressBar>
 
-      <FieldsetContent height={height}>
+      <FieldsetContent height={height} color={colors.green}>
         <MeasuringWrapper ref={measuringWrapperRef}>
-          <Button
+          <ButtonSecondary
             type="button"
             onClick={() =>
               append({
@@ -61,7 +62,7 @@ export default function Experience() {
             }
           >
             Add Experience
-          </Button>
+          </ButtonSecondary>
           <List>
             {fields.map((experienceItem, index) => (
               <ListItem key={experienceItem.id}>
@@ -90,9 +91,9 @@ export default function Experience() {
                   inputType="textarea"
                 />
 
-                <Button type="button" onClick={() => remove(index)}>
+                <ButtonSecondary type="button" onClick={() => remove(index)}>
                   Remove
-                </Button>
+                </ButtonSecondary>
               </ListItem>
             ))}
           </List>

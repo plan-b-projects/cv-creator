@@ -36,6 +36,11 @@ export const Button = styled.button`
   }
 `;
 
+export const ButtonSecondary = styled(Button)`
+  background: #1f1f1f;
+  color: #ffffff;
+`
+
 export const ButtonContainer = styled.div`
   display: flex;
   width: 90%;

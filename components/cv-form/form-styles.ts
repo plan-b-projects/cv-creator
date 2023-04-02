@@ -10,8 +10,8 @@ export const List = styled.ul`
 
 export const ListItem = styled.li``;
 
-export const FieldsetContent = styled.div<{ height: number }>`
-  background-color: ${colors.purple};
+export const FieldsetContent = styled.div<{ height: number, color: string }>`
+  background-color: ${props => props.color};
   border-radius: 0 0 10px 10px;
   color: ${colors.dark};
   transition: height 0.5s;
@@ -41,15 +41,16 @@ export const ProgressBar = styled.div<{ isExpanded: boolean }>`
   height: ${LEGEND_HEIGHT};
   background-color: white;
   overflow: hidden;
+  cursor: pointer;
 `;
 
-export const ProgressBarCompleted = styled.div<{ percentageCompleted: number }>`
+export const ProgressBarCompleted = styled.div<{ percentageCompleted: number, color: string }>`
   position: absolute;
   left: 0;
   top: 0;
   width: ${props => props.percentageCompleted}%;
   height: ${LEGEND_HEIGHT};
-  background-color: ${colors.purple};
+  background-color: ${props => props.color};
   transition: width .5s;
 `;
 

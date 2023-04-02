@@ -137,6 +137,7 @@ const Template = styled.div<{ isInSelector?: boolean }>`
   border: 1px solid black;
   display: flex;
   overflow: hidden;
+  text-align: left;
 
   @media (max-width: ${mediaScreen.small}) {
     width: ${(props) => (props.isInSelector ? '198.33px' : '297.5px')};

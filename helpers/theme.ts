@@ -5,6 +5,10 @@ export const colors = {
     dark: '#000',
     transparent: 'rgb(42,47,56, 0.5)',
     purple: '#c795f6', 
+    blue: '#84ccfa',
+    green: '#71d67b',
+    yellow: '#f7dd65',
+    red: '#ed7f61',
 }
 
 export const mediaScreen = {

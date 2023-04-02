@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
 import { CvFormValues } from '../../shared-types';
-import { Button } from '../../helpers/button';
+import { ButtonSecondary } from '../../helpers/button';
 import { FieldGroup } from './field-group';
 import {
   Fieldset,
@@ -14,6 +14,7 @@ import {
   ProgressBarCompleted,
 } from './form-styles';
 import { useMeasuredHeight } from '../../helpers/useMeasuredHeight';
+import { colors } from '../../helpers/theme';
 
 export default function Languages() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -31,7 +32,7 @@ export default function Languages() {
   return (
     <Fieldset aria-label="Languages">
       <ProgressBar isExpanded={isExpanded}>
-        <ProgressBarCompleted percentageCompleted={percentageCompleted} />
+        <ProgressBarCompleted percentageCompleted={percentageCompleted} color={colors.red} />
         <Legend
           isExpanded={isExpanded}
           onClick={() => setIsExpanded(!isExpanded)}
@@ -40,9 +41,9 @@ export default function Languages() {
         </Legend>
       </ProgressBar>
 
-      <FieldsetContent height={height}>
+      <FieldsetContent height={height} color={colors.red}>
         <MeasuringWrapper ref={measuringWrapperRef}>
-          <Button
+          <ButtonSecondary
             type="button"
             onClick={() =>
               append({
@@ -52,7 +53,7 @@ export default function Languages() {
             }
           >
             Add Language
-          </Button>
+          </ButtonSecondary>
           <List>
             {fields.map((languageItem, index) => (
               <ListItem key={languageItem.id}>
@@ -69,9 +70,9 @@ export default function Languages() {
                   options={['Elementary', 'Intermediate', 'Fluent', 'Native']}
                 />
 
-                <Button type="button" onClick={() => remove(index)}>
+                <ButtonSecondary type="button" onClick={() => remove(index)}>
                   Remove
-                </Button>
+                </ButtonSecondary>
               </ListItem>
             ))}
           </List>

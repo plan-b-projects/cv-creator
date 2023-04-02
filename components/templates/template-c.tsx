@@ -140,6 +140,8 @@ const Template = styled.div<{ isInSelector?: boolean }>`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  text-align: left;
+  
   color: ${({ theme }) => theme.name !== 'dark' ?
   theme.colors.secondaryText
   :
@@ -283,6 +285,3 @@ const RightText = styled.p`
   font-size: 0.5em;
   margin: 0;
 `;
-
-
-

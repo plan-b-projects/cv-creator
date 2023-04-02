@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
+import { colors } from '../../helpers/theme';
 import { useMeasuredHeight } from '../../helpers/useMeasuredHeight';
 import { CvFormValues } from '../../shared-types';
 import { FieldGroup } from './field-group';
@@ -29,7 +30,7 @@ export default function BasicInfo() {
   return (
     <Fieldset aria-label="Basic Info">
       <ProgressBar isExpanded={isExpanded}>
-        <ProgressBarCompleted percentageCompleted={percentageCompleted} />
+        <ProgressBarCompleted percentageCompleted={percentageCompleted} color={colors.purple} />
         <Legend
           isExpanded={isExpanded}
           data-testid="basic_info"
@@ -39,7 +40,7 @@ export default function BasicInfo() {
         </Legend>
       </ProgressBar>
 
-      <FieldsetContent height={height}>
+      <FieldsetContent height={height} color={colors.purple}>
         <MeasuringWrapper ref={measuringWrapperRef}>
           <FieldGroup
             name="basicInfo.profilePicture"

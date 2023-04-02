@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useWatch } from 'react-hook-form';
+import { colors } from '../../../helpers/theme';
 import { useMeasuredHeight } from '../../../helpers/useMeasuredHeight';
 import { CvFormValues } from '../../../shared-types';
 import {
@@ -29,7 +30,7 @@ export default function SkillsForm() {
   return (
     <Fieldset aria-label="Skills">
       <ProgressBar isExpanded={isExpanded}>
-        <ProgressBarCompleted percentageCompleted={percentageCompleted} />
+        <ProgressBarCompleted percentageCompleted={percentageCompleted} color={colors.yellow} />
         <Legend
           isExpanded={isExpanded}
           onClick={() => setIsExpanded(!isExpanded)}
@@ -38,7 +39,7 @@ export default function SkillsForm() {
         </Legend>
       </ProgressBar>
 
-      <FieldsetContent height={height}>
+      <FieldsetContent height={height} color={colors.yellow}>
         <MeasuringWrapper ref={measuringWrapperRef}>
           <SkillsInput skillLabel="Frontend" skillType="frontend" />
           <SkillsInput skillLabel="Backend" skillType="backend" />
