@@ -48,13 +48,9 @@ export default function JobSearch() {
 
     if (response.ok) {
       const newData = await response.json();
-      if (newData.length > 0) {
-        return setFavJobs(newData);
-      } else {
-        return [];
-      }
+      setFavJobs(newData);
     } else {
-      return [];
+      setFavJobs([]);
     }
   };
 

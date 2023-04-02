@@ -16,15 +16,22 @@ export type JobData = {
 };
 
 type JobType = {
-  prop: JobData;
-  isLiked?: boolean;
-};
 
-export default function Job({ prop, isLiked = false }: JobType) {
-  console.log(prop);
+    prop: JobData;
+    isLiked?: boolean;
+    onDeleteFav?: () => void;
+}
+
+export default function Job({ prop, isLiked = false, onDeleteFav = () => { } }: JobType) {
+    console.log(prop);
+
+    const [fav, setFave] = useState(isLiked);
+    const ref = useRef<HTMLDivElement>(null);
+
 
   const [fav, setFave] = useState(isLiked);
   const ref = useRef<HTMLDivElement>(null);
+
 
   const addFav = () => {
     fetch(`http://localhost:3000/api/users/job-search`, {
@@ -38,11 +45,16 @@ export default function Job({ prop, isLiked = false }: JobType) {
     }).then(() => setFave(true));
   };
 
-  const deleteFav = () => {
-    fetch(`http://localhost:3000/api/users/job-search/${prop.job_id}`, {
-      method: 'DELETE',
-    }).then(() => setFave(false));
-  };
+    const deleteFav = () => {
+        fetch(`http://localhost:3000/api/users/job-search/${prop.job_id}`, {
+            method: 'DELETE',
+        })
+            .then(() => setFave(false))
+            .then(onDeleteFav)
+    };
+
+
+  
 
   const handleClick = () => {
     if (!fav) {
@@ -100,7 +112,7 @@ const JobContainer = styled.div`
   margin: 30px;
   border: 1px solid #262a74;
   padding: 10px;
-  width: 25%;
+  min-width: 25%;
   background-color: white;
 `;
 const FavLinkContainer = styled.div`
