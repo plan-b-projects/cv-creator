@@ -16,6 +16,12 @@ const buttonStyle = css`
     color: ${colors.purple};
   }
 
+  &:disabled {
+    cursor: not-allowed;
+    background: ${colors.transparent};
+    color: ${colors.light};
+  }
+
   @media (max-width: ${mediaScreen.small}) {
     padding: 10px 20px;
     font-size: 14px;

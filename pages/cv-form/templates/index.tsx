@@ -7,10 +7,10 @@ import TemplateC from '../../../components/templates/template-c';
 import TemplateD from '../../../components/templates/template-d';
 import React from 'react';
 import router from 'next/router';
-import { Button, ButtonContainer } from '../../../helpers/button';
+import { Button } from '../../../helpers/button';
 import styled, { ThemeProvider } from 'styled-components';
 import { colors, H1, mediaScreen } from '../../../helpers/theme';
-import { dark } from '../../../components/themes/Theme.styled';
+import { light } from '../../../components/themes/Theme.styled';
 
 export default function FormPage() {
   const { data: session, status } = useSession();
@@ -42,7 +42,7 @@ export default function FormPage() {
           <PageContainer>
             <H1>Select CV TEMPLATES</H1>
             <ContentContainer>
-              <ThemeProvider theme={dark}>
+              <ThemeProvider theme={light}>
                 {templates.map((template) => (
                   <TemplateSelector>
                     <TemplateBtn
@@ -87,7 +87,7 @@ const ContentContainer = styled.div`
   width: 100%;
   margin: 0 15px;
   justify-content: center;
-  
+
   @media (min-width: ${mediaScreen.small}) {
     flex-direction: row;
     justify-content: space-evenly;

@@ -241,11 +241,11 @@ const LeftSubtitle = styled.h4`
 `;
 
 const LeftText = styled.div`
-  font-size: 0.6em;
+  font-size: 0.7em;
 `;
 
 const Link = styled.a`
-  font-size: 0.6em;
+  font-size: 0.7em;
   color: ${({ theme }) => theme.name !== 'dark' ?
   theme.colors.secondaryText
   :
@@ -293,12 +293,12 @@ const RightTitle = styled.h3`
 const RightSubtitle = styled.div`
   font-weight: 600;
   padding: 0 3rem;
-  font-size: 0.6em;
+  font-size: 0.7em;
 `;
 
 const Text = styled.p`
   padding: 0 3rem 0.5rem;
-  font-size: 0.5em;
+  font-size: 0.7em;
   margin: 0;
 `;
 

@@ -211,17 +211,17 @@ const LeftSubtitle = styled.h4`
 `;
 
 const LeftText = styled.div`
-  font-size: 0.6em;
+  font-size: 0.7em;
   color: ${({ theme }) => theme.colors.secondaryText};
 `;
 
 const UpperText = styled.div`
-  font-size: 0.6em;
+  font-size: 0.7em;
   color: ${({ theme }) => theme.colors.primaryText};
 `;
 
 const Link = styled.a`
-  font-size: 0.6em;
+  font-size: 0.7em;
   color: ${({ theme }) => theme.colors.primaryText};
   text-decoration: none;
 `;
@@ -251,11 +251,11 @@ const RightTitle = styled.h3`
 
 const RightSubtitle = styled.div`
   font-weight: 600;
-  font-size: 0.6em;
+  font-size: 0.7em;
 `;
 
 const RightText = styled.p`
   padding-bottom: 0.5em;
-  font-size: 0.5em;
+  font-size: 0.7em;
   margin: 0;
 `;
