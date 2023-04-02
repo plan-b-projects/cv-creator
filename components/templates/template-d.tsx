@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 import { CvFormValues } from '../../shared-types';
 import styled from 'styled-components';
 import { mediaScreen } from '../../helpers/theme';
+import { useTemplateSize } from '../../helpers/useTemplateSize';
 
 export default function TemplateD(props: { isInSelector?: boolean }) {
   const [data, setData] = useState<CvFormValues>();
+  const templateSize = useTemplateSize(props.isInSelector);
 
   const getFormValues = async () => {
     const response = await fetch('http://localhost:3000/api/users/cv-form', {
@@ -27,7 +29,7 @@ export default function TemplateD(props: { isInSelector?: boolean }) {
   }, []);
   
   return (
-    <Template isInSelector={props.isInSelector}>
+    <Template style={templateSize} isInSelector={props.isInSelector}>
       <TemplateTop> 
         <Name>{data?.basicInfo.name}</Name>
         <ProfileImage src={data?.basicInfo.profilePicture} />

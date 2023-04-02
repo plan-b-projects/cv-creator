@@ -81,16 +81,17 @@ const PageContainer = styled.div`
 
 const ContentContainer = styled.div`
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  width: 80%;
-  justify-content: space-evenly;
   align-items: center;
-
-  @media (max-width: ${mediaScreen.small}) {
-    flex-direction: column;
-    justify-content: center;
-    width: 300px;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 15px;
+  justify-content: center;
+  
+  @media (min-width: ${mediaScreen.small}) {
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 80%;
   }
 `;
 

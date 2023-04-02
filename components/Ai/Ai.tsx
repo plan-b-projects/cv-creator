@@ -3,6 +3,7 @@ import { ResponseData } from "../../pages/api/generate-answer";
 import { Button } from "../../helpers/button";
 import styled from "styled-components";
 import ReacrScrollableFeed from 'react-scrollable-feed';
+import { colors } from '../../helpers/theme';
 
 export default function Modal() {
   const [modal, setModal] = useState(false);
@@ -61,7 +62,7 @@ export default function Modal() {
               <h2>Hello! My name is Ceve.</h2>
               <h3>How can I help you?</h3>
               <Form>
-                <Input type="text" value={prompt} onChange={(e) => { setPrompt(e.target.value) }} placeholder='Write something to George ...' /> 
+                <Input type="text" value={prompt} onChange={(e) => { setPrompt(e.target.value) }} placeholder='Write something to Ceve...' /> 
                 <ModalBtn onClick={(e) => {
                   e.preventDefault();
                   askToAi(prompt);
@@ -90,7 +91,7 @@ export default function Modal() {
                 <ClearBtn onClick={clearConversation}>Clear conversation</ClearBtn>
               </ConversationBox>
             <ModalBtnClose className="close-modal" onClick={toggleModal}>
-              X
+              x
             </ModalBtnClose>
           </ModalContent>
         </ModalDiv>
@@ -100,22 +101,14 @@ export default function Modal() {
 }
 
 
-const ButtonAi = styled.button`
-  width : 75px;
-  height: 75px;
+const ButtonAi = styled(Button)`
   position: fixed;
   bottom: 60px;
   right: 30px;
-  background: #a0d6fc;
-  color: #262a74;
-  border-radius: 30%;
-  outline: 0;
-  border: 0;
-  cursor: pointer;
-
+  background: ${colors.yellow};
+  
   &:hover {
-    background: #262a74;
-    color: #a0d6fc;
+    color: ${colors.yellow};
   }
 `;
 
@@ -136,11 +129,12 @@ const Overlay = styled(ModalDiv)`
 
 const ModalContent = styled.div`
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   line-height: 1.4;
-  background: #f1f1f1;
+  background: ${colors.dark};
+  color: ${colors.light};
   padding: 18px 28px;
   border-radius: 14px;
   max-width: 600px;
@@ -164,18 +158,18 @@ const Form = styled.form`
 
 const ModalBtn = styled.button`
   padding: 0 1rem;
-  font-weight: 800;
+  font-weight: 400;
   font-size: large;
-  background: #a0d6fc;
-  color: #262a74;
+  background: ${colors.yellow};
+  color: ${colors.dark};
   border-radius: 7px;
   outline: 0;
   border: 0;
   cursor: pointer;
 
   &:hover {
-    background: #262a74;
-    color: #a0d6fc;
+    background: ${colors.dark};
+    color: ${colors.yellow};
   }
 `;
 
@@ -191,6 +185,9 @@ const Input = styled.input`
   padding: 1rem;
   margin-right: 1rem;
   border-radius: 7px;
+  background: ${colors.transparent};
+  color: ${colors.light};
+  border: 0;
 `;
 
 const ErrorBox = styled.div`
@@ -206,17 +203,17 @@ const ConversationBox = styled.div`
   max-height: 400px;
   margin-bottom: 1rem;
   overflow: scroll;
-  padding: 2rem;
+  padding: 1rem;
   border: 1px solid #262a74;
   border-radius: 7px;
-  background: white
+  background: ${colors.transparent};
 `;
 
 const Question = styled.p`
   width: auto;
   padding: 1rem 0 0.5rem 0;
   text-align: end;
-  border-bottom: 1px solid rgba(49,49,49,0.8);
+  border-bottom: 1px solid ${colors.yellow};
   `;
   
   const Answer = styled(Question)`
@@ -226,6 +223,7 @@ const Question = styled.p`
 const ClearBtn = styled.button`
   color: #262a74;
   background: none;
+  color: ${colors.light};
   outline: 0;
   border: 0;
   padding: 0.5rem;
@@ -235,6 +233,6 @@ const ClearBtn = styled.button`
   cursor: pointer;
 
   &:hover {
-    color: #a0d6fc;
+    color: ${colors.yellow};
   }
 `;

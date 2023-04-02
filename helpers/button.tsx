@@ -9,6 +9,7 @@ const buttonStyle = css`
   color: ${colors.dark};
   font-size: 16px;
   font-weight: 400;
+  cursor: pointer;
 
   &:hover {
     background: ${colors.dark};
