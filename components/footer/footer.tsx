@@ -28,6 +28,7 @@ const FooterBox = styled.footer`
   width: 100%;
   height: 60px;
   background-color: ${colors.dark};
+  margin-top: 30px; 
 `;
 
 const NavList = styled.ul`
