@@ -49,7 +49,7 @@ export default function Modal() {
           console.log('ERROR FROM CHATGPT: ' + error);
           setAiConversation((aiConversation) => [
             ...aiConversation,
-            'Sorry. I am not feeling well. I will be back soon.',
+            'Sorry, I am not feeling well. I will be back soon.',
           ]);
         });
       setLoading(loading);
@@ -91,7 +91,7 @@ export default function Modal() {
               </ModalBtn>
             </Form>
             {errorVisibility === true ? (
-              <ErrorBox>Sorry, try to write something else.</ErrorBox>
+              <ErrorBox>Try write something else...</ErrorBox>
             ) : null}
             <ConversationBox>
               <ReacrScrollableFeed>

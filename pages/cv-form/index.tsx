@@ -20,7 +20,7 @@ export default function FormPage() {
             <Form />
         )}
       </div>
-    <Ai  />
+    <Ai />
     </Layout>
   );
 }
