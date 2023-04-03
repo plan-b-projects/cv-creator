@@ -27,6 +27,8 @@ import {
   brown,
   pink,
 } from '../../../../components/themes/Theme.styled';
+import CvNameModal from '../../../../components/cv-name/modal';
+import { H3 } from '../../../../helpers/theme';
 export default function TemplatePage() {
   const router = useRouter();
   const { id } = router.query;
@@ -62,23 +64,6 @@ export default function TemplatePage() {
     }
   };
 
-  const saveCvToUser = async () => {
-    const cv = await getFormValues();
-    const response = await fetch('http://localhost:3000/api/users/cv-array', {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...cv,
-        cvTemplate: 'template-a',
-      }),
-    });
-    const status = response.status;
-    const data = await response.json();
-    return { status, data };
-  };
-
   const width = useWindowWidth();
 
   return (
@@ -102,42 +87,40 @@ export default function TemplatePage() {
           <TopContainer>
             <ButtonContainer>
               <Button onClick={exportPDFWithComponent}>Download as PFD</Button>
-              <Button onClick={() => saveCvToUser()}>
-                Save this CV to your profile
-              </Button>
+
+              <CvNameModal />
             </ButtonContainer>
           </TopContainer>
           <ContentContainer>
-          <ThemeProvider theme={selectedTheme}>
-            <ThemeContainer>
-              <span>Themes: </span>
-              <ThemeButton
-                className={`light ${selectedTheme === light ? 'active' : ''}`}
-                onClick={() => HandleThemeChange(light)}
-              ></ThemeButton>
-              <ThemeButton
-                className={`dark ${selectedTheme === dark ? 'active' : ''}`}
-                onClick={() => HandleThemeChange(dark)}
-              ></ThemeButton>
-              <ThemeButton
-                className={`blue ${selectedTheme === blue ? 'active' : ''}`}
-                onClick={() => HandleThemeChange(blue)}
-              ></ThemeButton>
-              <ThemeButton
-                className={`green ${selectedTheme === green ? 'active' : ''}`}
-                onClick={() => HandleThemeChange(green)}
-              ></ThemeButton>
-              <ThemeButton
-                className={`brown ${selectedTheme === brown ? 'active' : ''}`}
-                onClick={() => HandleThemeChange(brown)}
-              ></ThemeButton>
-              <ThemeButton
-                className={`pink ${selectedTheme === pink ? 'active' : ''}`}
-                onClick={() => HandleThemeChange(pink)}
-              ></ThemeButton>
-            </ThemeContainer>
+            <ThemeProvider theme={selectedTheme}>
+                <ThemeHeader>Choose a theme</ThemeHeader>
+              <ThemeContainer>
+                <ThemeButton
+                  className={`light ${selectedTheme === light ? 'active' : ''}`}
+                  onClick={() => HandleThemeChange(light)}
+                ></ThemeButton>
+                <ThemeButton
+                  className={`dark ${selectedTheme === dark ? 'active' : ''}`}
+                  onClick={() => HandleThemeChange(dark)}
+                ></ThemeButton>
+                <ThemeButton
+                  className={`blue ${selectedTheme === blue ? 'active' : ''}`}
+                  onClick={() => HandleThemeChange(blue)}
+                ></ThemeButton>
+                <ThemeButton
+                  className={`green ${selectedTheme === green ? 'active' : ''}`}
+                  onClick={() => HandleThemeChange(green)}
+                ></ThemeButton>
+                <ThemeButton
+                  className={`brown ${selectedTheme === brown ? 'active' : ''}`}
+                  onClick={() => HandleThemeChange(brown)}
+                ></ThemeButton>
+                <ThemeButton
+                  className={`pink ${selectedTheme === pink ? 'active' : ''}`}
+                  onClick={() => HandleThemeChange(pink)}
+                ></ThemeButton>
+              </ThemeContainer>
 
-           
               <PDFExport
                 ref={pdfExportComponent}
                 paperSize="A4"
@@ -152,7 +135,7 @@ export default function TemplatePage() {
                   {id === 'template-d' && <TemplateD />}
                 </div>
               </PDFExport>
-          </ThemeProvider>
+            </ThemeProvider>
           </ContentContainer>
         </>
       )}
@@ -167,3 +150,8 @@ const TopContainer = styled.div`
 const ContentContainer = styled.div`
   margin-bottom: 20px;
 `;
+
+const ThemeHeader = styled(H3)`
+  text-align: center;
+  margin-bottom: 10px;
+`

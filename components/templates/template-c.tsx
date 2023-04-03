@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 import { CvFormValues } from '../../shared-types';
 import styled from 'styled-components';
 import { mediaScreen } from '../../helpers/theme';
+import { useTemplateSize } from '../../helpers/useTemplateSize';
 
 export default function TemplateC(props: { isInSelector?: boolean }) {
   const [data, setData] = useState<CvFormValues>();
+  const templateSize = useTemplateSize(props.isInSelector);
 
   const getFormValues = async () => {
     const response = await fetch('http://localhost:3000/api/users/cv-form', {
@@ -27,7 +29,7 @@ export default function TemplateC(props: { isInSelector?: boolean }) {
   }, []);
   
   return (
-    <Template isInSelector={props.isInSelector}>
+    <Template style={templateSize} isInSelector={props.isInSelector}>
       <TemplateTop> 
         <Name>{data?.basicInfo.name}</Name>
         <ProfileImage src={data?.basicInfo.profilePicture} /> 
@@ -140,6 +142,8 @@ const Template = styled.div<{ isInSelector?: boolean }>`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  text-align: left;
+  
   color: ${({ theme }) => theme.name !== 'dark' ?
   theme.colors.secondaryText
   :
@@ -228,11 +232,11 @@ const LeftSubtitle = styled.h4`
 `;
 
 const LeftText = styled.div`
-  font-size: 0.6em;s
+  font-size: 0.7em;
 `;
 
 const Link = styled.a`
-  font-size: 0.6em;
+  font-size: 0.7em;
   color: ${({ theme }) => theme.name !== 'dark' ?
   theme.colors.secondaryText
   :
@@ -275,14 +279,11 @@ const RightTitle = styled.h3`
 
 const RightSubtitle = styled.div`
   font-weight: 600;
-  font-size: 0.6em;
+  font-size: 0.7em;
 `;
 
 const RightText = styled.p`
   padding-bottom: 0.5em;
-  font-size: 0.5em;
+  font-size: 0.7em;
   margin: 0;
 `;
-
-
-

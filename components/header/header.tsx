@@ -12,13 +12,15 @@ export default function Header() {
       <NavItems>
         <NavList>
           <List isActive={router.pathname === '/'}>
-            <NavListLink href="/">Home</NavListLink>
+            <NavListLink data-testid="home" href="/">
+              Home
+            </NavListLink>
           </List>
-          <List isActive={router.pathname === '/documentation'}>
+          <List isActive={router.pathname === '/job-search'}>
             <NavListLink href="/job-search">Job Search</NavListLink>
           </List>
         </NavList>
-      <LogInChip />
+        <LogInChip />
       </NavItems>
     </HeaderContainer>
   );
@@ -29,8 +31,8 @@ const HeaderContainer = styled.header`
   align-items: flex-end;
   justify-content: flex-end;
   padding: 40px;
-  
-  @media (max-width: ${mediaScreen.small}){
+
+  @media (max-width: ${mediaScreen.small}) {
     padding: 20px 10px;
   }
 `;
@@ -43,12 +45,10 @@ const NavItems = styled.nav`
   padding-left: 30px;
   justify-content: space-around;
   background-color: ${colors.transparent};
-  text-align: center;
 
-  @media (max-width: ${mediaScreen.small}){
+  @media (max-width: ${mediaScreen.small}) {
     width: 100%;
   }
-
 `;
 
 const NavList = styled.ul`
@@ -68,13 +68,13 @@ const List = styled.li<{ isActive: boolean }>`
   padding-bottom: 10px;
   padding-inline: 30px;
   border-bottom: ${(props) => (props.isActive ? '2px' : '0')} solid
-    ${colors.dark};
+    ${colors.purple};
 
   &:hover {
-    border-bottom: 2px solid ${colors.dark};
+    border-bottom: 2px solid ${colors.purple};
   }
 
-  @media (max-width: ${mediaScreen.small}){
+  @media (max-width: ${mediaScreen.small}) {
     padding-bottom: 8px;
     padding-inline: 0;
     font-size: 14px;
@@ -84,5 +84,9 @@ const List = styled.li<{ isActive: boolean }>`
 const NavListLink = styled(Link)`
   text-decoration: none;
   width: 100%;
-  color: ${colors.dark};
+  color: ${colors.light};
+
+  &:hover{
+    color: ${colors.purple}
+  }
 `;

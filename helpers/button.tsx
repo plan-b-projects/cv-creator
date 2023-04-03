@@ -5,13 +5,20 @@ const buttonStyle = css`
   padding: 10px 20px;
   display: inline-block;
   border-radius: 20px;
-  background: ${colors.light};
+  background: ${colors.purple};
   color: ${colors.dark};
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 400;
+  cursor: pointer;
 
   &:hover {
     background: ${colors.dark};
+    color: ${colors.purple};
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background: ${colors.transparent};
     color: ${colors.light};
   }
 
@@ -35,6 +42,16 @@ export const Button = styled.button`
     margin: 10px 0;
   }
 `;
+
+export const ButtonSecondary = styled(Button)`
+  background: #1f1f1f;
+  color: #ffffff;
+  `
+  
+export const ButtonLinkSecondary = styled(ButtonLink)`
+  background: #1f1f1f;
+  color: #ffffff;
+`
 
 export const ButtonContainer = styled.div`
   display: flex;

@@ -3,6 +3,7 @@ import { Button } from '../../helpers/button';
 import styled, { keyframes } from 'styled-components';
 import { useEffect, useState } from 'react';
 import Job, { JobData } from './job';
+import { H1, mediaScreen } from '../../helpers/theme';
 
 const jobSearchApi = async (query: string) => {
   const url = `https://jsearch.p.rapidapi.com/search?query=${encodeURI(
@@ -11,7 +12,7 @@ const jobSearchApi = async (query: string) => {
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': '4c8c02ab96msh7a1f3905caf944ep1c95f2jsn9a7e46cb4ad8',
+      'X-RapidAPI-Key': '508255ca30mshe81876e95f737e3p1fa130jsn78d6101ea2c8',
       'X-RapidAPI-Host': 'jsearch.p.rapidapi.com',
     },
   };
@@ -23,8 +24,6 @@ const jobSearchApi = async (query: string) => {
     return {};
   }
 };
-
-
 
 export default function JobSearch() {
   const { register, getValues } = useForm();
@@ -50,13 +49,9 @@ export default function JobSearch() {
 
     if (response.ok) {
       const newData = await response.json();
-      if (newData.length > 0) {
-        return setFavJobs(newData);
-      } else {
-        return [];
-      }
+      setFavJobs(newData);
     } else {
-      return [];
+      setFavJobs([]);
     }
   };
 
@@ -66,21 +61,20 @@ export default function JobSearch() {
 
   return (
     <>
+      <H1>Search for a jobs</H1>
       <JobSearchContainer>
-        <Label htmlFor="jobSearch">Search for a job: </Label>
         <InputSearchContainer>
           <Input
             type="text"
             {...register('job')}
             placeholder="ex. Python developer in Texas, USA"
           />
-          <ButtonGroup>
-            <Button type="submit" onClick={submitForm} disabled={isFormLoading}>
-              Search for jobs
-            </Button>
-          </ButtonGroup>
+
+          <Button type="submit" onClick={submitForm} disabled={isFormLoading}>
+            Search for jobs
+          </Button>
         </InputSearchContainer>
-        {isFormLoading ?
+        {isFormLoading ? (
           <Load>
             <div className="wrapper">
               <div className="circle"></div>
@@ -92,53 +86,76 @@ export default function JobSearch() {
               <span>Loading</span>
             </div>
           </Load>
-          :
-          null}
+        ) : null}
       </JobSearchContainer>
-      <JobsContainer>
-        {jobData.map((job: JobData) => (
-          <Job prop={job} isLiked={
-            favJobs.find((_job: JobData) => _job.job_id === job.job_id) ? true : false
-          } />
-        ))}
-      </JobsContainer>
+      <PageWrap>
+        <JobsContainer>
+          {jobData.map((job: JobData) => (
+            <Job
+              data-testid="job_box"
+              prop={job}
+              isLiked={
+                favJobs.find((_job: JobData) => _job.job_id === job.job_id)
+                  ? true
+                  : false
+              }
+            />
+          ))}
+        </JobsContainer>
+      </PageWrap>
     </>
   );
 }
 
-const ButtonGroup = styled.div`
-  display: flex;
-  padding-left: 30px;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const Label = styled.label`
-  display: block;
-  padding-bottom: 20px;
-`;
-const Input = styled.input`
-  padding: 10px;
-  border: 0;
-  border-bottom: 1px solid #000;
-  width: 100%;
-  height: 30px;
-`;
 export const InputSearchContainer = styled.div`
   display: flex;
-  flex-direction: row;
-`;
-export const JobSearchContainer = styled.div`
-  padding-inline: 300px;
-  margin-left: 10px;
-`;
-export const JobsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
+  width: 100%;
   justify-content: center;
-  padding-inline: 10px;
-  flex-wrap: wrap;
+  flex-direction: row;
+
+  @media (max-width: ${mediaScreen.small}) {
+    flex-direction: column;
+    flex: 0 0 260px;
+    align-items: stretch;
+    margin-inline: 15px;
+  }
 `;
+
+const Input = styled.input`
+  padding: 12px;
+  border: 0;
+  border-radius: 30px;
+  margin-inline: 20px;
+  width: 40%;
+
+  @media (max-width: ${mediaScreen.small}) {
+    width: 260px;
+    margin-inline: 0;
+  }
+`;
+
+export const JobSearchContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+`;
+
+const PageWrap = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const JobsContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 20px;
+  max-width: 900px;
+
+  @media (max-width: ${mediaScreen.small}) {
+    grid-template-columns: 1fr;
+  }
+`;
+
 export const Load = styled.div`
   display: flex;
   justify-content: center;

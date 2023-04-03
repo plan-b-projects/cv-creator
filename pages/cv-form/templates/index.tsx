@@ -10,10 +10,28 @@ import router from 'next/router';
 import { Button } from '../../../helpers/button';
 import styled, { ThemeProvider } from 'styled-components';
 import { colors, H1, mediaScreen } from '../../../helpers/theme';
-import { dark } from '../../../components/themes/Theme.styled';
+import { light } from '../../../components/themes/Theme.styled';
 
 export default function FormPage() {
   const { data: session, status } = useSession();
+  const templates = [
+    {
+      name: 'template-a',
+      component: <TemplateA isInSelector />,
+    },
+    {
+      name: 'template-b',
+      component: <TemplateB isInSelector />,
+    },
+    {
+      name: 'template-c',
+      component: <TemplateC isInSelector />,
+    },
+    {
+      name: 'template-d',
+      component: <TemplateD isInSelector />,
+    },
+  ];
 
   useNoSession();
 
@@ -24,63 +42,28 @@ export default function FormPage() {
           <PageContainer>
             <H1>Select CV TEMPLATES</H1>
             <ContentContainer>
-              <ThemeProvider theme={dark}>
-              <TemplateSelector>
-                <TemplateBtn
-                  type="button"
-                  onClick={() => router.push('/cv-form/templates/template-a')}
-                >
-                  <TemplateA isInSelector />
-                  <Button
-                    type="button"
-                    onClick={() => router.push('/cv-form/templates/template-a')}
-                  >
-                    Select This Template
-                  </Button>
-                </TemplateBtn>
-              </TemplateSelector>
-              <TemplateSelector>
-                <TemplateBtn
-                  type="button"
-                  onClick={() => router.push('/cv-form/templates/template-b')}
-                >
-                  <TemplateB isInSelector />
-                  <Button
-                    type="button"
-                    onClick={() => router.push('/cv-form/templates/template-b')}
-                  >
-                    Select This Template
-                  </Button>
-                </TemplateBtn>
-              </TemplateSelector>
-              <TemplateSelector>
-                <TemplateBtn
-                  type="button"
-                  onClick={() => router.push('/cv-form/templates/template-c')}
-                >
-                  <TemplateC isInSelector />
-                  <Button
-                    type="button"
-                    onClick={() => router.push('/cv-form/templates/template-c')}
-                  >
-                    Select This Template
-                  </Button>
-                </TemplateBtn>
-              </TemplateSelector>
-              <TemplateSelector>
-                <TemplateBtn
-                  type="button"
-                  onClick={() => router.push('/cv-form/templates/template-d')}
-                >
-                  <TemplateD isInSelector />
-                  <Button
-                    type="button"
-                    onClick={() => router.push('/cv-form/templates/template-d')}
-                  >
-                    Select This Template
-                  </Button>
-                </TemplateBtn>
-              </TemplateSelector>
+              <ThemeProvider theme={light}>
+                {templates.map((template) => (
+                  <TemplateSelector>
+                    <TemplateBtn
+                      type="button"
+                      onClick={() =>
+                        router.push(`/cv-form/templates/${template.name}`)
+                      }
+                    >
+                      {template.component}
+                      <SelectButton
+                        type="button"
+                        data-testid={template.name.replace('-', '_')}
+                        onClick={() =>
+                          router.push(`/cv-form/templates/${template.name}`)
+                        }
+                      >
+                        Select This Template
+                      </SelectButton>
+                    </TemplateBtn>
+                  </TemplateSelector>
+                ))}
               </ThemeProvider>
             </ContentContainer>
           </PageContainer>
@@ -98,15 +81,17 @@ const PageContainer = styled.div`
 
 const ContentContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  width: 80%;
-  justify-content: space-evenly;
+  flex-wrap: wrap;
   align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 15px;
+  justify-content: center;
 
-  @media (max-width: ${mediaScreen.small}) {
-    flex-direction: column;
-    justify-content: center;
-    width: 300px;
+  @media (min-width: ${mediaScreen.small}) {
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 80%;
   }
 `;
 
@@ -127,4 +112,8 @@ const TemplateBtn = styled.button`
   border: none;
   border-radius: 10px;
   background-color: ${colors.transparent};
+`;
+
+const SelectButton = styled(Button)`
+  margin: 15px 0;
 `;

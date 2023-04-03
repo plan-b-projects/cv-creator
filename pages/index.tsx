@@ -3,10 +3,8 @@ import { signIn, useSession } from 'next-auth/react';
 import { User } from '../db/db';
 import HomePage from '../components/homepage/homepage';
 import styled from 'styled-components';
-import noSession from '../public/noSession.jpg';
-import LogInChip from '../components/log-in-chip';
 import { ButtonLink } from '../helpers/button';
-import { H1, mediaScreen, Sphere, Text } from '../helpers/theme';
+import { H1, Text } from '../helpers/theme';
 
 const logInUser = async (credentials: User) => {
   const response = await fetch('http://localhost:3000/api/users', {
@@ -31,13 +29,14 @@ export default function IndexPage() {
   return (
     <Layout>
       <>
-          {!session && (
-        <>
+        {!session && (
+          <>
             <NotSignedIn>
-              <H1>Welcome to CV Creator App</H1>
-              <Text>Signed in to create CVs</Text>
+              <H1>Welcome to our CV Creator App</H1>
+              <Text>Sign in to create CVs</Text>
               <br />
               <ButtonLink
+                data-testid="sign_in"
                 href={`/api/auth/signin`}
                 onClick={(e) => {
                   e.preventDefault();
@@ -48,13 +47,13 @@ export default function IndexPage() {
               </ButtonLink>
             </NotSignedIn>
           </>
-          )}
-          {session?.user && (
-            <>
-              <H1>Welcome!</H1>
-              <HomePage />
-            </>
-          )}
+        )}
+        {session?.user && (
+          <>
+            <H1>Welcome!</H1>
+            <HomePage />
+          </>
+        )}
       </>
     </Layout>
   );
@@ -64,7 +63,4 @@ const NotSignedIn = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  
 `;
-
-
