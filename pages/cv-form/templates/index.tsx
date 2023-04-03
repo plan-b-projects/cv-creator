@@ -97,6 +97,11 @@ const ContentContainer = styled.div`
 
 const TemplateSelector = styled.div`
   margin: 30px;
+  transition-duration: 0.5s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 
   @media (max-width: ${mediaScreen.small}) {
     margin: 15px;

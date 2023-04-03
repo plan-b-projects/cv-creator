@@ -124,6 +124,11 @@ const JobContainer = styled.div<{ isFavorite: boolean }>`
   margin: 10px;
   border-radius: 10px;
   padding: 15px;
+  transition-duration: 0.5s;
+
+  &:hover {
+    transform: scale(1.02);
+  }
 `;
 
 const JobTitle = styled(H3)<{ isFavorite: boolean }>`

@@ -88,21 +88,26 @@ export default function JobSearch() {
           </Load>
         ) : null}
       </JobSearchContainer>
-      <PageWrap>
-        <JobsContainer>
-          {jobData.map((job: JobData) => (
-            <Job
-              data-testid="job_box"
-              prop={job}
-              isLiked={
-                favJobs.find((_job: JobData) => _job.job_id === job.job_id)
-                  ? true
-                  : false
-              }
-            />
-          ))}
-        </JobsContainer>
-      </PageWrap>
+      {
+        isFormLoading ?
+          null
+          :
+          <PageWrap>
+            <JobsContainer>
+              {jobData.map((job: JobData) => (
+                <Job
+                  data-testid="job_box"
+                  prop={job}
+                  isLiked={
+                    favJobs.find((_job: JobData) => _job.job_id === job.job_id)
+                      ? true
+                      : false
+                  }
+                />
+              ))}
+            </JobsContainer>
+          </PageWrap>
+      }
     </>
   );
 }
