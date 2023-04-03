@@ -32,6 +32,11 @@ export default function JobSearch() {
   const [isFormLoading, setIsFormLoading] = useState(false);
 
   const submitForm = async () => {
+    const patternDigit = /^\d+$/;
+    const patternSpace = /^\s*$/;
+    if (getValues('job') === '' || patternDigit.test(getValues('job')) || patternSpace.test(getValues('job'))) {
+      return
+    }
     setIsFormLoading(true);
     const jobValue = getValues('job');
     const res = await jobSearchApi(jobValue);
