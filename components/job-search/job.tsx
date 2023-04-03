@@ -31,7 +31,7 @@ export default function Job({
   const [fav, setFave] = useState(isLiked);
 
   const addFav = () => {
-    fetch(`http://localhost:3000/api/users/job-search`, {
+    fetch(`https://cv-creator-three.vercel.app/api/users/job-search`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -43,9 +43,12 @@ export default function Job({
   };
 
   const deleteFav = () => {
-    fetch(`http://localhost:3000/api/users/job-search/${prop.job_id}`, {
-      method: 'DELETE',
-    })
+    fetch(
+      `https://cv-creator-three.vercel.app/api/users/job-search/${prop.job_id}`,
+      {
+        method: 'DELETE',
+      },
+    )
       .then(() => setFave(false))
       .then(onDeleteFav);
   };
@@ -59,11 +62,13 @@ export default function Job({
   };
 
   return (
-    <JobContainer
-      isFavorite={fav}
-      key={prop.job_id}
-    >
-      <JobTitle isFavorite={fav} onClick={() => window.open(prop.job_apply_link, '_blank')}>{prop.job_title}</JobTitle>
+    <JobContainer isFavorite={fav} key={prop.job_id}>
+      <JobTitle
+        isFavorite={fav}
+        onClick={() => window.open(prop.job_apply_link, '_blank')}
+      >
+        {prop.job_title}
+      </JobTitle>
       <DetailsContainer>
         <Company isFavorite={fav}>{prop.employer_name}</Company>
         <Details isFavorite={fav}>

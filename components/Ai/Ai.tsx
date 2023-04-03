@@ -1,7 +1,7 @@
-import React, { useState, useRef } from "react";
-import { ResponseData } from "../../pages/api/generate-answer";
-import { Button } from "../../helpers/button";
-import styled from "styled-components";
+import React, { useState, useRef } from 'react';
+import { ResponseData } from '../../pages/api/generate-answer';
+import { Button } from '../../helpers/button';
+import styled from 'styled-components';
 import ReacrScrollableFeed from 'react-scrollable-feed';
 import { colors } from '../../helpers/theme';
 
@@ -11,37 +11,47 @@ export default function Modal() {
   const [errorVisibility, setErrorVisibility] = useState(false);
   const [loading, setLoading] = useState(false);
   const [aiConversation, setAiConversation] = useState<string[]>([]);
- 
+
   const askToAi = async (prompt: string) => {
     const patternDigit = /^\d+$/;
     const patternSpace = /^\s*$/;
-    if (prompt === '' || patternDigit.test(prompt) || patternSpace.test(prompt)) {
+    if (
+      prompt === '' ||
+      patternDigit.test(prompt) ||
+      patternSpace.test(prompt)
+    ) {
       if (errorVisibility === false) {
         setErrorVisibility(!errorVisibility);
       }
       setTimeout(() => {
-          setErrorVisibility(false);
-        }, 2000);
+        setErrorVisibility(false);
+      }, 2000);
     } else {
       if (errorVisibility === true) {
         setErrorVisibility(!errorVisibility);
       }
       setLoading(!loading);
-      setAiConversation(aiConversation => [...aiConversation, prompt]);
-      await fetch('http://localhost:3000/api/generate-answer', {
+      setAiConversation((aiConversation) => [...aiConversation, prompt]);
+      await fetch('https://cv-creator-three.vercel.app/api/generate-answer', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          prompt: prompt
-        })
-      }).then((response) => response.json())
-        .then((data) => setAiConversation(aiConversation => [...aiConversation, data.text]))
-        .catch(error => {
+          prompt: prompt,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) =>
+          setAiConversation((aiConversation) => [...aiConversation, data.text]),
+        )
+        .catch((error) => {
           console.log('ERROR FROM CHATGPT: ' + error);
-          setAiConversation(aiConversation => [...aiConversation, 'Sorry. I am not feeling well. I will be back soon.'])
-      });
+          setAiConversation((aiConversation) => [
+            ...aiConversation,
+            'Sorry. I am not feeling well. I will be back soon.',
+          ]);
+        });
       setLoading(loading);
     }
     setPrompt('');
@@ -53,52 +63,52 @@ export default function Modal() {
     setModal(!modal);
   };
 
-    return (
+  return (
     <>
-      <ButtonAi onClick={toggleModal}>
-        Ask Ceve
-      </ButtonAi>
+      <ButtonAi onClick={toggleModal}>Ask Ceve</ButtonAi>
       {modal && (
         <ModalDiv>
           <Overlay onClick={toggleModal} />
-            <ModalContent>
-              <h2>Hello! My name is Ceve.</h2>
-              <h3>How can I help you?</h3>
-              <Form>
-                <Input type="text" value={prompt} onChange={(e) => { setPrompt(e.target.value) }} placeholder='Write something to Ceve...' /> 
-                <ModalBtn onClick={(e) => {
+          <ModalContent>
+            <h2>Hello! My name is Ceve.</h2>
+            <h3>How can I help you?</h3>
+            <Form>
+              <Input
+                type="text"
+                value={prompt}
+                onChange={(e) => {
+                  setPrompt(e.target.value);
+                }}
+                placeholder="Write something to Ceve..."
+              />
+              <ModalBtn
+                onClick={(e) => {
                   e.preventDefault();
                   askToAi(prompt);
-                }}>Go</ModalBtn>
-              </Form>
-              {
-                errorVisibility === true ?
-                  <ErrorBox>Sorry, try to write something else.</ErrorBox>
-                  :
-                  null
-              }
-              <ConversationBox>
+                }}
+              >
+                Go
+              </ModalBtn>
+            </Form>
+            {errorVisibility === true ? (
+              <ErrorBox>Sorry, try to write something else.</ErrorBox>
+            ) : null}
+            <ConversationBox>
               <ReacrScrollableFeed>
-                {
-                aiConversation.length === 0 ?
-                  '...'
-                  : 
-                    aiConversation.map((text, index) => {
-                    if (index%2 !== 0) {
-                      return <Answer>{text}</Answer>
-                    } 
-                    return <Question>{text}</Question>
-                  })
-                  }
-                  {
-                  loading === true ?
-                    <Loader />
-                    :
-                    null
-                  }
-                </ReacrScrollableFeed>
-                <ClearBtn onClick={clearConversation}>Clear conversation</ClearBtn>
-              </ConversationBox>
+                {aiConversation.length === 0
+                  ? '...'
+                  : aiConversation.map((text, index) => {
+                      if (index % 2 !== 0) {
+                        return <Answer>{text}</Answer>;
+                      }
+                      return <Question>{text}</Question>;
+                    })}
+                {loading === true ? <Loader /> : null}
+              </ReacrScrollableFeed>
+              <ClearBtn onClick={clearConversation}>
+                Clear conversation
+              </ClearBtn>
+            </ConversationBox>
             <ModalBtnClose className="close-modal" onClick={toggleModal}>
               x
             </ModalBtnClose>
@@ -109,13 +119,12 @@ export default function Modal() {
   );
 }
 
-
 const ButtonAi = styled(Button)`
   position: fixed;
   bottom: 60px;
   right: 30px;
   background: ${colors.yellow};
-  
+
   &:hover {
     color: ${colors.yellow};
   }
@@ -132,7 +141,7 @@ const ModalDiv = styled.div`
 `;
 
 const Overlay = styled(ModalDiv)`
-  background: rgba(49,49,49,0.8);
+  background: rgba(49, 49, 49, 0.8);
   cursor: pointer;
 `;
 
@@ -203,8 +212,8 @@ const ErrorBox = styled.div`
   width: 65%;
   position: absolute;
   color: ${colors.yellow};
-  top:210px;
-  left:35px;
+  top: 210px;
+  left: 35px;
 `;
 
 const ConversationBox = styled.div`
@@ -223,9 +232,9 @@ const Question = styled.p`
   padding: 1rem 0 0.5rem 0;
   text-align: end;
   border-bottom: 1px solid ${colors.yellow};
-  `;
-  
-  const Answer = styled(Question)`
+`;
+
+const Answer = styled(Question)`
   text-align: start;
 `;
 
@@ -249,36 +258,47 @@ const ClearBtn = styled.button`
 const Loader = styled.div`
   width: 28px;
   height: 28px;
-  border: 5px solid #FFF;
+  border: 5px solid #fff;
   border-radius: 50%;
   display: inline-block;
   box-sizing: border-box;
   position: relative;
   left: 5px;
   top: 3px;
-  animation: pulse 1s linear infinite;  
-  
-  &:after {
-  content: '';
-  position: absolute;
-  width: 28px;
-  height: 28px;
-  border: 5px solid #FFF;
-  border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  animation: scaleUp 1s linear infinite;
-}
+  animation: pulse 1s linear infinite;
 
-@keyframes scaleUp {
-  0% { transform: translate(-50%, -50%) scale(0) }
-  60% , 100% { transform: translate(-50%, -50%)  scale(1)}
-}
-@keyframes pulse {
-  0% , 60% , 100%{ transform:  scale(1) }
-  80% { transform:  scale(1.2)}
-}
+  &:after {
+    content: '';
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: scaleUp 1s linear infinite;
+  }
+
+  @keyframes scaleUp {
+    0% {
+      transform: translate(-50%, -50%) scale(0);
+    }
+    60%,
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+  @keyframes pulse {
+    0%,
+    60%,
+    100% {
+      transform: scale(1);
+    }
+    80% {
+      transform: scale(1.2);
+    }
+  }
 `;

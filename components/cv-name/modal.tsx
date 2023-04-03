@@ -13,12 +13,15 @@ export default function CvNameModal() {
   const router = useRouter();
 
   const getFormValues = async () => {
-    const response = await fetch('http://localhost:3000/api/users/cv-form', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://cv-creator-three.vercel.app/api/users/cv-form',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    });
+    );
 
     if (response.ok) {
       const newData = await response.json();
@@ -30,18 +33,21 @@ export default function CvNameModal() {
 
   const saveCvToUser = async () => {
     const cv = await getFormValues();
-    const response = await fetch('http://localhost:3000/api/users/cv-array', {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://cv-creator-three.vercel.app/api/users/cv-array',
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...cv,
+          id: uuidv4(),
+          cvTemplate: router.query.id,
+          cvName: prompt ? prompt : 'Unnamed CV',
+        }),
       },
-      body: JSON.stringify({
-        ...cv,
-        id: uuidv4(),
-        cvTemplate: router.query.id,
-        cvName: prompt ? prompt : 'Unnamed CV',
-      }),
-    });
+    );
     const status = response.status;
     const data = await response.json();
     toggleModal();
@@ -123,28 +129,26 @@ const ModalContent = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
+
   @media (min-width: ${mediaScreen.small}) {
     max-width: 500px;
   }
-  `;
-  
-  const Form = styled.form`
+`;
+
+const Form = styled.form`
   width: 100%;
   margin-bottom: 2rem;
   display: flex;
   justify-content: center;
   gap: 15px;
   flex-direction: column;
-  
+
   @media (min-width: ${mediaScreen.small}) {
     flex-direction: row;
   }
-  
 `;
 
-const ModalBtn = styled(Button)`
-`;
+const ModalBtn = styled(Button)``;
 
 const ModalBtnClose = styled(ModalBtn)`
   padding: 0.5rem;

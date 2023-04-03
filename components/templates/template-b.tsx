@@ -9,12 +9,15 @@ export default function TemplateB(props: { isInSelector?: boolean }) {
   const templateSize = useTemplateSize(props.isInSelector);
 
   const getFormValues = async () => {
-    const response = await fetch('http://localhost:3000/api/users/cv-form', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://cv-creator-three.vercel.app/api/users/cv-form',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    });
+    );
 
     if (response.ok) {
       const newData = await response.json();
@@ -27,7 +30,7 @@ export default function TemplateB(props: { isInSelector?: boolean }) {
   useEffect(() => {
     getFormValues();
   }, []);
-  
+
   return (
     <Template style={templateSize} isInSelector={props.isInSelector}>
       <TemplateTop>
@@ -94,7 +97,7 @@ export default function TemplateB(props: { isInSelector?: boolean }) {
             })}
           </LeftSection>
         </TemplateLeft>
-        
+
         <TemplateRight>
           <RightSection>
             <RightSectionTitle>SUMMARY</RightSectionTitle>

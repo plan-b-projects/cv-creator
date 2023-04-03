@@ -13,12 +13,15 @@ export default function HomePage() {
   const [reloadData, setReloadData] = useState<any>(false);
 
   const getCvs = async () => {
-    const response = await fetch('http://localhost:3000/api/users/cv-array', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://cv-creator-three.vercel.app/api/users/cv-array',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    });
+    );
 
     if (response.ok) {
       const newData = await response.json();
@@ -29,12 +32,15 @@ export default function HomePage() {
   };
 
   const getFavJobs = async () => {
-    const response = await fetch('http://localhost:3000/api/users/job-search', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://cv-creator-three.vercel.app/api/users/job-search',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    });
+    );
 
     if (response.ok) {
       const newData = await response.json();
@@ -45,23 +51,26 @@ export default function HomePage() {
   };
 
   const setCvForTemplate = async (data: CvFormValues) => {
-    const response = await fetch('http://localhost:3000/api/users/cv-form', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://cv-creator-three.vercel.app/api/users/cv-form',
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
       },
-      body: JSON.stringify(data),
-    });
+    );
 
     return response.ok;
   };
 
   const deleteCv = async (cv: CvFormValues) => {
     const response = await fetch(
-      `http://localhost:3000/api/users/cv-array/${cv.id}`,
+      `https://cv-creator-three.vercel.app/api/users/cv-array/${cv.id}`,
       {
         method: 'DELETE',
-      }
+      },
     );
 
     if (response.ok) {

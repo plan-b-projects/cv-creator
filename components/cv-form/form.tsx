@@ -11,12 +11,15 @@ import styled from 'styled-components';
 import { H1, mediaScreen } from '../../helpers/theme';
 
 const getFormValues = async () => {
-  const response = await fetch('http://localhost:3000/api/users/cv-form', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    'https://cv-creator-three.vercel.app/api/users/cv-form',
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     },
-  });
+  );
 
   if (response.ok) {
     return await response.json();
@@ -26,13 +29,16 @@ const getFormValues = async () => {
 };
 
 const saveForm = async (data: CvFormValues) => {
-  const response = await fetch('http://localhost:3000/api/users/cv-form', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    'https://cv-creator-three.vercel.app/api/users/cv-form',
+    {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
     },
-    body: JSON.stringify(data),
-  });
+  );
 
   return response.ok;
 };

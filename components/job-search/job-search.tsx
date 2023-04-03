@@ -34,8 +34,12 @@ export default function JobSearch() {
   const submitForm = async () => {
     const patternDigit = /^\d+$/;
     const patternSpace = /^\s*$/;
-    if (getValues('job') === '' || patternDigit.test(getValues('job')) || patternSpace.test(getValues('job'))) {
-      return
+    if (
+      getValues('job') === '' ||
+      patternDigit.test(getValues('job')) ||
+      patternSpace.test(getValues('job'))
+    ) {
+      return;
     }
     setIsFormLoading(true);
     const jobValue = getValues('job');
@@ -45,12 +49,15 @@ export default function JobSearch() {
   };
 
   const getFavJobs = async () => {
-    const response = await fetch('http://localhost:3000/api/users/job-search', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://cv-creator-three.vercel.app/api/users/job-search',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    });
+    );
 
     if (response.ok) {
       const newData = await response.json();
@@ -93,26 +100,23 @@ export default function JobSearch() {
           </Load>
         ) : null}
       </JobSearchContainer>
-      {
-        isFormLoading ?
-          null
-          :
-          <PageWrap>
-            <JobsContainer>
-              {jobData.map((job: JobData) => (
-                <Job
-                  data-testid="job_box"
-                  prop={job}
-                  isLiked={
-                    favJobs.find((_job: JobData) => _job.job_id === job.job_id)
-                      ? true
-                      : false
-                  }
-                />
-              ))}
-            </JobsContainer>
-          </PageWrap>
-      }
+      {isFormLoading ? null : (
+        <PageWrap>
+          <JobsContainer>
+            {jobData.map((job: JobData) => (
+              <Job
+                data-testid="job_box"
+                prop={job}
+                isLiked={
+                  favJobs.find((_job: JobData) => _job.job_id === job.job_id)
+                    ? true
+                    : false
+                }
+              />
+            ))}
+          </JobsContainer>
+        </PageWrap>
+      )}
     </>
   );
 }

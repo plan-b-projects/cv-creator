@@ -2,13 +2,13 @@ import dotenv from 'dotenv';
 
 describe('Navigation', () => {
   it.only('should create and save a cv', () => {
-    cy.visit('http://localhost:3000/');
+    cy.visit('https://cv-creator-three.vercel.app/');
 
     cy.get('[data-testid="sign_in"]').click();
 
     cy.url().should(
       'include',
-      'http://localhost:3000/api/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F',
+      'https://cv-creator-three.vercel.app/api/auth/signin?callbackUrl=http%3A%2F%2Fhttps://cv-creator-three.vercel.app/%3A3000%2F',
     );
 
     cy.get('span').contains('Sign in with GitHub').click();
@@ -25,7 +25,7 @@ describe('Navigation', () => {
 
     cy.get('[data-testid="create_cv"]').click();
 
-    cy.url().should('include', 'http://localhost:3000/cv-form');
+    cy.url().should('include', 'https://cv-creator-three.vercel.app/cv-form');
 
     cy.get('[data-testid="basic_info"]').click();
     cy.get('[name="basicInfo.profilePicture"]')
@@ -50,12 +50,15 @@ describe('Navigation', () => {
 
     cy.get('[data-testid="save_and_create_cv"]').click();
 
-    cy.url().should('include', 'http://localhost:3000/cv-form/templates');
+    cy.url().should(
+      'include',
+      'https://cv-creator-three.vercel.app/cv-form/templates',
+    );
 
     cy.get('[data-testid="template_b"]').click();
     cy.url().should(
       'include',
-      'http://localhost:3000/cv-form/templates/template-b',
+      'https://cv-creator-three.vercel.app/cv-form/templates/template-b',
     );
     cy.get('[data-testid="save_template"]').click();
     cy.get('[data-testid="name_cv"]').type('Cypress test cv');
@@ -64,18 +67,18 @@ describe('Navigation', () => {
     cy.go('back');
     cy.go('back');
     cy.reload();
-    cy.url().should('include', 'http://localhost:3000/');
+    cy.url().should('include', 'https://cv-creator-three.vercel.app/');
     cy.get('[data-testid="Cypress test cv"]');
   });
 
   it.only('should go to job search', () => {
-    cy.visit('http://localhost:3000/');
+    cy.visit('https://cv-creator-three.vercel.app/');
 
     cy.get('[data-testid="sign_in"]').click();
 
     cy.url().should(
       'include',
-      'http://localhost:3000/api/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F',
+      'https://cv-creator-three.vercel.app/api/auth/signin?callbackUrl=http%3A%2F%2Fhttps://cv-creator-three.vercel.app/%3A3000%2F',
     );
 
     cy.get('span').contains('Sign in with GitHub').click();
@@ -90,7 +93,10 @@ describe('Navigation', () => {
 
     cy.get('[data-testid="job_search"]').click();
 
-    cy.url().should('include', 'http://localhost:3000/job-search');
+    cy.url().should(
+      'include',
+      'https://cv-creator-three.vercel.app/job-search',
+    );
 
     cy.get('[name="job"]').clear().type('JavaScript in Stockholm');
     cy.get('[class="button__Button-sc-4e3eac9a-1 eYtzJl"]').click();
@@ -98,7 +104,7 @@ describe('Navigation', () => {
     cy.scrollTo(0, 500);
     cy.get('[data-testid="fav_job"]').first().click();
     cy.go('back');
-    cy.url().should('include', 'http://localhost:3000/');
+    cy.url().should('include', 'https://cv-creator-three.vercel.app/');
     cy.scrollTo('bottom');
     cy.get('[data-testid="fav_job"]').first().scrollIntoView();
   });

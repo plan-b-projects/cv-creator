@@ -9,12 +9,15 @@ export default function TemplateC(props: { isInSelector?: boolean }) {
   const templateSize = useTemplateSize(props.isInSelector);
 
   const getFormValues = async () => {
-    const response = await fetch('http://localhost:3000/api/users/cv-form', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://cv-creator-three.vercel.app/api/users/cv-form',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    });
+    );
 
     if (response.ok) {
       const newData = await response.json();
@@ -27,12 +30,12 @@ export default function TemplateC(props: { isInSelector?: boolean }) {
   useEffect(() => {
     getFormValues();
   }, []);
-  
+
   return (
     <Template style={templateSize} isInSelector={props.isInSelector}>
-      <TemplateTop> 
+      <TemplateTop>
         <Name>{data?.basicInfo.name}</Name>
-        <ProfileImage src={data?.basicInfo.profilePicture} /> 
+        <ProfileImage src={data?.basicInfo.profilePicture} />
       </TemplateTop>
       <TemplateBottom>
         <TemplateLeft>
@@ -93,7 +96,7 @@ export default function TemplateC(props: { isInSelector?: boolean }) {
             })}
           </LeftSection>
         </TemplateLeft>
-        
+
         <TemplateRight>
           <RightSection>
             <RightSectionTitle>SUMMARY</RightSectionTitle>
@@ -143,17 +146,15 @@ const Template = styled.div<{ isInSelector?: boolean }>`
   flex-direction: column;
   overflow: hidden;
   text-align: left;
-  
-  color: ${({ theme }) => theme.name !== 'dark' ?
-  theme.colors.secondaryText
-  :
-  theme.colors.secondaryBackground
-  };
-  background: ${({ theme }) => theme.name !== 'dark' ?
-  theme.colors.secondaryBackground
-  :
-  theme.colors.primaryBackground
-  };
+
+  color: ${({ theme }) =>
+    theme.name !== 'dark'
+      ? theme.colors.secondaryText
+      : theme.colors.secondaryBackground};
+  background: ${({ theme }) =>
+    theme.name !== 'dark'
+      ? theme.colors.secondaryBackground
+      : theme.colors.primaryBackground};
 
   @media (max-width: ${mediaScreen.small}) {
     width: ${(props) => (props.isInSelector ? '198.33px' : '297.5px')};
@@ -192,16 +193,12 @@ const ProfileImage = styled.img`
 `;
 
 const Name = styled.span`
-  color: ${({ theme }) => theme.name !== 'dark' ?
-  theme.colors.primaryBackground
-  :
-  theme.colors.secondaryBackground
-  };
-  color: ${({ theme }) => theme.name === 'light' ?
-  theme.colors.secondaryText
-  :
-  null
-  };
+  color: ${({ theme }) =>
+    theme.name !== 'dark'
+      ? theme.colors.primaryBackground
+      : theme.colors.secondaryBackground};
+  color: ${({ theme }) =>
+    theme.name === 'light' ? theme.colors.secondaryText : null};
   width: 50%;
   font-size: 3.5em;
 `;
@@ -211,16 +208,12 @@ const LeftSection = styled.div`
 `;
 
 const LeftTitle = styled.h3`
-  color: ${({ theme }) => theme.name !== 'dark' ?
-  theme.colors.primaryBackground
-  :
-  theme.colors.secondaryBackground
-  };
-  color: ${({ theme }) => theme.name === 'light' ?
-  theme.colors.secondaryText
-  :
-  null
-  };
+  color: ${({ theme }) =>
+    theme.name !== 'dark'
+      ? theme.colors.primaryBackground
+      : theme.colors.secondaryBackground};
+  color: ${({ theme }) =>
+    theme.name === 'light' ? theme.colors.secondaryText : null};
   font-size: 1em;
   margin: 0.5em 0;
 `;
@@ -237,11 +230,10 @@ const LeftText = styled.div`
 
 const Link = styled.a`
   font-size: 0.7em;
-  color: ${({ theme }) => theme.name !== 'dark' ?
-  theme.colors.secondaryText
-  :
-  theme.colors.secondaryBackground
-  };
+  color: ${({ theme }) =>
+    theme.name !== 'dark'
+      ? theme.colors.secondaryText
+      : theme.colors.secondaryBackground};
   text-decoration: none;
 `;
 
@@ -257,16 +249,12 @@ const RightSection = styled.div`
 `;
 
 const RightSectionTitle = styled.h2`
-  color: ${({ theme }) => theme.name !== 'dark' ?
-  theme.colors.primaryBackground
-  :
-  theme.colors.secondaryBackground
-  };
-  color: ${({ theme }) => theme.name === 'light' ?
-  theme.colors.secondaryText
-  :
-  null
-  };
+  color: ${({ theme }) =>
+    theme.name !== 'dark'
+      ? theme.colors.primaryBackground
+      : theme.colors.secondaryBackground};
+  color: ${({ theme }) =>
+    theme.name === 'light' ? theme.colors.secondaryText : null};
   margin: 0.5rem 0 0 0;
   padding: 0.5em 0;
   font-size: 1.2em;

@@ -7,13 +7,16 @@ import { ButtonLink } from '../helpers/button';
 import { H1, Text } from '../helpers/theme';
 
 const logInUser = async (credentials: User) => {
-  const response = await fetch('http://localhost:3000/api/users', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    'https://cv-creator-three.vercel.app/api/users',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(credentials),
     },
-    body: JSON.stringify(credentials),
-  });
+  );
   const status = response.status;
   const data = await response.json();
   return { status, data };

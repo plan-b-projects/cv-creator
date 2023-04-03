@@ -49,12 +49,15 @@ export default function TemplatePage() {
   };
 
   const getFormValues = async () => {
-    const response = await fetch('http://localhost:3000/api/users/cv-form', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://cv-creator-three.vercel.app/api/users/cv-form',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    });
+    );
 
     if (response.ok) {
       const newData = await response.json();
@@ -93,7 +96,7 @@ export default function TemplatePage() {
           </TopContainer>
           <ContentContainer>
             <ThemeProvider theme={selectedTheme}>
-                <ThemeHeader>Choose a theme</ThemeHeader>
+              <ThemeHeader>Choose a theme</ThemeHeader>
               <ThemeContainer>
                 <ThemeButton
                   className={`light ${selectedTheme === light ? 'active' : ''}`}
@@ -154,4 +157,4 @@ const ContentContainer = styled.div`
 const ThemeHeader = styled(H3)`
   text-align: center;
   margin-bottom: 10px;
-`
+`;

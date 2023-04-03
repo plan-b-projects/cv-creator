@@ -9,12 +9,15 @@ export default function TemplateA(props: { isInSelector?: boolean }) {
   const templateSize = useTemplateSize(props.isInSelector);
 
   const getFormValues = async () => {
-    const response = await fetch('http://localhost:3000/api/users/cv-form', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://cv-creator-three.vercel.app/api/users/cv-form',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    });
+    );
 
     if (response.ok) {
       const newData = await response.json();
@@ -27,7 +30,7 @@ export default function TemplateA(props: { isInSelector?: boolean }) {
   useEffect(() => {
     getFormValues();
   }, []);
-  
+
   return (
     <Template style={templateSize} isInSelector={props.isInSelector}>
       <TemplateLeft>
@@ -212,7 +215,7 @@ const RightSection = styled.div``;
 const RightSectionTitle = styled.h2`
   padding: 0.5em 1em;
   text-align: center;
-  background:  ${({ theme }) => theme.colors.secondayBgTitle};
+  background: ${({ theme }) => theme.colors.secondayBgTitle};
   font-size: 1.2em;
 `;
 
