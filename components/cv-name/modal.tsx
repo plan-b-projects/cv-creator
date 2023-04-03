@@ -14,7 +14,7 @@ export default function CvNameModal() {
 
   const getFormValues = async () => {
     const response = await fetch(
-      'https://cv-creator-three.vercel.app/api/users/cv-form',
+      '/api/users/cv-form',
       {
         method: 'GET',
         headers: {
@@ -34,7 +34,7 @@ export default function CvNameModal() {
   const saveCvToUser = async () => {
     const cv = await getFormValues();
     const response = await fetch(
-      'https://cv-creator-three.vercel.app/api/users/cv-array',
+      '/api/users/cv-array',
       {
         method: 'PATCH',
         headers: {

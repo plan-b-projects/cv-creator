@@ -8,7 +8,7 @@ import { H1, Text } from '../helpers/theme';
 
 const logInUser = async (credentials: User) => {
   const response = await fetch(
-    'https://cv-creator-three.vercel.app/api/users',
+    '/api/users',
     {
       method: 'POST',
       headers: {

@@ -14,7 +14,7 @@ export default function HomePage() {
 
   const getCvs = async () => {
     const response = await fetch(
-      'https://cv-creator-three.vercel.app/api/users/cv-array',
+      '/api/users/cv-array',
       {
         method: 'GET',
         headers: {
@@ -33,7 +33,7 @@ export default function HomePage() {
 
   const getFavJobs = async () => {
     const response = await fetch(
-      'https://cv-creator-three.vercel.app/api/users/job-search',
+      '/api/users/job-search',
       {
         method: 'GET',
         headers: {
@@ -52,7 +52,7 @@ export default function HomePage() {
 
   const setCvForTemplate = async (data: CvFormValues) => {
     const response = await fetch(
-      'https://cv-creator-three.vercel.app/api/users/cv-form',
+      '/api/users/cv-form',
       {
         method: 'PUT',
         headers: {
@@ -67,7 +67,7 @@ export default function HomePage() {
 
   const deleteCv = async (cv: CvFormValues) => {
     const response = await fetch(
-      `https://cv-creator-three.vercel.app/api/users/cv-array/${cv.id}`,
+      `/api/users/cv-array/${cv.id}`,
       {
         method: 'DELETE',
       },

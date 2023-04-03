@@ -67,7 +67,7 @@ export default function Languages() {
                   name={`languages.${index}.fluency`}
                   label="Fluency"
                   inputType="select"
-                  options={['Elementary', 'Intermediate', 'Fluent', 'Native']}
+                  options={['Native', 'Fluent', 'Intermediate', 'Elementary']}
                 />
 
                 <ButtonSecondary type="button" onClick={() => remove(index)}>

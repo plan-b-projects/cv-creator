@@ -46,12 +46,12 @@ export const blue = {
 export const green = {
   name: 'green',
   colors: {
-    primaryBackground: '#245133',
-    secondaryBackground: '#F0FFBD',
-    primaryTitle: '#CCFF33',
+    primaryBackground: '#2F6D64',
+    secondaryBackground: '#F2F6EF',
+    primaryTitle: '#B6DCCD',
     secondayTitle: '#001524',
-    primaryBgTitle: '#CCFF33',
-    secondayBgTitle: '#CCFF33',
+    primaryBgTitle: '#B6DCCD',
+    secondayBgTitle: '#B6DCCD',
     primaryText: '#FEF9EF',
     secondaryText: '#001524',
     border: 'white',

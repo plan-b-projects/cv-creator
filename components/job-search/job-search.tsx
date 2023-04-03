@@ -50,7 +50,7 @@ export default function JobSearch() {
 
   const getFavJobs = async () => {
     const response = await fetch(
-      'https://cv-creator-three.vercel.app/api/users/job-search',
+      '/api/users/job-search',
       {
         method: 'GET',
         headers: {

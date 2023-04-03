@@ -31,7 +31,7 @@ export default function Job({
   const [fav, setFave] = useState(isLiked);
 
   const addFav = () => {
-    fetch(`https://cv-creator-three.vercel.app/api/users/job-search`, {
+    fetch(`/api/users/job-search`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ export default function Job({
 
   const deleteFav = () => {
     fetch(
-      `https://cv-creator-three.vercel.app/api/users/job-search/${prop.job_id}`,
+      `/api/users/job-search/${prop.job_id}`,
       {
         method: 'DELETE',
       },

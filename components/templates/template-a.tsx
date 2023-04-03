@@ -10,7 +10,7 @@ export default function TemplateA(props: { isInSelector?: boolean }) {
 
   const getFormValues = async () => {
     const response = await fetch(
-      'https://cv-creator-three.vercel.app/api/users/cv-form',
+      '/api/users/cv-form',
       {
         method: 'GET',
         headers: {

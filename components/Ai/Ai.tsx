@@ -32,7 +32,7 @@ export default function Modal() {
       }
       setLoading(!loading);
       setAiConversation((aiConversation) => [...aiConversation, prompt]);
-      await fetch('https://cv-creator-three.vercel.app/api/generate-answer', {
+      await fetch('/api/generate-answer', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -138,6 +138,7 @@ const ModalDiv = styled.div`
   right: 0;
   bottom: 0;
   position: fixed;
+
 `;
 
 const Overlay = styled(ModalDiv)`
@@ -162,7 +163,7 @@ const ModalContent = styled.div`
   align-items: center;
   justify-content: center;
 
-  @media (min-width: 400px) {
+  @media (min-width: 600px) {
     min-width: 30vw;
   }
 `;

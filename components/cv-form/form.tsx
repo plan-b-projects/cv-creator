@@ -12,7 +12,7 @@ import { H1, mediaScreen } from '../../helpers/theme';
 
 const getFormValues = async () => {
   const response = await fetch(
-    'https://cv-creator-three.vercel.app/api/users/cv-form',
+    '/api/users/cv-form',
     {
       method: 'GET',
       headers: {
@@ -30,7 +30,7 @@ const getFormValues = async () => {
 
 const saveForm = async (data: CvFormValues) => {
   const response = await fetch(
-    'https://cv-creator-three.vercel.app/api/users/cv-form',
+    '/api/users/cv-form',
     {
       method: 'PUT',
       headers: {
@@ -69,15 +69,15 @@ export default function Form() {
           <Languages />
 
           <ButtonGroup>
-            <Button type="button" onClick={saveDraft}>
-              Save draft
-            </Button>
             <Button
               type="submit"
               data-testid="save_and_create_cv"
               onClick={submitForm}
             >
               Save and select template
+            </Button>
+            <Button type="button" onClick={saveDraft}>
+              Save draft
             </Button>
           </ButtonGroup>
         </StyledForm>

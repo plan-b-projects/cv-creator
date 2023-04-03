@@ -50,7 +50,7 @@ export default function TemplatePage() {
 
   const getFormValues = async () => {
     const response = await fetch(
-      'https://cv-creator-three.vercel.app/api/users/cv-form',
+      '/api/users/cv-form',
       {
         method: 'GET',
         headers: {
@@ -89,7 +89,7 @@ export default function TemplatePage() {
           />
           <TopContainer>
             <ButtonContainer>
-              <Button onClick={exportPDFWithComponent}>Download as PFD</Button>
+              <Button onClick={exportPDFWithComponent}>Download as PDF</Button>
 
               <CvNameModal />
             </ButtonContainer>
@@ -140,11 +140,22 @@ export default function TemplatePage() {
               </PDFExport>
             </ThemeProvider>
           </ContentContainer>
+          
+            <EditForm>
+              <Button onClick={() => router.push('/cv-form')}>Edit form</Button>
+              </EditForm>
         </>
       )}
     </Layout>
   );
 }
+
+const EditForm = styled.div`
+ display: flex;
+ justify-content: center;
+align-items: center;
+`
+
 const TopContainer = styled.div`
   display: flex;
   justify-content: center;
