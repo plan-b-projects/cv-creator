@@ -35,7 +35,14 @@ export default function TemplateD(props: { isInSelector?: boolean }) {
     <Template style={templateSize} isInSelector={props.isInSelector}>
       <TemplateTop>
         <Name>{data?.basicInfo.name}</Name>
-        <ProfileImage src={data?.basicInfo.profilePicture} />
+        <ImageBox>
+          {
+            data?.basicInfo.profilePicture ?
+            <ProfileImage src={data?.basicInfo.profilePicture} />
+              :
+            <ProfileImage src='https://marketplace.canva.com/EAFEits4-uw/1/0/1600w/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s.jpg'></ProfileImage>  
+          }
+        </ImageBox>
         <LeftTopSection>
           <LeftTitle>CONTACT</LeftTitle>
           <LeftText>{data?.basicInfo.location}</LeftText>
@@ -196,9 +203,18 @@ const BottomSection = styled.div`
   justify-content: space-between;
 `;
 
+const ImageBox = styled.div`
+  width: 6em;
+  height: 6em;
+  align-self: center;
+`;
+
 const ProfileImage = styled.img`
-  flex: 0 0 5em;
-  width: 5em;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: auto;
+  border: 3px solid ${({ theme }) => theme.colors.primaryTitle};
   border-radius: 50%;
 `;
 

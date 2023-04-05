@@ -35,7 +35,14 @@ export default function TemplateC(props: { isInSelector?: boolean }) {
     <Template style={templateSize} isInSelector={props.isInSelector}>
       <TemplateTop>
         <Name>{data?.basicInfo.name}</Name>
-        <ProfileImage src={data?.basicInfo.profilePicture} />
+        <ImageBox>
+          {
+            data?.basicInfo.profilePicture ?
+            <ProfileImage src={data?.basicInfo.profilePicture} />
+              :
+            <ProfileImage src='https://marketplace.canva.com/EAFEits4-uw/1/0/1600w/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s.jpg'></ProfileImage>  
+          }
+        </ImageBox>
       </TemplateTop>
       <TemplateBottom>
         <TemplateLeft>
@@ -186,9 +193,18 @@ const TemplateLeft = styled.div`
   flex-direction: column;
 `;
 
+const ImageBox = styled.div`
+  width: 6em;
+  height: 6em;
+  align-self: center;
+`;
+
 const ProfileImage = styled.img`
-  flex: 0 0 9em;
-  width: 9em;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: auto;
+  border: 3px solid ${({ theme }) => theme.colors.primaryTitle};
   border-radius: 50%;
 `;
 
